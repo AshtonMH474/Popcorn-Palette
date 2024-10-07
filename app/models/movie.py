@@ -19,8 +19,9 @@ class Movie(db.Model):
     custom = db.Column(db.Boolean, nullable=False,default=True)
     created_at = db.Column(db.DateTime, default=lambda: datetime.now(timezone.utc))
     updated_at = db.Column(db.DateTime, default=lambda: datetime.now(timezone.utc), onupdate=lambda: datetime.now(timezone.utc))
-    images=db.relationship('Movie_Image', back_populates='movie', cascade='all, delete-orphan')
-    user = db.relationship('User', back_populates='movie')
+
+    movie_images=db.relationship('Movie_Image', back_populates='movie', cascade='all, delete-orphan')
+    user = db.relationship('User', back_populates='movies')
 
 
     def to_dict(self):
