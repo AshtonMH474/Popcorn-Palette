@@ -18,7 +18,7 @@ class Movie_Image(db.Model):
     updated_at = db.Column(db.DateTime, default=lambda: datetime.now(timezone.utc), onupdate=lambda: datetime.now(timezone.utc))
 
 
-    movie = db.relationship('Movie',back_populates='movie_image')
+    movie = db.relationship('Movie',back_populates='movie_images')
 
 
     def to_dict(self):
