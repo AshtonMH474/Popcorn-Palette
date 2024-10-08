@@ -1,1 +1,53 @@
 /* TODO: Add sitewide styles */
+/* *{
+    background-color: black;
+} */
+.mouseOver {
+    cursor: pointer;
+}
+.rightPageBorder {
+    margin-right: 50px;
+  }
+.xx-largeFont {
+    font-size: xx-large;
+  }
+.noPadding {
+    padding: 0px;
+  }
+.whiteFont {
+    color: #F8F9FA;
+  }
+  .noBackground {
+    background: transparent;
+  }
+  .noBorder {
+    border: none;
+  }
+  .lightGrey {
+    background-color: #6C757D;
+  }
+  .removeDecorations {
+    list-style-type: none;
+  }
+
+  .dropShadow {
+    box-shadow: 2px 2px 10px #343A40;
+  }
+  .largeRightPadding {
+    padding-right: 35px;
+  }
+  .littleTopPadding {
+    padding-top: 5px;
+  }
+  .littleBottomPadding {
+    padding-bottom: 5px;
+  }
+  .whiteBackground{
+    background-color: white;
+  }
+ .border{
+    position: relative;
+    right:8px;
+    bottom: 8px;
+    width:103%;
+ }

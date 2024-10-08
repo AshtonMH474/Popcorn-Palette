@@ -1,0 +1,86 @@
+*{
+    font-family:'Gotham', sans-serif;
+}
+
+.homeScreen{
+    position: relative;
+    bottom: 8px;
+    right: 8px;
+    width: 103%;
+    height: 110vh;
+    background-attachment: fixed;
+    background-color: #0b0b0b;
+    overflow: hidden;
+}
+
+
+.white{
+    color:white
+}
+.font{
+    font-family:'Gotham', sans-serif;
+}
+.movieFlex{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+
+}
+.star{
+    position: relative;
+    right: 1px;
+    top:1px;
+}
+.paddingLeft10px{
+padding-left: 10px;
+}
+.textCenter{
+    text-align: center;
+    position: relative;
+    right: 390px;
+}
+.movieItem {
+    /* text-align: center; */
+    background-color: #36454F;
+    border-radius: 10px;
+    transition: transform 0.2s;
+}
+.movieItem:hover {
+    transform: scale(1.05);
+}
+.arrow{
+    height: 50px;
+    width: 50px;
+}
+.arrow:hover{
+    cursor: pointer;
+    background-color:#B22222 ;
+}
+
+.arrowRight{
+    position: absolute;
+    left: 80% ;
+    bottom: 175px;
+}
+.arrowLeft{
+    position: absolute;
+    left: 290px;
+    bottom: 175px;
+}
+
+.posters {
+    height: 300px; /* Adjust height as needed */
+    width: 200px; /* Set width to auto to maintain aspect ratio */
+
+    border-radius: 8px; /* Optional: adds rounded corners */
+    overflow: hidden; /* Ensures no part of the image spills over */
+    object-fit: cover; /* Ensures the image covers the div without stretching */
+}
+
+.title{
+    white-space: nowrap;         /* Prevents the text from wrapping */
+    overflow: hidden;            /* Hides overflow text */
+    text-overflow: ellipsis;
+    max-width: 180px;
+}
