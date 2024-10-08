@@ -28,7 +28,7 @@ def upgrade():
     sa.Column('title', sa.String(length=100), nullable=False),
     sa.Column('description', sa.Text(), nullable=True),
     sa.Column('release_date', sa.Date(), nullable=False),
-    sa.Column('avg_rating', sa.Float(precision=2, asdecimal=1), nullable=False),
+    sa.Column('avg_rating', sa.Float(), nullable=False),
     sa.Column('custom', sa.Boolean(), nullable=False),
     sa.Column('created_at', sa.DateTime(), nullable=True),
     sa.Column('updated_at', sa.DateTime(), nullable=True),

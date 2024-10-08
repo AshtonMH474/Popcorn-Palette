@@ -15,7 +15,7 @@ class Movie(db.Model):
     title = db.Column(db.String(100),nullable=False)
     description = db.Column(db.Text,nullable=True)
     release_date = db.Column(db.Date,nullable=False)
-    avg_rating = db.Column(db.Float(2,1),nullable=False,default=0.0)
+    avg_rating = db.Column(db.Float,nullable=False,default=0.0)
     custom = db.Column(db.Boolean, nullable=False,default=True)
     created_at = db.Column(db.DateTime, default=lambda: datetime.now(timezone.utc))
     updated_at = db.Column(db.DateTime, default=lambda: datetime.now(timezone.utc), onupdate=lambda: datetime.now(timezone.utc))
@@ -37,4 +37,7 @@ class Movie(db.Model):
         }
         if self.user_id:
             new_dict['userId']=self.user_id
+        if self.movie_images:
+            new_dict['movieImages'] = [image.to_dict() for image in self.movie_images]
+
         return new_dict
