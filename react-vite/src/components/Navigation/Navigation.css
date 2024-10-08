@@ -1,3 +1,50 @@
 .profile-dropdown {
   position: absolute;
+  display: inline-block;
+  text-align: center;
+  top: 40px;
+  right: 50px;
+  border-radius: 5px;
+  z-index: 100;
+}
+
+.logo{
+  height: 50px;
+}
+
+.lightBlack{
+  background-color: #121212;
+}
+.noMargin{
+  margin: 0px;
+}
+.displayFlex{
+  display: flex;
+}
+.spaceBetween{
+  justify-content: space-between;
+}
+.alignCenter{
+  align-items: center;
+}
+.logoTitle{
+  color:#B22222;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
+  font-size: large;
+}
+.noTextUnderline{
+  text-decoration: none ;
+}
+.moveLeft50px{
+  position: relative;
+  left:50px
+}
+.moveRight50px{
+  position: relative;
+  right:50px
+}
+.moveDown5px{
+  position: relative;
+  top:5px
 }
