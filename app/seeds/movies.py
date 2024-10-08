@@ -549,12 +549,7 @@ def seed_movies():
     custom=False
 )
 
-    action7 = Movie(
-    title='Inception',
-    description='A skilled thief uses dream-sharing technology to infiltrate the subconscious of his targets and plant ideas.',
-    release_date=date(2010, 7, 16),
-    custom=False
-)
+
 
     action8 = Movie(
     title='Transformers',
@@ -583,7 +578,6 @@ def seed_movies():
     action4,
     action5,
     action6,
-    action7,
     action8,
     action9,
     action10
