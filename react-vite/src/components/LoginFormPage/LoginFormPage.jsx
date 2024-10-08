@@ -49,7 +49,7 @@ function LoginFormPage() {
         {errors.email && <p>{errors.email}</p>}
         <label>
           Password
-          <input
+          <input className="whiteBackground"
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
@@ -57,7 +57,7 @@ function LoginFormPage() {
           />
         </label>
         {errors.password && <p>{errors.password}</p>}
-        <button type="submit">Log In</button>
+        <button className='whiteFont' type="submit">Log In</button>
       </form>
     </>
   );
