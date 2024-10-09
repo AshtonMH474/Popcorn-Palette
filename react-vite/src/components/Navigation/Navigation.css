@@ -48,3 +48,24 @@
   position: relative;
   top:5px
 }
+
+.search{
+  position: absolute;
+  right: 41%;
+  width: 400px;
+}
+.searchButton{
+  position: relative;
+  left: 60px;
+  top: 3px;
+}
+.searchButton:hover{
+  cursor: pointer;
+}
+.watchLink:hover{
+  cursor: pointer;
+}
+.watchLink{
+  position: absolute;
+  left: 60%;
+}
