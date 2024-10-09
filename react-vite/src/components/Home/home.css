@@ -24,7 +24,8 @@
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
-    justify-content: center;
+    position: relative;
+    left: 19%;
 
 }
 .star{
@@ -41,13 +42,13 @@ padding-left: 10px;
     right: 390px;
 }
 .movieItem {
-    /* text-align: center; */
     background-color: #36454F;
     border-radius: 10px;
     transition: transform 0.2s;
 }
 .movieItem:hover {
     transform: scale(1.05);
+    cursor: pointer;
 }
 .arrow{
     height: 50px;
@@ -60,7 +61,7 @@ padding-left: 10px;
 
 .arrowRight{
     position: absolute;
-    left: 80% ;
+    left: 79% ;
     bottom: 175px;
 }
 .arrowLeft{
