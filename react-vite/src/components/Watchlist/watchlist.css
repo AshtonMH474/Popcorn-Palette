@@ -1,0 +1,7 @@
+.watchlistGrid{
+    display: grid;
+    grid-template-columns: repeat(5, auto); /* Each item fits around its content */
+    column-gap: 20px;
+    row-gap: 20px; /* Adjust spacing between each item */
+    justify-content: center;
+}
