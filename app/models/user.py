@@ -2,6 +2,7 @@ from .db import db, environment, SCHEMA, add_prefix_for_prod
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 from datetime import datetime,timezone
+from .movie import watchlist
 
 
 class User(db.Model, UserMixin):
@@ -18,8 +19,10 @@ class User(db.Model, UserMixin):
     last_name = db.Column(db.String(30), nullable=False)
     created_at = db.Column(db.DateTime, default=lambda: datetime.now(timezone.utc))
     updated_at = db.Column(db.DateTime, default=lambda: datetime.now(timezone.utc), onupdate=lambda: datetime.now(timezone.utc))
-
     movies=db.relationship('Movie', back_populates='user', cascade='all, delete-orphan')
+
+    # movies in watchlist
+    watchlist_movies = db.relationship('Movie',secondary=watchlist,back_populates='users_watchlist')
 
     @property
     def password(self):
