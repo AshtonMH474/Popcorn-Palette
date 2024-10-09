@@ -34,6 +34,8 @@ class Movie(db.Model):
     movie_images=db.relationship('Movie_Image', back_populates='movie', cascade='all, delete-orphan')
     user = db.relationship('User', back_populates='movies')
 
+    users_watchlist=db.relationship('User',secondary=watchlist,back_populates='watchlist_movies')
+
 
     def to_dict(self):
         new_dict =  {
