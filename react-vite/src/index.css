@@ -42,6 +42,9 @@
   .littleBottomPadding {
     padding-bottom: 5px;
   }
+  .littleRightPadding{
+    padding-right: 5px;
+  }
   .whiteBackground{
     background-color: white;
   }
@@ -50,4 +53,7 @@
     right:8px;
     bottom: 8px;
     width:103%;
+ }
+ .zIndex{
+    z-index: 3;
  }
