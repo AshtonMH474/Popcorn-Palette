@@ -41,11 +41,12 @@ function Home(){
 
     return (
         <>
+        <div className='topBackground'></div>
         <div className='homeScreen'>
             <div className='moveLeft50px'>
                 <Recent recent={recent}/>
             </div>
-            <div className='footer footerWatchlist'>
+            <div className='footer '>
                 <BottomInfo/>
             </div>
         </div>

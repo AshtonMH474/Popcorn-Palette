@@ -1,7 +1,4 @@
-/* TODO: Add sitewide styles */
-/* *{
-    background-color: black;
-} */
+
 .mouseOver {
     cursor: pointer;
 }
@@ -101,7 +98,6 @@
     position: absolute;
     bottom: 0;
     width: 100%;
-    border: 1px red solid;
 
   }
 /* html,body{
