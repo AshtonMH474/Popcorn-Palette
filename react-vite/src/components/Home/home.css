@@ -7,10 +7,11 @@
     bottom: 8px;
     right: 8px;
     width: 103%;
-    height: 110vh;
+    height: 100%;
     background-attachment: fixed;
     background-color: #0b0b0b;
     overflow: hidden;
+    min-height: 95vh;
 }
 
 

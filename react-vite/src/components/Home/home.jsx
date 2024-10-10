@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import './home.css'
 import { useDispatch, useSelector } from 'react-redux'
 import { getMovies } from '../../redux/movies'
-
+import BottomInfo from '../BottomInfo'
 import Recent from './recent';
 
 
@@ -45,7 +45,9 @@ function Home(){
             <div className='moveLeft50px'>
                 <Recent recent={recent}/>
             </div>
-
+            <div className='footer footerWatchlist'>
+                <BottomInfo/>
+            </div>
         </div>
         </>
     )
