@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import './watchlist.css'
 import { useDispatch, useSelector } from 'react-redux'
-import { deleteFromWatchlist, getWatchlist } from '../../redux/watchlist'
+import { deleteFromWatchlist, getWatchlist, updateMovieInWatchlist } from '../../redux/watchlist'
 import { IoStarSharp } from "react-icons/io5";
 import { FaRegTrashAlt } from "react-icons/fa";
 import { IoEyeOutline } from "react-icons/io5";
@@ -17,6 +17,11 @@ function Watchlist(){
 
     function removeMovie(id){
         dispatch(deleteFromWatchlist(id))
+    }
+
+    function updateMovieToWatched(id){
+        dispatch(updateMovieInWatchlist(id))
+        dispatch(getWatchlist())
     }
 
     return (
@@ -35,7 +40,7 @@ function Watchlist(){
                             <div className="displayFlex spaceBetween littleRightPadding">
                                 <div className='white'><IoStarSharp className='star' />{movie.avgRating.toFixed(1)}</div>
                                 <div className='displayFlex littleRightPadding'>
-                                    <div className='white littleRightPadding eye'><IoEyeOutline/></div>
+                                    <div className='white littleRightPadding eye cursor'><IoEyeOutline onClick={() => updateMovieToWatched(movie.id)}/></div>
                                     <div className='white zIndex trash cursor'><FaRegTrashAlt onClick={() => removeMovie(movie.id)}/></div>
                                 </div>
 
