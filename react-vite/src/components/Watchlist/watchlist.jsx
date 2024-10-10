@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import './watchlist.css'
 import { useDispatch, useSelector } from 'react-redux'
 import { deleteFromWatchlist, getWatchlist, updateMovieInWatchlist } from '../../redux/watchlist'
@@ -11,9 +11,15 @@ function Watchlist(){
     const dispatch = useDispatch()
     const watchlist = useSelector(state => state.watchlist)
     const watchlistArr = Object.values(watchlist)
+    const [active,setActive] = useState('unwatched')
+    const [watchlistCurrArr,setWatchlist] = useState([])
+
+
     useEffect(() => {
         dispatch(getWatchlist())
+        setWatchlist(watchlistArr.filter(movie => movie.watched == false))
     },[dispatch,watchlistArr.length ])
+
 
     function removeMovie(id){
         dispatch(deleteFromWatchlist(id))
@@ -21,16 +27,37 @@ function Watchlist(){
 
     function updateMovieToWatched(id){
         dispatch(updateMovieInWatchlist(id))
-        dispatch(getWatchlist())
     }
+
+    useEffect(() => {
+        const filteredArr = watchlistArr.filter(movie => active === 'unwatched' ? !movie.watched : movie.watched)
+        setWatchlist(filteredArr)
+    }, [watchlist,active])
+
+    const changeToUnwatched = () => {
+        setActive('unwatched')
+    }
+
+    const changeToWatched = () => {
+        setActive('watched')
+    }
+
+
 
     return (
         <>
         <div className='homeScreen'>
             <div className='moveLeft50px'>
-                <h2 className='textCenter white'>You Want to See {watchlistArr.length} Movies</h2>
+                <div className='displayFlex spaceAround'>
+                    {active == 'unwatched' && (<h2 className='textCenter white numWatchlist'>You Want to See {watchlistCurrArr.length} Movies</h2>)}
+                    {active == 'watched' && (<h2 className='textCenter white numWatchlist'>You Have Seen {watchlistCurrArr.length} Movies</h2>)}
+                    <div className='displayFlex watched'>
+                        <div onClick={changeToUnwatched} className='white bold largeRightPadding cursor redHover'>UNWATCHED</div>
+                        <div onClick={changeToWatched} className='white bold cursor redHover'>WATCHED</div>
+                    </div>
+                </div>
                 <div className='watchlistGrid'>
-                    {watchlistArr.map(movie => (
+                    {watchlistCurrArr.map(movie => (
                         <div key={movie.id} className='movieItem lightBlack'>
                         <NavLink className='noTextUnderline' to={`/${movie.id}`}>
                         <img className='posters' src={movie.movieImages[0].imgUrl} alt='moviePoster' />
