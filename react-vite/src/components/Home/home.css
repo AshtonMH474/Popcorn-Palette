@@ -1,17 +1,25 @@
 *{
     font-family:'Gotham', sans-serif;
 }
+.topBackground{
+    background-color: #0b0b0b;
+    position: absolute;
+    width: 100%;
+    right: 0%;
+    bottom: 93%;
+    height: 20px;
+
+}
 
 .homeScreen{
-    position: relative;
-    bottom: 8px;
+     position: relative;
+    top:8px;
     right: 8px;
     width: 103%;
-    height: 100%;
     background-attachment: fixed;
     background-color: #0b0b0b;
     overflow: hidden;
-    min-height: 95vh;
+     min-height: 93.5vh;
 }
 
 
