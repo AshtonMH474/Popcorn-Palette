@@ -57,3 +57,11 @@
  .zIndex{
     z-index: 3;
  }
+
+ .spaceAround{
+    justify-content: space-around;
+    align-items: center;
+ }
+ .bold{
+    font-weight: bold;
+ }

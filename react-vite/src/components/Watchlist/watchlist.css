@@ -19,3 +19,15 @@
 .trash:hover{
     color:red
 }
+.numWatchlist{
+    position: relative;
+    left: 1%;
+}
+.watched{
+    position: relative;
+    right: 20px;
+}
+
+.redHover:hover{
+    color:#B22222
+}
