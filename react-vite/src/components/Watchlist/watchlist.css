@@ -5,3 +5,17 @@
     row-gap: 20px; /* Adjust spacing between each item */
     justify-content: center;
 }
+
+.eye{
+    padding-top: 2px;
+}
+.eye:hover{
+    color:#00FF00
+}
+.trash{
+    font-size: small;
+    padding-top: 2px;
+}
+.trash:hover{
+    color:red
+}
