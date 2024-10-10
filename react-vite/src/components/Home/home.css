@@ -48,8 +48,8 @@ padding-left: 10px;
 }
 .movieItem:hover {
     transform: scale(1.05);
-    cursor: pointer;
 }
+
 .arrow{
     height: 50px;
     width: 50px;
@@ -78,10 +78,17 @@ padding-left: 10px;
     overflow: hidden; /* Ensures no part of the image spills over */
     object-fit: cover; /* Ensures the image covers the div without stretching */
 }
+.posters:hover{
+    cursor: pointer;
+}
 
 .title{
     white-space: nowrap;         /* Prevents the text from wrapping */
     overflow: hidden;            /* Hides overflow text */
     text-overflow: ellipsis;
     max-width: 180px;
+}
+
+.cursor{
+    cursor: pointer;
 }
