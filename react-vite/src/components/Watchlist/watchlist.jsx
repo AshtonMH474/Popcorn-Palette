@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import './watchlist.css'
 import { useDispatch, useSelector } from 'react-redux'
+import BottomInfo from '../BottomInfo'
 import { deleteFromWatchlist, getWatchlist, updateMovieInWatchlist } from '../../redux/watchlist'
 import { IoStarSharp } from "react-icons/io5";
 import { FaRegTrashAlt } from "react-icons/fa";
@@ -13,6 +14,7 @@ function Watchlist(){
     const watchlistArr = Object.values(watchlist)
     const [active,setActive] = useState('unwatched')
     const [watchlistCurrArr,setWatchlist] = useState([])
+
 
 
     useEffect(() => {
@@ -32,6 +34,7 @@ function Watchlist(){
     useEffect(() => {
         const filteredArr = watchlistArr.filter(movie => active === 'unwatched' ? !movie.watched : movie.watched)
         setWatchlist(filteredArr)
+
     }, [watchlist,active])
 
     const changeToUnwatched = () => {
@@ -46,7 +49,7 @@ function Watchlist(){
 
     return (
         <>
-        <div className='homeScreen'>
+        <div className='homeScreen fullHeight'>
             <div className='moveLeft50px'>
                 <div className='displayFlex spaceAround'>
                     {active == 'unwatched' && (<h2 className='textCenter white numWatchlist'>You Want to See {watchlistCurrArr.length} Movies</h2>)}
@@ -56,8 +59,15 @@ function Watchlist(){
                         <div onClick={changeToWatched} className='white bold cursor redHover'>WATCHED</div>
                     </div>
                 </div>
+
+
                 <div className='watchlistGrid'>
-                    {watchlistCurrArr.map(movie => (
+                    {watchlistCurrArr.length === 0 ? (
+                    <div className='noMoviesMessage white'>
+                        NO MOVIES IN {active === 'unwatched' ? 'UNWATCHED' : 'WATCHED'} LIST
+                    </div>
+                    ):(
+                    watchlistCurrArr.length > 0 && watchlistCurrArr.map(movie => (
                         <div key={movie.id} className='movieItem lightBlack'>
                         <NavLink className='noTextUnderline' to={`/${movie.id}`}>
                         <img className='posters' src={movie.movieImages[0].imgUrl} alt='moviePoster' />
@@ -67,7 +77,7 @@ function Watchlist(){
                             <div className="displayFlex spaceBetween littleRightPadding">
                                 <div className='white'><IoStarSharp className='star' />{movie.avgRating.toFixed(1)}</div>
                                 <div className='displayFlex littleRightPadding'>
-                                    <div className='white littleRightPadding eye cursor'><IoEyeOutline onClick={() => updateMovieToWatched(movie.id)}/></div>
+                                    <div className={active === 'unwatched'?'white littleRightPadding eye cursor':'littleRightPadding cursor watchedEye' }><IoEyeOutline onClick={() => updateMovieToWatched(movie.id)}/></div>
                                     <div className='white zIndex trash cursor'><FaRegTrashAlt onClick={() => removeMovie(movie.id)}/></div>
                                 </div>
 
@@ -75,8 +85,13 @@ function Watchlist(){
                         </div>
 
                     </div>
-                    ))}
+                    ))
+                )}
+
                 </div>
+            </div>
+            <div className='footer lightBlack'>
+                <BottomInfo/>
             </div>
         </div>
         </>
