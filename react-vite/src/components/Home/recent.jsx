@@ -36,7 +36,7 @@ function Recent({recent}){
                 <div className='movieFlex alignCenter'>
                 {recent.slice(currentIndex, currentIndex + 5).map(movie =>(
                     <div key={movie.id} className='movieItem lightBlack'>
-                        <NavLink className='noTextUnderline' to={`/${movie.id}`}>
+                        <NavLink className='noTextUnderline' to={`/movies/${movie.id}`}>
                         <img className='posters' src={movie.movieImages[0].imgUrl} alt='moviePoster' />
                         </NavLink>
                         <div className='paddingLeft10px'>
