@@ -1,0 +1,55 @@
+.widthPoster{
+    width: 200px;
+}
+.movieDetailsPage{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 50px;
+}
+.movieItemDetails{
+    background-color: #36454F;
+    border-radius: 10px;
+}
+.movieOptions{
+    position: relative;
+    top: 100px;
+    left: 25%;
+}
+.movieDetailButtons{
+    flex-direction: column;
+    align-items: flex-start;
+}
+.paddingTop{
+    padding-top: 50px;
+}
+.detailButton{
+    width: 200px ;
+    background-color: #708090;
+}
+
+.detailButton:hover{
+    background-color:#B22222 ;
+    cursor: pointer;
+}
+.detailsPoster{
+    height: 300px;
+    width: 200px;
+    border-radius: 8px;
+    overflow: hidden;
+    object-fit: cover;
+}
+.movieDescription{
+    word-break: break-word;
+}
+
+.movieDetailsTitle{
+    font-size: xx-large;
+    font-weight: bolder;
+}
+
+.movieInfo{
+    position: relative;
+    bottom: 400px;
+    width: 500px
+}
