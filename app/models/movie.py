@@ -34,6 +34,9 @@ class Movie(db.Model):
     movie_images=db.relationship('Movie_Image', back_populates='movie', cascade='all, delete-orphan')
     user = db.relationship('User', back_populates='movies')
 
+    # reviews
+    reviews=db.relationship('Review',back_populates='movie',cascade='all, delete-orphan')
+
     users_watchlist=db.relationship('User',secondary=watchlist,back_populates='watchlist_movies')
 
 
@@ -52,5 +55,7 @@ class Movie(db.Model):
             new_dict['userId']=self.user_id
         if self.movie_images:
             new_dict['movieImages'] = [image.to_dict() for image in self.movie_images]
+        if self.reviews and len(self.reviews) > 0:
+            new_dict['reviews'] = [review.to_dict() for review in self.reviews]
 
         return new_dict
