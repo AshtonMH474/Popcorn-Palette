@@ -21,6 +21,8 @@ class User(db.Model, UserMixin):
     updated_at = db.Column(db.DateTime, default=lambda: datetime.now(timezone.utc), onupdate=lambda: datetime.now(timezone.utc))
     movies=db.relationship('Movie', back_populates='user', cascade='all, delete-orphan')
 
+    # reviews
+    reviews=db.relationship('Review',back_populates='user',cascade='all, delete-orphan')
     # movies in watchlist
     watchlist_movies = db.relationship('Movie',secondary=watchlist,back_populates='users_watchlist')
 
