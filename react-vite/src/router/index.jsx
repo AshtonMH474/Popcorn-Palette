@@ -4,6 +4,7 @@ import SignupFormPage from '../components/SignupFormPage';
 import Layout from './Layout';
 import Home from '../components/Home';
 import Watchlist from '../components/Watchlist';
+import MovieDetails from '../components/MovieDetails';
 
 export const router = createBrowserRouter([
   {
@@ -16,6 +17,10 @@ export const router = createBrowserRouter([
       {
         path:'/watchlist',
         element:<Watchlist/>
+      },
+      {
+        path:'/movies/:movieId',
+        element:<MovieDetails/>
       },
       {
         path: "login",

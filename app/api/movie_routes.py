@@ -12,3 +12,12 @@ def all_movies():
 
     movies = Movie.query.all()
     return {'movies':[movie.to_dict() for movie in movies]}
+
+
+@movie_routes.route('/<int:movie_id>')
+def movie_details(movie_id):
+     """
+    Query for certain movie
+    """
+     movie = Movie.query.filter_by(id=movie_id).first()
+     return {'movie':movie.to_dict()}
