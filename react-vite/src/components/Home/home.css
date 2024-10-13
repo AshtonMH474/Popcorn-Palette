@@ -1,11 +1,12 @@
 *{
     font-family:'Gotham', sans-serif;
+
 }
 .topBackground{
     background-color: #0b0b0b;
     position: absolute;
-    width: 100%;
-    right: 0%;
+    width: 102%;
+    left: 0%;
     bottom: 93%;
     height: 20px;
 
