@@ -7,6 +7,7 @@ import { IoStarSharp } from "react-icons/io5";
 import { FaRegTrashAlt } from "react-icons/fa";
 import { IoEyeOutline } from "react-icons/io5";
 import { NavLink } from 'react-router-dom';
+import { getMovies } from '../../redux/movies'
 
 function Watchlist(){
     const dispatch = useDispatch()
@@ -19,6 +20,7 @@ function Watchlist(){
 
     useEffect(() => {
         dispatch(getWatchlist())
+        dispatch(getMovies()) //grabs movies so it knows if user has review or not
         setWatchlist(watchlistArr.filter(movie => movie.watched == false))
     },[dispatch,watchlistArr.length ])
 
@@ -70,7 +72,7 @@ function Watchlist(){
                     ):(
                     watchlistCurrArr.length > 0 && watchlistCurrArr.map(movie => (
                         <div key={movie.id} className='movieItem lightBlack'>
-                        <NavLink className='noTextUnderline' to={`/${movie.id}`}>
+                        <NavLink className='noTextUnderline' to={`/movies/${movie.id}`}>
                         <img className='posters' src={movie.movieImages[0].imgUrl} alt='moviePoster' />
                         </NavLink>
                         <div className='paddingLeft10px watchlistCard'>
