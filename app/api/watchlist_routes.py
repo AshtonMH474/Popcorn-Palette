@@ -5,8 +5,9 @@ from app.models.movie import watchlist
 
 watchlist_routes = Blueprint('watchlist',__name__)
 
-@login_required
+
 @watchlist_routes.route('/current')
+@login_required
 def get_watchlist():
     """
     Query for all movies in watchlist
@@ -28,8 +29,9 @@ def get_watchlist():
         return {'watchlistMovies':[]}
 
 
-@login_required
+
 @watchlist_routes.route('/',methods=['POST'])
+@login_required
 def add_to_watchlist():
     user = User.query.filter_by(id=current_user.id).first()
     data = request.json
@@ -57,8 +59,9 @@ def add_to_watchlist():
         return jsonify({'error': "Couldn't Add To Watchlist"}), 400
 
 
-@login_required
+
 @watchlist_routes.route('/<int:movie_id>',methods=['PUT'])
+@login_required
 def watched_movie(movie_id):
     movie=Movie.query.filter_by(id=movie_id).first()
 
