@@ -1,0 +1,95 @@
+.addReview{
+    background-color: #445566;
+    width: 100%;
+    min-width: 1000px;
+    position: relative;
+    bottom: 22px;
+
+}
+.reviewHeader{
+    color:#ffffff
+}
+
+.addReviewPoster{
+    position: relative;
+    left: 10%;
+
+}
+.smallPaddingTop{
+    padding-top: 20px;
+}
+
+.addReviewItems{
+    padding-bottom: 20px;
+}
+
+.reviewValues{
+    position: relative;
+    left: 15%;
+    width: 600px;
+}
+
+.inputReview{
+    width: 99%;
+    border-radius: 8px;
+    min-width: 99%;
+    max-width: 99%;
+    min-height: 150px;
+    max-height: 150px;
+    background-color: #ccddee;
+}
+.reviewStars{
+    font-size: 60px;
+    position: relative;
+    left: 22%;
+    gap: 10px;
+}
+
+.activeStar{
+color: #B22222;
+}
+.nonActiveStar{
+    color: #99aabb;
+    transition: color 0.3s ease;
+
+}
+.nonActiveStar:hover{
+    color:#B22222;
+    transform: scale(1.2);
+    transition: color 0.2s ease, transform 0.2s ease;
+
+}
+
+.addReviewButton{
+    position: relative;
+    left: 38%;
+    width: 150px;
+    top:20px;
+    background-color: #0b0b0b;
+    color: #fff;
+    border: none;
+    padding: 12px 24px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 3;
+}
+
+.addReviewButton:hover {
+    background-color: #B22222;
+    transform: scale(1.05);
+}
+
+
+
+.footerAddReview{
+    background-color: #445566;
+    width: 1000px;
+    height: 50px;
+    position: absolute;
+    top: 95%;
+
+}

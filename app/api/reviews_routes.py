@@ -12,6 +12,10 @@ def get_reviews():
     return {'reviews':[review.to_dict() for review in reviews]}
 
 
+@review_routes.route('/<int:movie_id>')
+def get_movie_reviews(movie_id):
+    reviews = Review.query.filter_by(movie_id=movie_id).all()
+    return {'reviews':[review.to_dict() for review in reviews]}
 
 @review_routes.route('/',methods=['POST'])
 @login_required

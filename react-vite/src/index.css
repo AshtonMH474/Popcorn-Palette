@@ -42,6 +42,9 @@
   .littleRightPadding{
     padding-right: 5px;
   }
+  .littleLeftPadding{
+    padding-left: 50px;
+  }
   .whiteBackground{
     background-color: white;
   }

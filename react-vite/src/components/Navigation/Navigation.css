@@ -40,6 +40,9 @@
   position: relative;
   left:50px
 }
+.largePaddingLeft{
+  padding-left: 100px;
+}
 .moveRight50px{
   position: relative;
   right:50px

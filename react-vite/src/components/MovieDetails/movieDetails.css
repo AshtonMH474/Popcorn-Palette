@@ -26,6 +26,7 @@
 .detailButton{
     width: 200px ;
     background-color: #708090;
+    list-style-type: none;
 }
 
 .detailButton:hover{
@@ -52,4 +53,17 @@
     position: relative;
     bottom: 400px;
     width: 500px
+}
+.reviewsContainer{
+    position: relative;
+    right:11%;
+    text-align: center;
+}
+.largePaddingBottom{
+    padding-bottom: 255px;
+}
+.reviewRating{
+    position: relative;
+    top:20px;
+    left: 5%;
 }
