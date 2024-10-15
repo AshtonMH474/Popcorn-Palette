@@ -33,6 +33,7 @@ function MovieDetails(){
 
     useEffect(() => {
         if(movieItem?.reviews)checkIfUserHasReview()
+        console.log('jjghtgijoijojn')
     },[movieItem?.reviews])
 
 
@@ -45,9 +46,6 @@ function MovieDetails(){
         }
     }
 
-    function addReview(){
-        alert('Feature coming')
-    }
 
     return (
         <>

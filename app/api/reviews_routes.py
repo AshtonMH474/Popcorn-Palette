@@ -31,9 +31,9 @@ def make_review():
     if movie is None:
         return {'errors': {'message': 'Movie can not be found'}}, 404
 
-    current_review = Review.query.filter_by(movie_id=movie_id,user_id=current_user.id)
-    if current_review is not None:
-        return {'errors': {'message':'User already has a review for this movie'}}
+    current_review = Review.query.filter_by(movie_id=movie_id,user_id=current_user.id).first()
+    if current_review and getattr(current_review,'id',None) is not None:
+        return {'errors': {'message':'User already has a review for this movie'}},400
 
     try:
         review = data.get('review')
@@ -48,7 +48,7 @@ def make_review():
         db.session.add(the_review)
         db.session.commit()
 
-        return jsonify({'review':review.to_dict()}),201
+        return jsonify({'review':the_review.to_dict()}),201
     except Exception:
         db.session.rollback()
         return jsonify({'error': "Couldn't Add Review"}), 400
