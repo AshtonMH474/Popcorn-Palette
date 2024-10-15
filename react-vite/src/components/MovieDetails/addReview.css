@@ -23,6 +23,9 @@
 .smallPaddingTop{
     padding-top: 20px;
 }
+.smallPaddingBottom{
+    padding-bottom: 10px;
+}
 
 .addReviewItems{
     padding-bottom: 20px;
@@ -97,4 +100,30 @@ color: #B22222;
     position: absolute;
     top: 95%;
 
+}
+
+.error{
+color: #FF4C4C;
+}
+
+.errorRating{
+    position: relative;
+    left: 36%;
+}
+
+.disabledButton{
+background-color: #ccc; /* Disabled color */
+cursor: not-allowed;
+}
+
+.cancel{
+    font-size: 40px;
+    padding-right: 20px;
+    padding-top: 10px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+.cancel:hover{
+    cursor: pointer;
+    color: #B22222;
+    transform: scale(1.05);
 }

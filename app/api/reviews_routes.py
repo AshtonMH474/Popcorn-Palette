@@ -1,7 +1,7 @@
 from flask import Blueprint, jsonify,request
 from flask_login import login_required,current_user
 from app.models import Review,Movie,db
-
+from app.seeds.utilis import update_rating
 review_routes = Blueprint('reviews',__name__)
 
 
@@ -47,6 +47,8 @@ def make_review():
         )
         db.session.add(the_review)
         db.session.commit()
+
+        update_rating(movie_id)
 
         return jsonify({'review':the_review.to_dict()}),201
     except Exception:
