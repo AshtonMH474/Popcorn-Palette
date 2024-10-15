@@ -1,11 +1,26 @@
 import { useState } from "react";
 import { IoStarSharp } from "react-icons/io5";
 import './addReview.css'
+import { addingToReviews } from "../../redux/reviews";
+import { useDispatch } from "react-redux";
+import { useModal } from "../../context/Modal";
 function AddReview({movieItem,year}){
-    console.log(movieItem)
     const [rating,setRating] = useState(0)
     const [review,setReview] = useState('')
     const [hoveredRating, setHoveredRating] = useState(0);
+    const dispatch = useDispatch()
+    const {closeModal} = useModal()
+
+    function submitReview(){
+        let payload = {
+            movieId:movieItem.id,
+            review:review,
+            rating:rating
+        }
+        dispatch(addingToReviews(payload))
+        closeModal()
+    }
+
 
     return (
         <div className="addReview">
@@ -13,13 +28,14 @@ function AddReview({movieItem,year}){
             <h1 className="largePaddingLeft smallPaddingTop bold reviewHeader">MAKE A REVIEW</h1>
         </div>
         <div className="displayFlex addReviewItems">
-            <div className="movieItemDetails lightBlack widthPoster addReviewPoster">
+            <div className=" addReviewPoster">
                     <img className='detailsPoster' src={movieItem.movieImages[0].imgUrl} alt='moviePoster' />
-
-
             </div>
             <div className="reviewValues">
-                <h2 className="reviewHeader">{movieItem.title}</h2>
+                <div className="displayFlex spaceBetween">
+                    <h2 className="reviewHeader title">{movieItem.title}</h2>
+                    <h2 className="addReviewYear">{year}</h2>
+                </div>
                 <textarea className="inputReview" type='text' value={review} placeholder="Make a Review..." onChange={(e) => setReview(e.target.value)}/>
                 <div className="displayFlex reviewStars">
                     <IoStarSharp className={`cursor ${hoveredRating >= 1 || rating >= 1 ? 'activeStar':'nonActiveStar'}`} onClick={() => setRating(1)}
@@ -44,7 +60,7 @@ function AddReview({movieItem,year}){
                         />
                 </div>
 
-                <button className="addReviewButton">Submit</button>
+                <button onClick={submitReview} className="addReviewButton">Submit</button>
 
             </div>
         </div>
