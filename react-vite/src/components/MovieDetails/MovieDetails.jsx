@@ -33,7 +33,6 @@ function MovieDetails(){
 
     useEffect(() => {
         if(movieItem?.reviews)checkIfUserHasReview()
-        console.log('jjghtgijoijojn')
     },[movieItem?.reviews])
 
 

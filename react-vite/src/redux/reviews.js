@@ -23,7 +23,6 @@ export const getReviewsFromMovie = (movieId) => async(dispatch) => {
 
 
 export const addingToReviews = (payload) => async(dispatch) => {
-    console.log(payload)
     const res = await csrfFetch('/api/reviews/',{
         method:'POST',
         body:JSON.stringify(payload)
