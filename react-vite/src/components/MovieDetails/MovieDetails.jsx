@@ -8,6 +8,7 @@ import Reviews from "./Reviews";
 import BottomInfo from "../BottomInfo";
 import AddReview from "./AddReviewModel";
 import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
+import UpdateReview from "./updateReview";
 
 function MovieDetails(){
     const {movieId} = useParams()
@@ -17,6 +18,8 @@ function MovieDetails(){
     const movieItem = Object.values(movie)[0]
     const [year,setYear] = useState(0)
     const [hasReview,setHasReview] = useState(false)
+    const [userReview,setTheReview] = useState(null)
+
 
 
     useEffect(() => {
@@ -32,7 +35,10 @@ function MovieDetails(){
     },[movieItem])
 
     useEffect(() => {
-        if(movieItem?.reviews)checkIfUserHasReview()
+        if(user && movieItem?.reviews){
+            checkIfUserHasReview()
+            setUserReview()
+        }
     },[movieItem?.reviews])
 
 
@@ -43,6 +49,16 @@ function MovieDetails(){
         } else {
             setHasReview(false);
         }
+    }
+
+    function setUserReview(){
+        if(Array.isArray(movieItem.reviews)) {
+            const userReview = movieItem.reviews.filter((review) => review.userId === user.id);
+            setTheReview(userReview[0])
+        }else{
+            setTheReview(null)
+        }
+
     }
 
 
@@ -63,14 +79,14 @@ function MovieDetails(){
                     </div>
 
                 </div>
-                <div className=" displayFlex movieDetailButtons paddingTop">
+                {user && (<div className=" displayFlex movieDetailButtons paddingTop">
                             <button className="detailButton">Add to Watchlist</button>
                             <button className="detailButton">Add to a List</button>
                             {hasReview == false && (<button className="detailButton"><OpenModalMenuItem itemText={'Add a Review'}  modalComponent={<AddReview movieItem={movieItem} year={year}/>} /></button>)}
-                            {hasReview == true && (<button className="detailButton">Update your Review</button>)}
-                </div>
+                            {hasReview == true && (<button className="detailButton"><OpenModalMenuItem itemText={'Update a Review'}  modalComponent={<UpdateReview movieItem={movieItem} year={year} userReview={userReview}/>}/></button>)}
+                </div>)}
             </div>
-            <div className="movieDetailsPage">
+            <div className={`movieDetailsPage ${user ? '': 'nonUserDetail'}`}>
                 <div className="moveLeft50px movieInfo">
                     <div className="white movieDetailsTitle">{movieItem.title}</div>
                     <p className="white movieDescription largePaddingBottom">{movieItem.description}</p>

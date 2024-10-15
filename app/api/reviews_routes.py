@@ -70,13 +70,16 @@ def update_review(review_id):
     if review.user_id != current_user.id:
         return {'errors': {'message': 'Unauthorized'}}, 401
 
+    movie=Movie.query.filter_by(id=review.movie_id).first()
+
     try:
         review.review=data.get('review',review.review)
         review.rating=data.get('rating',review.rating)
 
         db.session.commit()
 
-
+        update_rating(movie.id)
+        db.session.commit()
         return jsonify({'review':review.to_dict()})
 
     except Exception:
