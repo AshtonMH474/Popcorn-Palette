@@ -38,7 +38,7 @@ function AddReview({movieItem,year}){
 
         setTimeout(() => {
             dispatch(getMovieDetails(movieItem.id))
-        },10)
+        },50)
 
     }
 

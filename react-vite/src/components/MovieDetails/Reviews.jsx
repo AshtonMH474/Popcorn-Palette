@@ -18,7 +18,7 @@ function Reviews({movieId}){
         <>
             <h2 className="white">REVIEWS</h2>
             <div>
-                {reviewsArr.map(review => (
+                {reviewsArr.reverse().map(review => (
                     <div key={review.id}>
                         <div className="displayFlex">
                             <h3 className="white">Review by {review.user.firstName}</h3>

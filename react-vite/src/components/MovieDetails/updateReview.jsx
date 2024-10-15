@@ -35,7 +35,7 @@ function UpdateReview({movieItem,year,userReview}){
 
         setTimeout(() => {
             dispatch(getMovieDetails(movieItem.id))
-        },50)
+        },500)
 
     }
 
