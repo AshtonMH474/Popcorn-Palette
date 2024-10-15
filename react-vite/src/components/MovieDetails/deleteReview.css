@@ -1,0 +1,20 @@
+.moveDelete{
+   padding-right: 250px;
+}
+.deleteReview{
+   margin-right: 10px;
+   background-color: #B22222;
+}
+.deleteReview:hover{
+    background-color: #8B1A1A;
+}
+.questionDelete{
+    padding-top: 80px;
+    text-align: center;
+}
+.cancelButton{
+    background-color: black;
+}
+.cancelButton:hover{
+    background-color: gray;
+}

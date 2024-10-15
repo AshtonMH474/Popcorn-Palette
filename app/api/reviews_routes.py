@@ -98,9 +98,21 @@ def delete_review(review_id):
     if review.user_id != current_user.id:
         return {'errors': {'message': 'Unauthorized'}}, 401
 
+    movie=Movie.query.filter_by(id=review.movie_id).first()
+
     try:
         db.session.delete(review)
         db.session.commit()
+
+        if len(movie.reviews) == 0:
+            movie.avg_rating = 0
+        else:
+            update_rating(movie.id)
+
+        db.session.commit()
+
+        return {"message":"Successfully deleted"},200
+
     except Exception:
         db.session.rollback()
         return jsonify({'error': "Couldn't Delete Review"}), 400
