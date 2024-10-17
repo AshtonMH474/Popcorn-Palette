@@ -50,6 +50,13 @@ def sign_up():
     """
     form = SignUpForm()
     form['csrf_token'].data = request.cookies['csrf_token']
+
+    if '@' not in form.data['email']:
+        return {'errors':'Email Invaild'},400
+
+    if len(form.data['username']) < 8:
+        return {'errors':'Username must be 8 characters or longer'},400
+
     if form.validate_on_submit():
         user = User(
             username=form.data['username'],
