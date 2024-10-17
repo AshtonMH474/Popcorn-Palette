@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getMovies } from '../../redux/movies'
 import BottomInfo from '../BottomInfo'
 import Recent from './recent';
+import HighMovies from './highMovies'
 
 
 
@@ -13,10 +14,10 @@ function Home(){
     const moviesArr = Object.values(movies)
 
     const [recent,setRecent] = useState([])
+    const [highlyRated,setHighly] = useState([])
 
     useEffect(() => {
         dispatch(getMovies())
-
 
     },[dispatch])
 
@@ -38,15 +39,35 @@ function Home(){
 
     },[moviesArr.length,recent.length])
 
+    useEffect(() => {
+        function getHighMovies(){
+            let newArr = []
+
+            moviesArr.forEach((movie) => {
+                if(movie.avgRating >= 4.5) newArr.push(movie)
+            })
+        newArr.sort((a,b) => b.avgRating - a.avgRating)
+        return newArr
+        }
+
+        let highMovies = getHighMovies()
+        setHighly(highMovies)
+    },[moviesArr.length, highlyRated.length])
+
 
     return (
         <>
         <div className='topBackground'></div>
         <div className='homeScreen'>
-            <div className='moveLeft50px'>
+            <div className='moveLeft50px movieBottomPadding'>
                 <Recent recent={recent}/>
             </div>
-            <div className='footer '>
+
+            <div className='moveLeft50px movieBottomPadding'>
+                <HighMovies movies={highlyRated}/>
+            </div>
+            <div className='topPaddingHome'></div>
+            <div className='footer'>
                 <BottomInfo/>
             </div>
         </div>

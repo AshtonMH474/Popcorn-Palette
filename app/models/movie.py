@@ -59,3 +59,21 @@ class Movie(db.Model):
             new_dict['reviews'] = [review.to_dict() for review in self.reviews]
 
         return new_dict
+
+    def to_dict_reviews(self):
+        new_dict =  {
+            'id':self.id,
+            'title':self.title,
+            'description':self.description,
+            'releaseDate':self.release_date,
+            'avgRating':self.avg_rating,
+            'custom':self.custom,
+            'createdAt':self.created_at,
+            'updatedAt':self.updated_at
+        }
+        if self.user_id:
+            new_dict['userId']=self.user_id
+        if self.movie_images:
+            new_dict['movieImages'] = [image.to_dict() for image in self.movie_images]
+
+        return new_dict

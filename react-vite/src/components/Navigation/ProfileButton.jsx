@@ -5,8 +5,11 @@ import { thunkLogout } from "../../redux/session";
 import OpenModalMenuItem from "./OpenModalMenuItem";
 import LoginFormModal from "../LoginFormModal";
 import SignupFormModal from "../SignupFormModal";
+import { useNavigate } from "react-router-dom";
+
 
 function ProfileButton() {
+  const navigate = useNavigate()
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
   const user = useSelector((store) => store.session.user);
@@ -39,6 +42,15 @@ function ProfileButton() {
     closeMenu();
   };
 
+  function naviagteWatchlist(){
+    navigate('/watchlist')
+    closeMenu()
+  }
+  function navigateReviews(){
+    navigate('/reviews')
+    closeMenu()
+  }
+
   return (
     <>
       <div className="mouseOver rightPageBorder xx-largeFont noPadding whiteFont noBackground noBorder" onClick={toggleMenu}>
@@ -48,24 +60,29 @@ function ProfileButton() {
         <ul className={"profile-dropdown lightGrey removeDecorations dropShadow largeRightPadding littleTopPadding littleBottomPadding"} ref={ulRef}>
           {user ? (
             <>
-              <li className="whiteFont">{user.username}</li>
-              <li className="whiteFont">{user.email}</li>
+              <li onClick={naviagteWatchlist} className="profileButton cursor">Watchlist</li>
+              <li onClick={navigateReviews} className="profileButton cursor">Reviews</li>
               <li>
-                <button onClick={logout}>Log Out</button>
+                <div className='profileButton cursor' onClick={logout}>Log Out</div>
               </li>
             </>
           ) : (
             <>
+            <div className="profileButton cursor ">
               <OpenModalMenuItem
                 itemText="Log In"
                 onItemClick={closeMenu}
                 modalComponent={<LoginFormModal />}
               />
+            </div>
+            <div className="profileButton cursor ">
               <OpenModalMenuItem
+                className='profileButton'
                 itemText="Sign Up"
                 onItemClick={closeMenu}
                 modalComponent={<SignupFormModal />}
               />
+              </div>
             </>
           )}
         </ul>

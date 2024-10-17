@@ -18,12 +18,15 @@ function SignupFormModal() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    let obj = {}
     if (password !== confirmPassword) {
-      return setErrors({
-        confirmPassword:
-          "Confirm Password field must be the same as the Password field",
-      });
+      obj.confirmPassword =  "Confirm Password field must be the same as the Password field"
     }
+
+    if(!email.includes('@')) obj.email = 'Invaild Email'
+
+    if(username.length < 8) obj.username = 'Username must be 8 characters or longer'
+    if(obj.confirmPassword || obj.email || obj.username) return setErrors(obj)
 
     const serverResponse = await dispatch(
       thunkSignup({
@@ -46,8 +49,11 @@ function SignupFormModal() {
     <>
     <div className="loginBackground">
       <h1 className="loginH1 white">Sign Up</h1>
-      {errors.server && <p>{errors.server}</p>}
+      {errors.server && <p className="error">{errors.server}</p>}
+
+
       <form className="loginForm" onSubmit={handleSubmit}>
+      {errors.email && <p className="error">{errors.email}</p>}
         <label className="loginLabel white">
           Email
           </label>
@@ -58,59 +64,65 @@ function SignupFormModal() {
             required
           />
 
-        {errors.email && <p>{errors.email}</p>}
-        <label>
-          Username
-          <input
+        {errors.username && <p className="error">{errors.username}</p>}
+        <label className="loginLabel white">
+            Username
+        </label>
+          <input className="loginInput"
             type="text"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             required
           />
-        </label>
-        {errors.username && <p>{errors.username}</p>}
-        <label>
+
+        {errors.firstName && <p className="error">{errors.firstName}</p>}
+        <label className="loginLabel white">
           First Name
-          <input
+          </label>
+          <input className="loginInput"
             type="text"
             value={firstName}
             onChange={(e) => setFirstName(e.target.value)}
             required
           />
-        </label>
-        {errors.firstName && <p>{errors.firstName}</p>}
-        <label>
+
+        {errors.lastName && <p className="error">{errors.lastName}</p>}
+        <label className="loginLabel white">
           Last Name
-          <input
+          </label>
+          <input className="loginInput"
             type="text"
             value={lastName}
             onChange={(e) => setLastName(e.target.value)}
             required
           />
-        </label>
-        {errors.lastName && <p>{errors.lastName}</p>}
 
-        <label>
+
+        {errors.password && <p className="error">{errors.password}</p>}
+        <label className="loginLabel white">
           Password
-          <input
+          </label>
+          <input className="loginInput"
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
           />
-        </label>
-        {errors.password && <p>{errors.password}</p>}
-        <label>
+
+        {errors.confirmPassword && <p className="error">{errors.confirmPassword}</p>}
+        <label className="loginLabel white">
           Confirm Password
-          <input
+          </label>
+          <input className="loginInput"
             type="password"
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
             required
           />
-        </label>
-        {errors.confirmPassword && <p>{errors.confirmPassword}</p>}
-        <button type="submit">Sign Up</button>
+
+        <div className="displayFlex justifyCenter">
+          <button className="loginButton" type="submit">Sign Up</button>
+        </div>
       </form>
       </div>
     </>
