@@ -5,11 +5,13 @@ import { HiArrowSmallLeft } from "react-icons/hi2";
 import { FaPlus } from "react-icons/fa6";
 import { NavLink } from "react-router-dom";
 import { addingToWatchList } from "../../redux/watchlist";
-import { useDispatch } from "react-redux";
+import { useDispatch,useSelector } from "react-redux";
 
 function Recent({recent}){
     const [currentIndex, setCurrentIndex] = useState(0);
     const dispatch = useDispatch()
+    const user = useSelector((store) => store.session.user);
+
 
     const nextMovies = () => {
         if (currentIndex + 5 < recent.length) {
@@ -43,7 +45,7 @@ function Recent({recent}){
                             <div className='white title'>{movie.title}</div>
                             <div className="displayFlex spaceBetween littleRightPadding">
                                 <div className='white'><IoStarSharp className='star' />{movie.avgRating.toFixed(1)}</div>
-                                <FaPlus onClick={() => addToWatchList(movie.id)} className="white zIndex eye cursor"/>
+                                <FaPlus onClick={() => addToWatchList(movie.id)} className={`white zIndex eye cursor ${user == null ? 'invisable' : 'zIndex'}`}/>
                             </div>
                         </div>
 

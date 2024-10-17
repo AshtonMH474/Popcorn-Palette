@@ -6,7 +6,7 @@ import { deleteFromWatchlist, getWatchlist, updateMovieInWatchlist } from '../..
 import { IoStarSharp } from "react-icons/io5";
 import { FaRegTrashAlt } from "react-icons/fa";
 import { IoEyeOutline } from "react-icons/io5";
-import { NavLink } from 'react-router-dom';
+import { Navigate, NavLink } from 'react-router-dom';
 import { getMovies } from '../../redux/movies'
 
 function Watchlist(){
@@ -15,7 +15,7 @@ function Watchlist(){
     const watchlistArr = Object.values(watchlist)
     const [active,setActive] = useState('unwatched')
     const [watchlistCurrArr,setWatchlist] = useState([])
-
+    const user = useSelector((store) => store.session.user);
 
 
     useEffect(() => {
@@ -47,7 +47,7 @@ function Watchlist(){
         setActive('watched')
     }
 
-
+    if(!user) return <Navigate to='/'/>
 
     return (
         <>

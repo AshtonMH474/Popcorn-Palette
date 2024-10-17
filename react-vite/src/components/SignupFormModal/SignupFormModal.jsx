@@ -44,18 +44,20 @@ function SignupFormModal() {
 
   return (
     <>
-      <h1>Sign Up</h1>
+    <div className="loginBackground">
+      <h1 className="loginH1 white">Sign Up</h1>
       {errors.server && <p>{errors.server}</p>}
-      <form onSubmit={handleSubmit}>
-        <label>
+      <form className="loginForm" onSubmit={handleSubmit}>
+        <label className="loginLabel white">
           Email
-          <input
+          </label>
+          <input className="loginInput"
             type="text"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
           />
-        </label>
+
         {errors.email && <p>{errors.email}</p>}
         <label>
           Username
@@ -110,6 +112,7 @@ function SignupFormModal() {
         {errors.confirmPassword && <p>{errors.confirmPassword}</p>}
         <button type="submit">Sign Up</button>
       </form>
+      </div>
     </>
   );
 }
