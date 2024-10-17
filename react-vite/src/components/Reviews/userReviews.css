@@ -1,0 +1,69 @@
+.reviewsBorder{
+    border: 1px white solid;
+    font-weight: bold;
+    width: 500px;
+    height: 100px;
+    padding-top: 100px;
+    text-align: center;
+    position: relative;
+    left: 22%;
+}
+
+.reviewMovieItem{
+    width: 200px;
+    border-radius: 10px;
+    background-color: #36454F;
+    transition: transform 0.2s;
+    min-height: 325px;
+    max-height: 325px;
+
+}
+
+.reviewMovieItem:hover {
+    transform: scale(1.05);
+}
+
+.currentReview{
+    margin-bottom: 80px;
+    width: 65%;
+    height: 325px;
+    min-height: 325px;
+    max-height: 325px;
+
+}
+
+.reviewsCenter{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-left: 100px;
+
+}
+.padding50pxBottom{
+    padding-bottom: 50px;
+}
+
+.reviewInfo{
+    padding-left: 30px;
+    overflow-y: auto;
+    position: relative;
+}
+
+.wordBreak{
+    word-break: break-word;
+}
+
+.reviewReview{
+    max-height:215px;
+    overflow-y: auto;
+    white-space: normal;
+    padding-right: 10px;
+    scrollbar-color: white #f1f1f1;
+    scrollbar-width: thin;
+}
+
+
+.reviewPadding{
+    padding-top: 100px;
+}
