@@ -46,6 +46,10 @@ function ProfileButton() {
     navigate('/watchlist')
     closeMenu()
   }
+  function navigateReviews(){
+    navigate('/reviews')
+    closeMenu()
+  }
 
   return (
     <>
@@ -57,7 +61,7 @@ function ProfileButton() {
           {user ? (
             <>
               <li onClick={naviagteWatchlist} className="profileButton cursor">Watchlist</li>
-              <li className="profileButton cursor">Reviews</li>
+              <li onClick={navigateReviews} className="profileButton cursor">Reviews</li>
               <li>
                 <div className='profileButton cursor' onClick={logout}>Log Out</div>
               </li>

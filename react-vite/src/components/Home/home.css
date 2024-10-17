@@ -61,23 +61,33 @@ padding-left: 10px;
 }
 
 .arrow{
-    height: 50px;
-    width: 50px;
+
+    border: none;
+    border-radius: 50%;
+    padding: 10px;
+    font-size: 20px;
+    cursor: pointer;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s, background-color 0.2s;
 }
 .arrow:hover{
     cursor: pointer;
     background-color:#B22222 ;
+    transform: scale(1.1);
+}
+.arrow:active {
+    transform: scale(0.95);
 }
 
 .arrowRight{
     position: absolute;
     left: 79% ;
-    bottom: 175px;
+    bottom: 255px;
 }
 .arrowLeft{
     position: absolute;
     left: 290px;
-    bottom: 175px;
+    bottom: 255px;
 }
 
 .posters {
@@ -105,4 +115,11 @@ padding-left: 10px;
 
 .invisable{
     visibility: hidden;;
+}
+
+.movieBottomPadding{
+    padding-bottom: 60px;
+}
+.topPaddingHome{
+    padding-top: 80px;
 }
