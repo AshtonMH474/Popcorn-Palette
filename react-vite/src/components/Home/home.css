@@ -102,3 +102,7 @@ padding-left: 10px;
 .cursor{
     cursor: pointer;
 }
+
+.invisable{
+    visibility: hidden;;
+}

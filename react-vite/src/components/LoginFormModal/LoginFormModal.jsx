@@ -28,33 +28,61 @@ function LoginFormModal() {
     }
   };
 
+  const handleDemo = async(e) => {
+    e.preventDefault();
+    const email ='demo@aa.io'
+    const password = 'password'
+
+    const serverResponse = await dispatch(
+      thunkLogin({
+        email:email,
+        password:password,
+      })
+    );
+
+    if (serverResponse) {
+      setErrors(serverResponse);
+    } else {
+      closeModal();
+    }
+  }
+
   return (
-    <>
-      <h1>Log In</h1>
-      <form onSubmit={handleSubmit}>
-        <label>
+    <div className="loginBackground">
+      <h1 className="white loginH1">Log In</h1>
+      <form className="loginForm" onSubmit={handleSubmit}>
+      {errors.email && <p className="error">{errors.email}</p>}
+        <label className="loginLabel white">
           Email
-          <input
+        </label>
+        <input className="loginInput"
             type="text"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
           />
-        </label>
-        {errors.email && <p>{errors.email}</p>}
-        <label>
+
+        {errors.password && <p className="error">{errors.password}</p>}
+        <label className="loginLabel white">
           Password
-          <input
+        </label>
+          <input className="loginInput"
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
           />
-        </label>
-        {errors.password && <p>{errors.password}</p>}
-        <button type="submit">Log In</button>
-      </form>
-    </>
+
+        <div className="displayFlex justifyCenter ">
+          <button className="loginButton marginLogin" type="submit">Log In</button>
+          <button className="loginButton marginLogin" onClick={handleDemo}>Demo User</button>
+        </div>
+        </form>
+
+
+
+
+      </div>
   );
 }
 
