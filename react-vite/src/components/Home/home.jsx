@@ -5,6 +5,7 @@ import { getMovies } from '../../redux/movies'
 import BottomInfo from '../BottomInfo'
 import Recent from './recent';
 import HighMovies from './highMovies'
+import { getWatchlist } from '../../redux/watchlist'
 
 
 
@@ -12,6 +13,9 @@ function Home(){
     const dispatch = useDispatch()
     const movies = useSelector(state => state.movies)
     const moviesArr = Object.values(movies)
+    const user = useSelector((store) => store.session.user)
+    const watchlist = useSelector(state => state.watchlist)
+    const watchlistArr = Object.values(watchlist)
 
     const [recent,setRecent] = useState([])
     const [highlyRated,setHighly] = useState([])
@@ -19,19 +23,33 @@ function Home(){
     useEffect(() => {
         dispatch(getMovies())
 
+        if(user)dispatch(getWatchlist())
+
     },[dispatch])
 
-    useEffect(()=> {
-        function getRecentMovies(){
-            let newArr = []
+    const isMovieInWatchlist = (movieId) => {
+        return watchlistArr.some((watchlistMovie) => watchlistMovie.id === movieId)
+    }
 
-            moviesArr.forEach((movie) => {
-                let date = new Date(movie.releaseDate)
-                let year = date.getFullYear()
-                if(year >= 2024) newArr.push(movie)
+    function getRecentMovies(){
+        let newArr = []
+
+        moviesArr.forEach((movie) => {
+            let date = new Date(movie.releaseDate)
+            let year = date.getFullYear()
+            if(year >= 2024){
+                if(user)newArr.push({
+                ...movie,
+                isInWatchlist: isMovieInWatchlist(movie.id)
             })
-            return newArr
+            else newArr.push(movie)
         }
+        })
+        return newArr
+    }
+
+
+    useEffect(()=> {
 
         let recentMovies = getRecentMovies()
         setRecent(recentMovies)
@@ -44,7 +62,13 @@ function Home(){
             let newArr = []
 
             moviesArr.forEach((movie) => {
-                if(movie.avgRating >= 4.5) newArr.push(movie)
+                if(movie.avgRating >= 4.5){
+                    if(user)newArr.push({
+                        ...movie,
+                        isInWatchlist: isMovieInWatchlist(movie.id)
+                    })
+                    else newArr.push(movie)
+                }
             })
         newArr.sort((a,b) => b.avgRating - a.avgRating)
         return newArr
@@ -53,6 +77,7 @@ function Home(){
         let highMovies = getHighMovies()
         setHighly(highMovies)
     },[moviesArr.length, highlyRated.length])
+
 
 
     return (
@@ -64,7 +89,7 @@ function Home(){
             </div>
 
             <div className='moveLeft50px movieBottomPadding'>
-                <HighMovies movies={highlyRated}/>
+                <HighMovies high={highlyRated}/>
             </div>
             <div className='topPaddingHome'></div>
             <div className='footer'>

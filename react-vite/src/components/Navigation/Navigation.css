@@ -55,12 +55,13 @@
 
 .search{
   position: absolute;
-  right: 41%;
-  width: 400px;
+  right: 33.5%;
+  width: 550px;
+  border-radius: 8px;
 }
 .searchButton{
   position: relative;
-  left: 60px;
+  left: 190px;
   top: 3px;
 }
 .searchButton:hover{
@@ -71,7 +72,7 @@
 }
 .watchLink{
   position: absolute;
-  left: 60%;
+  left: 68%;
 }
 
 .profileButton{

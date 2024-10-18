@@ -82,9 +82,9 @@ function MovieDetails(){
                 {user && (<div className=" displayFlex movieDetailButtons paddingTop">
                             <button className="detailButton">Add to Watchlist</button>
                             <button className="detailButton">Add to a List</button>
-                            {hasReview == false && (<button className="detailButton"><OpenModalMenuItem itemText={'Add a Review'}  modalComponent={<AddReview movieItem={movieItem} year={year}/>} /></button>)}
-                            {hasReview == true && (<button className="detailButton"><OpenModalMenuItem itemText={'Update Your Review'}  modalComponent={<UpdateReview movieItem={movieItem} year={year} userReview={userReview}/>}/></button>)}
-                            {hasReview == true && (<button className="detailButton"><OpenModalMenuItem itemText={'Delete Your Review'}  modalComponent={<DeleteReview movieItem={movieItem} userReview={userReview} setHasReview={setHasReview}/>}/></button>)}
+                            {hasReview == false && (<button className="detailButton noListStyleType"><OpenModalMenuItem itemText={'Add a Review'}  modalComponent={<AddReview movieItem={movieItem} year={year}/>} /></button>)}
+                            {hasReview == true && (<button className="detailButton noListStyleType"><OpenModalMenuItem itemText={'Update Your Review'}  modalComponent={<UpdateReview movieItem={movieItem} year={year} userReview={userReview}/>}/></button>)}
+                            {hasReview == true && (<button className="detailButton noListStyleType"><OpenModalMenuItem itemText={'Delete Your Review'}  modalComponent={<DeleteReview movieItem={movieItem} userReview={userReview} setHasReview={setHasReview}/>}/></button>)}
                 </div>)}
             </div>
             <div className={`movieDetailsPage ${user ? '': 'nonUserDetail'}`}>
