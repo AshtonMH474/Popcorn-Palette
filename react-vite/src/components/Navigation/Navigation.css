@@ -89,3 +89,30 @@
   border-radius: 3px;
   transform: scale(1.05);
 }
+
+.dropdown-search{
+  position: absolute;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  z-index: 1000;
+  max-height: 200px;
+  overflow-y: auto;
+  width: 550px;
+  margin-top: 5px;
+  right: 33.5%;
+}
+
+.dropdown-item-search{
+  padding: 10px;
+  text-decoration: none;
+  color: black;
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.dropdown-item-search:hover{
+  background-color: #f0f0f0;
+  cursor: pointer;
+}

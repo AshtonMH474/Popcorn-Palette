@@ -10,6 +10,7 @@ import AddReview from "./AddReviewModel";
 import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
 import UpdateReview from "./updateReview";
 import DeleteReview from "./DeleteReview";
+import { addingToWatchList } from "../../redux/watchlist";
 
 function MovieDetails(){
     const {movieId} = useParams()
@@ -61,6 +62,12 @@ function MovieDetails(){
         }
 
     }
+    function addToWatchList(movieId){
+        const movieData = {movieId}
+        dispatch(addingToWatchList(movieData))
+
+
+    }
 
 
     return (
@@ -80,8 +87,8 @@ function MovieDetails(){
 
                 </div>
                 {user && (<div className=" displayFlex movieDetailButtons paddingTop">
-                            <button className="detailButton">Add to Watchlist</button>
-                            <button className="detailButton">Add to a List</button>
+                            <button onClick={() => addToWatchList(movieId)} className="detailButton">Add to Watchlist</button>
+                            <button onClick={() => alert('Feature coming soon...')} className="detailButton">Add to a List</button>
                             {hasReview == false && (<button className="detailButton noListStyleType"><OpenModalMenuItem itemText={'Add a Review'}  modalComponent={<AddReview movieItem={movieItem} year={year}/>} /></button>)}
                             {hasReview == true && (<button className="detailButton noListStyleType"><OpenModalMenuItem itemText={'Update Your Review'}  modalComponent={<UpdateReview movieItem={movieItem} year={year} userReview={userReview}/>}/></button>)}
                             {hasReview == true && (<button className="detailButton noListStyleType"><OpenModalMenuItem itemText={'Delete Your Review'}  modalComponent={<DeleteReview movieItem={movieItem} userReview={userReview} setHasReview={setHasReview}/>}/></button>)}

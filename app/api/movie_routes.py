@@ -1,4 +1,4 @@
-from flask import Blueprint, jsonify
+from flask import Blueprint, jsonify,request
 from flask_login import login_required
 from app.models import User,Movie
 
@@ -21,3 +21,17 @@ def movie_details(movie_id):
     """
      movie = Movie.query.filter_by(id=movie_id).first()
      return {'movie':movie.to_dict()}
+
+
+@movie_routes.route('/search')
+def search_movie():
+
+    search_term = request.args.get('query',None)
+
+    if not search_term:
+        movies = Movie.query.all()
+
+    else:
+        movies = Movie.query.filter(Movie.title.ilike(f'%{search_term}%')).all()
+
+    return {'movies': [movie.to_dict() for movie in movies]}
