@@ -3,16 +3,21 @@ import ProfileButton from "./ProfileButton";
 import "./Navigation.css";
 import { FaPlus } from "react-icons/fa6";
 import { FaSearch } from "react-icons/fa";
-import { useSelector } from "react-redux";
-// import LoginFormModal from "../LoginFormModal";
-// import OpenModalButton from '../OpenModalButton';
-
+import { useDispatch, useSelector } from "react-redux";
 import logo from '../../Static/2938928.webp'
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { searchMovies } from "../../redux/search";
 
 function Navigation() {
+  const dispatch = useDispatch()
   const sessionUser = useSelector(state=> state.session.user);
+  const searchedMovies = useSelector(state => state.search)
+  const searchArr = Object.values(searchedMovies)
   const [movie,setMovie] = useState('')
+  useEffect(() => {
+    dispatch(searchMovies(movie))
+
+  },[movie.length,dispatch])
 
   return (
     <>
@@ -33,6 +38,15 @@ function Navigation() {
         <div>
           <input className="search" type="text" value={movie} placeholder="search movie..." onChange={(e) => setMovie(e.target.value)}/>
           <FaSearch className="searchButton"/>
+          {movie.length > 0 && searchArr.length > 0 && (
+                <div className="dropdown-search">
+                  {searchArr.map((movie) => (
+                    <NavLink onClick={() =>setMovie('')} key={movie.id} to={`/movies/${movie.id}`} className="dropdown-item-search">
+                      {movie.title}
+                    </NavLink>
+                  ))}
+                </div>
+              )}
         </div>
        {sessionUser && ( <div className="watchLink">
           <NavLink className='displayFlex noTextUnderline' to='/watchlist'>
