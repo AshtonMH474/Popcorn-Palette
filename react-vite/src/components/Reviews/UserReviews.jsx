@@ -6,9 +6,13 @@ import { getUserReviews } from "../../redux/reviews"
 import { NavLink } from "react-router-dom"
 import { IoStarSharp } from "react-icons/io5";
 import { FaRegTrashAlt } from "react-icons/fa";
+import { FiEdit2 } from "react-icons/fi";
 import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
 import DeleteReview from "../MovieDetails/DeleteReview"
+import UpdateReview from "../MovieDetails/updateReview"
 import './userReviews.css'
+
+
 function UserReviews(){
     const dispatch = useDispatch()
     const user = useSelector((store) => store.session.user);
@@ -27,8 +31,7 @@ function UserReviews(){
     if(reviewsArr.length < 1){
         return (
             <>
-                <div className='topBackground'></div>
-                <div className="homeScreen">
+                <div className="homeScreen topPaddingHome">
                     <h2 className='textCenter white'>YOUR REVIEWS</h2>
                     <div className="reviewsBorder white">NO REVIEWS YET</div>
                     <div className='footer lightBlack'>
@@ -41,8 +44,7 @@ function UserReviews(){
 
     return (
         <>
-            <div className='topBackground'></div>
-            <div className="homeScreen">
+            <div className="homeScreen topPaddingHome">
                 <h2 className='textCenter white padding50pxBottom'>YOUR REVIEWS</h2>
                 <div className="reviewsCenter">
                 {reviewsArr.length && reviewsArr.map(review => (
@@ -56,11 +58,18 @@ function UserReviews(){
                                     <div className='paddingLeft10px'>
                                         <div className="displayFlex  spaceBetween">
                                             <div className='white'><IoStarSharp className='star' />{review.movie.avgRating.toFixed(1)}</div>
-                                            <div className="white zIndex trash cursor littleRightPadding">
+                                            <div className="displayFlex">
+                                                <div className="noListStyleType white cursor littleRightPadding editReview">
+                                                    <OpenModalMenuItem itemText={<FiEdit2/>}
+                                                    modalComponent={<UpdateReview movieItem={review.movie} year={new Date(review.movie.releaseDate).getFullYear()} userReview={review}/>}
+                                                    />
+                                                </div>
+                                                <div className="noListStyleType white trash cursor littleRightPadding">
                                                 <OpenModalMenuItem
                                                 itemText={<FaRegTrashAlt />}
                                                 modalComponent={<DeleteReview movieItem={review.movie} userReview={review}/>}
                                                 />
+                                                </div>
                                             </div>
                                         </div>
                                     </div>

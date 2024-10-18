@@ -51,8 +51,7 @@ function Watchlist(){
 
     return (
         <>
-        <div className='topBackground'></div>
-        <div className='homeScreen'>
+        <div className='homeScreen topPaddingHome'>
             <div className='moveLeft50px'>
                 <div className='displayFlex spaceAround'>
                     {active == 'unwatched' && (<h2 className='textCenter white numWatchlist'>You Want to See {watchlistCurrArr.length} Movies</h2>)}
