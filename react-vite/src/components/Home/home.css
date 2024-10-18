@@ -2,15 +2,6 @@
     font-family:'Gotham', sans-serif;
 
 }
-.topBackground{
-    background-color: #0b0b0b;
-    position: absolute;
-    width: 102%;
-    left: 0%;
-    bottom: 93%;
-    height: 20px;
-
-}
 
 .homeScreen{
      position: relative;
@@ -121,5 +112,5 @@ padding-left: 10px;
     padding-bottom: 60px;
 }
 .topPaddingHome{
-    padding-top: 80px;
+    padding-top: 50px;
 }

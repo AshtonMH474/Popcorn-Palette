@@ -17,7 +17,7 @@ function Navigation() {
   return (
     <>
     <div className="border">
-    <ul className="dropShadow lightBlack noMargin removeDecorations displayFlex spaceBetween alignCenter noPadding ">
+    <ul className="lightBlack noMargin removeDecorations displayFlex spaceBetween alignCenter noPadding ">
       <li>
         <div className="displayFlex alignCenter spaceBetween moveLeft50px">
           <NavLink className='noTextUnderline' to="/">

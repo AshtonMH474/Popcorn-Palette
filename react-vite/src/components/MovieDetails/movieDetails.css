@@ -71,3 +71,6 @@
     position: relative;
     top:115px
 }
+.minHeightBackground{
+    min-height: 98.7vh;
+}

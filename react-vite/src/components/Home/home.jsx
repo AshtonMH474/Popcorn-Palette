@@ -57,7 +57,7 @@ function Home(){
 
     return (
         <>
-        <div className='topBackground'></div>
+
         <div className='homeScreen'>
             <div className='moveLeft50px movieBottomPadding'>
                 <Recent recent={recent}/>
