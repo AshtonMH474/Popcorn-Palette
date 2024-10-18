@@ -45,10 +45,14 @@ padding-left: 10px;
 .movieItem {
     background-color: #36454F;
     border-radius: 10px;
-    transition: transform 0.2s;
+    box-shadow: 0 4px 6px rgba(255, 255, 255, 0.1), /* Light shadow to contrast against dark bg */
+    0 1px 3px rgba(255, 255, 255, 0.08); /* Subtle, layered shadow */
+    transition: transform 0.2s, box-shadow 0.2s ease;
 }
 .movieItem:hover {
     transform: scale(1.05);
+    box-shadow: 0 10px 15px rgba(255, 255, 255, 0.2), /* Brighter shadow on hover */
+    0 4px 6px rgba(255, 255, 255, 0.1);
 }
 
 .arrow{
@@ -113,4 +117,8 @@ padding-left: 10px;
 }
 .topPaddingHome{
     padding-top: 50px;
+}
+.checkmark{
+    font-size: 20px;
+
 }

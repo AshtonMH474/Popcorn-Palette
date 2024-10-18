@@ -51,6 +51,7 @@ function Watchlist(){
 
     return (
         <>
+
         <div className='homeScreen topPaddingHome'>
             <div className='moveLeft50px'>
                 <div className='displayFlex spaceAround'>

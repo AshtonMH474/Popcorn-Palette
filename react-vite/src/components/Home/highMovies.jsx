@@ -1,17 +1,28 @@
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import { IoStarSharp } from "react-icons/io5";
 import { HiArrowSmallRight } from "react-icons/hi2";
 import { HiArrowSmallLeft } from "react-icons/hi2";
+import { IoIosCheckmark } from "react-icons/io";
 import { FaPlus } from "react-icons/fa6";
 import { NavLink } from "react-router-dom";
 import { addingToWatchList } from "../../redux/watchlist";
 import { useDispatch,useSelector } from "react-redux";
+import { deleteFromWatchlist } from "../../redux/watchlist";
 
-function HighMovies({movies}){
+function HighMovies({high}){
     const [currentIndex, setCurrentIndex] = useState(0);
     const dispatch = useDispatch()
     const user = useSelector((store) => store.session.user);
+    const [movies, setMovies] = useState(high);
+    const watchlist = useSelector((state) => state.watchlist);
 
+    useEffect(() => {
+        // Whenever recent or watchlist changes, update local movie state
+        setMovies(high.map(movie => ({
+            ...movie,
+            isInWatchlist: Object.values(watchlist).some(watchlistMovie => watchlistMovie.id === movie.id)
+        })));
+    }, [high, watchlist]);
 
     const nextMovies = () => {
         if (currentIndex + 5 < movies.length) {
@@ -32,6 +43,10 @@ function HighMovies({movies}){
 
     }
 
+    function removeMovieFromWatchList(id){
+        dispatch(deleteFromWatchlist(id))
+    }
+
 
     return (
         <>
@@ -46,7 +61,8 @@ function HighMovies({movies}){
                             <div className='white title'>{movie.title}</div>
                             <div className="displayFlex spaceBetween littleRightPadding">
                                 <div className='white'><IoStarSharp className='star' />{movie.avgRating.toFixed(1)}</div>
-                                <FaPlus onClick={() => addToWatchList(movie.id)} className={`white zIndex eye cursor ${user == null ? 'invisable' : 'zIndex'}`}/>
+                                {!movie.isInWatchlist && (<FaPlus onClick={() => addToWatchList(movie.id)} className={`white zIndex eye cursor ${user == null ? 'invisable' : 'zIndex'}`}/>)}
+                                {movie.isInWatchlist && (<IoIosCheckmark onClick={() => removeMovieFromWatchList(movie.id)} className={`white zIndex  checkmark eye cursor ${user == null ? 'invisable' : 'zIndex'}`}/>)}
                             </div>
                         </div>
 
