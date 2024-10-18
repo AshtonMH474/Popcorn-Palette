@@ -34,7 +34,7 @@ function Recent({recent}){
 
     return (
         <>
-                <h2 className='textCenter white'>RECENTLY RELEASED</h2>
+                <h2 className='textCenter white topPaddingHome'>RECENTLY RELEASED</h2>
                 <div className='movieFlex alignCenter'>
                 {recent.slice(currentIndex, currentIndex + 5).map(movie =>(
                     <div key={movie.id} className='movieItem lightBlack'>

@@ -27,9 +27,6 @@
     list-style-type: none;
   }
 
-  .dropShadow {
-    box-shadow: 2px 2px 10px #343A40;
-  }
   .largeRightPadding {
     padding-right: 35px;
   }
@@ -47,11 +44,14 @@
     background-color: white;
   }
  .border{
-    position: relative;
-    right:8px;
-    bottom: 8px;
-    width:103%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1;
+
  }
+
  .zIndex{
     z-index: 3;
  }

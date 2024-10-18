@@ -67,3 +67,12 @@
 .reviewPadding{
     padding-top: 100px;
 }
+.noListStyleType{
+    list-style-type: none;
+}
+.editReview{
+    padding-top: 1px;
+}
+.editReview:hover{
+    color: #00FF00;
+}

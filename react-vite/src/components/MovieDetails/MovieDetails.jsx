@@ -65,8 +65,7 @@ function MovieDetails(){
 
     return (
         <>
-        <div className='topBackground'></div>
-        <div className="homeScreen">
+        <div className="homeScreen minHeightBackground">
         {movieItem ? (
             <>
             <div className="movieOptions">
