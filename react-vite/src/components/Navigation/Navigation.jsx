@@ -2,11 +2,11 @@ import { NavLink } from "react-router-dom";
 import ProfileButton from "./ProfileButton";
 import "./Navigation.css";
 import { FaPlus } from "react-icons/fa6";
-import { FaSearch } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import logo from '../../Static/2938928.webp'
 import { useEffect, useState } from "react";
 import { searchMovies } from "../../redux/search";
+import { getReviewsFromMovie } from "../../redux/reviews";
 
 function Navigation() {
   const dispatch = useDispatch()
@@ -17,6 +17,11 @@ function Navigation() {
   useEffect(() => {
     dispatch(searchMovies(movie))
   },[movie.length,dispatch])
+
+  function goToMovie(movieId){
+    setMovie('')
+    dispatch(getReviewsFromMovie(movieId))
+  }
 
   return (
     <>
@@ -36,11 +41,11 @@ function Navigation() {
       <li className="displayFlex">
         <div>
           <input className="search" type="text" value={movie} placeholder="search movie..." onChange={(e) => setMovie(e.target.value)}/>
-          <FaSearch className="searchButton"/>
+
           {movie.length > 0 && searchArr.length > 0 && (
                 <div className="dropdown-search">
                   {searchArr.map((movie) => (
-                    <NavLink onClick={() =>setMovie('')} key={movie.id} to={`/movies/${movie.id}`} className="dropdown-item-search">
+                    <NavLink onClick={() => goToMovie(movie.id)} key={movie.id} to={`/movies/${movie.id}`} className="dropdown-item-search">
                       {movie.title}
                     </NavLink>
                   ))}

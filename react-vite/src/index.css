@@ -101,10 +101,6 @@
     width: 100%;
 
   }
-/* html,body{
-    height: 100%;
-
+.github:hover{
+  text-decoration:none;
 }
-.fullHeight{
-    min-height: 100vh;
-} */

@@ -68,7 +68,9 @@
 .watchLink{
   position: absolute;
   left: 68%;
+  bottom: 13px;
 }
+
 
 .profileButton{
   min-width: 100px;
