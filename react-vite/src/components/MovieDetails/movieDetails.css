@@ -4,8 +4,6 @@
 .movieDetailsPage{
     display: flex;
     justify-content: center;
-    align-items: center;
-    padding-top: 50px;
 }
 .movieItemDetails{
     background-color: #36454F;
@@ -16,23 +14,10 @@
     top: 100px;
     left: 25%;
 }
-/* .movieDetailButtons{
-    flex-direction: column;
-    align-items: flex-start;
-} */
+
 .paddingTop{
     padding-top: 50px;
 }
-/* .detailButton{
-    width: 200px ;
-    background-color: #708090;
-    list-style-type: none;
-}
-
-.detailButton:hover{
-    background-color:#B22222 ;
-    cursor: pointer;
-} */
 .detailButton {
     width: 200px;
     padding: 10px 20px;
@@ -78,7 +63,7 @@
 
 .movieInfo{
     position: relative;
-    bottom: 400px;
+    bottom: 480px;
     width: 500px
 }
 .reviewsContainer{
@@ -101,3 +86,14 @@
 .minHeightBackground{
     min-height: 98.7vh;
 }
+.noUserButtons {
+    height: 124.6px;
+  }
+
+  .noUserPadding {
+    height: 0;
+    padding-top: 20px;
+  }
+  .marginButton{
+    margin-bottom: 84px;
+  }
