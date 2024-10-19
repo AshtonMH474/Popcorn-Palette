@@ -10,7 +10,8 @@ import AddReview from "./AddReviewModel";
 import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
 import UpdateReview from "./updateReview";
 import DeleteReview from "./DeleteReview";
-import { addingToWatchList } from "../../redux/watchlist";
+import { deleteFromWatchlist } from "../../redux/watchlist";
+import { addingToWatchList, getWatchlist } from "../../redux/watchlist";
 
 function MovieDetails(){
     const {movieId} = useParams()
@@ -21,12 +22,30 @@ function MovieDetails(){
     const [year,setYear] = useState(0)
     const [hasReview,setHasReview] = useState(false)
     const [userReview,setTheReview] = useState(null)
+    const watchlist = useSelector(state => state.watchlist)
+    const watchlistArr = Object.values(watchlist)
+    const [isInWatchlist, setIsInWatchlist] = useState(false);
 
-
+    console.log(watchlistArr)
 
     useEffect(() => {
-        dispatch(getMovieDetails(movieId))
-    },[dispatch,movieId])
+        const fetchData = async () => {
+            await dispatch(getMovieDetails(movieId));
+
+            if (user) {
+                await dispatch(getWatchlist()); // Fetch watchlist
+            }
+        };
+
+        fetchData();
+    }, [dispatch, movieId, user]);
+
+    useEffect(() => {
+        if (user && watchlist && movieItem) {
+            const inWatchlist = watchlistArr.some(watchlistMovie => watchlistMovie.id === movieItem.id);
+            setIsInWatchlist(inWatchlist);
+        }
+    }, [watchlist, movieItem, user]);
 
     useEffect(() => {
         if(movieItem){
@@ -42,6 +61,10 @@ function MovieDetails(){
             setUserReview()
         }
     },[movieItem?.reviews])
+
+    useEffect(() => {
+        if(user)dispatch(getWatchlist())
+    },[dispatch,user])
 
 
     function checkIfUserHasReview() {
@@ -69,7 +92,9 @@ function MovieDetails(){
 
     }
 
-
+    function removeFromWatchlist(movieId){
+        dispatch(deleteFromWatchlist(movieId))
+    }
     return (
         <>
         <div className="homeScreen minHeightBackground">
@@ -86,13 +111,35 @@ function MovieDetails(){
                     </div>
 
                 </div>
-                {user && (<div className=" displayFlex movieDetailButtons paddingTop">
-                            <button onClick={() => addToWatchList(movieId)} className="detailButton">Add to Watchlist</button>
-                            <button onClick={() => alert('Feature coming soon...')} className="detailButton">Add to a List</button>
-                            {hasReview == false && (<button className="detailButton noListStyleType"><OpenModalMenuItem itemText={'Add a Review'}  modalComponent={<AddReview movieItem={movieItem} year={year}/>} /></button>)}
-                            {hasReview == true && (<button className="detailButton noListStyleType"><OpenModalMenuItem itemText={'Update Your Review'}  modalComponent={<UpdateReview movieItem={movieItem} year={year} userReview={userReview}/>}/></button>)}
-                            {hasReview == true && (<button className="detailButton noListStyleType"><OpenModalMenuItem itemText={'Delete Your Review'}  modalComponent={<DeleteReview movieItem={movieItem} userReview={userReview} setHasReview={setHasReview}/>}/></button>)}
-                </div>)}
+
+
+                <div className={`displayFlex movieDetailButtons paddingTop ${user ? '' : 'noUserButtons'}`}>
+            {user ? (
+                <>
+                    {!isInWatchlist && (<button onClick={() => addToWatchList(movieId)} className="detailButton">Add to Watchlist</button>)}
+                    {isInWatchlist && (<button onClick={() => removeFromWatchlist(movieId)} className="detailButton">Remove From Watchlist</button>)}
+                    <button onClick={() => alert('Feature coming soon...')} className="detailButton">Add to a List</button>
+                    {!hasReview && (
+                    <button className="detailButton noListStyleType marginButton">
+                        <OpenModalMenuItem itemText={'Add a Review'} modalComponent={<AddReview movieItem={movieItem} year={year} />} />
+                    </button>
+                    )}
+                {hasReview && (
+                    <>
+                        <button className="detailButton noListStyleType">
+                        <OpenModalMenuItem itemText={'Update Your Review'} modalComponent={<UpdateReview movieItem={movieItem} year={year} userReview={userReview} />} />
+                        </button>
+                        <button className="detailButton noListStyleType">
+                        <OpenModalMenuItem itemText={'Delete Your Review'} modalComponent={<DeleteReview movieItem={movieItem} userReview={userReview} setHasReview={setHasReview} />} />
+                        </button>
+                    </>
+                )}
+                </>
+            ) : (
+                <div className="noUserPadding"></div>  // Placeholder when no user is present
+            )}
+            </div>
+
             </div>
             <div className={`movieDetailsPage ${user ? '': 'nonUserDetail'}`}>
                 <div className="moveLeft50px movieInfo">
