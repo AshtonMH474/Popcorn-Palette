@@ -16,7 +16,6 @@ function Navigation() {
   const [movie,setMovie] = useState('')
   useEffect(() => {
     dispatch(searchMovies(movie))
-
   },[movie.length,dispatch])
 
   return (

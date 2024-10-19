@@ -58,15 +58,10 @@
   right: 33.5%;
   width: 550px;
   border-radius: 8px;
+  bottom: 13px;
+  height: 15px;
 }
-.searchButton{
-  position: relative;
-  left: 190px;
-  top: 3px;
-}
-.searchButton:hover{
-  cursor: pointer;
-}
+
 .watchLink:hover{
   cursor: pointer;
 }
