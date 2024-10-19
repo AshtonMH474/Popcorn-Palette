@@ -85,7 +85,7 @@ const initialState = {};
 function watchlistReducer(state = initialState, action) {
   switch (action.type) {
     case GET_WATCHLIST:{
-      const newState = {...state};
+      const newState = {};
       action.payload.watchlistMovies.forEach((movie)=>newState[movie.id] = movie)
       return newState;
     }

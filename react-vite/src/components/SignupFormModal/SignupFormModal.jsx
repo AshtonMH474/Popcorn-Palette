@@ -4,6 +4,7 @@ import { useModal } from "../../context/Modal";
 import { thunkSignup } from "../../redux/session";
 import "./SignupForm.css";
 
+
 function SignupFormModal() {
   const dispatch = useDispatch();
   const [email, setEmail] = useState("");
@@ -41,6 +42,7 @@ function SignupFormModal() {
     if (serverResponse) {
       setErrors(serverResponse);
     } else {
+
       closeModal();
     }
   };
