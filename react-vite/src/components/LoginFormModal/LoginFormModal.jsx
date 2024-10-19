@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 import "./LoginForm.css";
 
+
 function LoginFormModal() {
   const dispatch = useDispatch();
   const [email, setEmail] = useState("");
@@ -43,6 +44,7 @@ function LoginFormModal() {
     if (serverResponse) {
       setErrors(serverResponse);
     } else {
+
       closeModal();
     }
   }

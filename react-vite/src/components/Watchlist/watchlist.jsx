@@ -22,7 +22,7 @@ function Watchlist(){
         dispatch(getWatchlist())
         dispatch(getMovies()) //grabs movies so it knows if user has review or not
         setWatchlist(watchlistArr.filter(movie => movie.watched == false))
-    },[dispatch,watchlistArr.length ])
+    },[dispatch,watchlistArr.length])
 
 
     function removeMovie(id){
