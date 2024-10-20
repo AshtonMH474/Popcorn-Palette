@@ -2,6 +2,7 @@ from .db import db, environment, SCHEMA, add_prefix_for_prod
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 from datetime import datetime,timezone
+from .genre import movie_genres
 
 watchlist = db.Table(
     'watchlist',
@@ -39,6 +40,8 @@ class Movie(db.Model):
 
     users_watchlist=db.relationship('User',secondary=watchlist,back_populates='watchlist_movies')
 
+    # genres
+    genres = db.relationship('Genre',secondary=movie_genres,back_populates='movies')
 
     def to_dict(self):
         new_dict =  {
@@ -57,6 +60,8 @@ class Movie(db.Model):
             new_dict['movieImages'] = [image.to_dict() for image in self.movie_images]
         if self.reviews and len(self.reviews) > 0:
             new_dict['reviews'] = [review.to_dict() for review in self.reviews]
+        if self.genres and len(self.genres) > 0:
+            new_dict['genres'] = [genre.to_dict() for genre in self.genres]
 
         return new_dict
 
