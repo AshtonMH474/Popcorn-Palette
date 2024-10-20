@@ -26,7 +26,7 @@ function MovieDetails(){
     const watchlistArr = Object.values(watchlist)
     const [isInWatchlist, setIsInWatchlist] = useState(false);
 
-    console.log(watchlistArr)
+
 
     useEffect(() => {
         const fetchData = async () => {

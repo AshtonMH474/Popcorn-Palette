@@ -122,3 +122,12 @@ padding-left: 10px;
     font-size: 20px;
 
 }
+
+.tabsHome:hover{
+    color:#B22222;
+    cursor: pointer;
+}
+.moveCenterPage{
+    padding-left: 330px;
+    padding-bottom: 10px;
+}

@@ -6,6 +6,7 @@ import BottomInfo from '../BottomInfo'
 import Recent from './recent';
 import HighMovies from './highMovies'
 import { getWatchlist } from '../../redux/watchlist'
+import FilterMovies from './filteredMovies'
 
 
 
@@ -16,9 +17,12 @@ function Home(){
     const user = useSelector((store) => store.session.user)
     const watchlist = useSelector(state => state.watchlist)
     const watchlistArr = Object.values(watchlist)
-
+    // if(moviesArr)console.log(moviesArr.filter(movie => movie.genres.some(genre => genre.type == 'action')))
     const [recent,setRecent] = useState([])
     const [highlyRated,setHighly] = useState([])
+    const [active,setActive] = useState('action')
+    const [activeMovies,setActiveMovies] = useState([])
+    const [currentIndex, setCurrentIndex] = useState(0);
 
     useEffect(() => {
         dispatch(getMovies())
@@ -26,6 +30,32 @@ function Home(){
         if(user)dispatch(getWatchlist())
 
     },[dispatch])
+
+    useEffect(() => {
+        let filteredMovies;
+        if(active === 'action'){
+            filteredMovies = moviesArr.filter(movie => movie.genres.some(genre => genre.type == 'action'))
+            setActiveMovies(filteredMovies)
+        }
+        if(active === 'romance'){
+            filteredMovies = moviesArr.filter(movie => movie.genres.some(genre => genre.type == 'romance'))
+            setActiveMovies(filteredMovies)
+        }
+        if(active === 'scifi'){
+            filteredMovies = moviesArr.filter(movie => movie.genres.some(genre => genre.type == 'scifi'))
+            setActiveMovies(filteredMovies)
+        }
+        if(active === 'horror'){
+            filteredMovies = moviesArr.filter(movie => movie.genres.some(genre => genre.type == 'horror'))
+            setActiveMovies(filteredMovies)
+        }
+        if(active === 'comedy'){
+            filteredMovies = moviesArr.filter(movie => movie.genres.some(genre => genre.type == 'comedy'))
+            setActiveMovies(filteredMovies)
+        }
+
+
+    },[movies,active])
 
     const isMovieInWatchlist = (movieId) => {
         return watchlistArr.some((watchlistMovie) => watchlistMovie.id === movieId)
@@ -91,6 +121,34 @@ function Home(){
             <div className='moveLeft50px movieBottomPadding'>
                 <HighMovies high={highlyRated}/>
             </div>
+
+            <div className='moveLeft50px movieBottomPadding'>
+                <div className='displayFlex moveCenterPage'>
+                    <h2 onClick={() =>{setActive('action')
+                        setCurrentIndex(0)}
+                        }
+                    className='white smallRightPadding tabsHome'>ACTION</h2>
+
+                    <h2 onClick={() =>{ setActive('comedy')
+                        setCurrentIndex(0) }
+                        }
+                    className='white smallRightPadding tabsHome'>COMEDY</h2>
+
+                    <h2  onClick={() =>{ setActive('romance')
+                        setCurrentIndex(0)
+                    }} className='white smallRightPadding tabsHome'>ROMANCE</h2>
+
+                    <h2 onClick={() => {setActive('horror')
+                        setCurrentIndex(0)
+                    }} className='white smallRightPadding tabsHome'>HORROR</h2>
+
+                    <h2 onClick={() => {setActive('scifi')
+                        setCurrentIndex(0)
+                    }} className='white smallRightPadding tabsHome'>SCIFI</h2>
+                </div>
+                <FilterMovies movies={activeMovies} currentIndex={currentIndex} setCurrentIndex={setCurrentIndex}/>
+            </div>
+
             <div className='topPaddingHome'></div>
             <div className='footer'>
                 <BottomInfo/>
