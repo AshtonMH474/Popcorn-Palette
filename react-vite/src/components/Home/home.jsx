@@ -136,24 +136,24 @@ function Home(){
                     <h2 onClick={() =>{setActive('action')
                         setCurrentIndex(0)}
                         }
-                    className='white smallRightPadding tabsHome'>ACTION</h2>
+                    className={`white smallRightPadding tabsHome ${active === 'action'? 'red' : ''}`}>ACTION</h2>
 
                     <h2 onClick={() =>{ setActive('comedy')
                         setCurrentIndex(0) }
                         }
-                    className='white smallRightPadding tabsHome'>COMEDY</h2>
+                    className={`white smallRightPadding tabsHome ${active === 'comedy'? 'red' : ''}`}>COMEDY</h2>
 
                     <h2  onClick={() =>{ setActive('romance')
                         setCurrentIndex(0)
-                    }} className='white smallRightPadding tabsHome'>ROMANCE</h2>
+                    }} className={`white smallRightPadding tabsHome ${active === 'romance'? 'red' : ''}`}>ROMANCE</h2>
 
                     <h2 onClick={() => {setActive('horror')
                         setCurrentIndex(0)
-                    }} className='white smallRightPadding tabsHome'>HORROR</h2>
+                    }} className={`white smallRightPadding tabsHome ${active === 'horror'? 'red' : ''}`}>HORROR</h2>
 
                     <h2 onClick={() => {setActive('scifi')
                         setCurrentIndex(0)
-                    }} className='white smallRightPadding tabsHome'>SCIFI</h2>
+                    }} className={`white smallRightPadding tabsHome ${active === 'scifi'? 'red' : ''}`}>SCIFI</h2>
                 </div>
                 <FilterMovies movies={activeMovies} currentIndex={currentIndex} setCurrentIndex={setCurrentIndex}/>
             </div>
