@@ -6,17 +6,21 @@ import { IoStarSharp } from "react-icons/io5";
 import { FaPlus } from "react-icons/fa6";
 import { HiArrowSmallRight } from "react-icons/hi2";
 import { HiArrowSmallLeft } from "react-icons/hi2";
+import { IoIosCheckmark } from "react-icons/io";
 
 function FilterMovies({movies,currentIndex,setCurrentIndex}){
     const dispatch = useDispatch()
-    // const [currentIndex, setCurrentIndex] = useState(0);
     const [currMovies, setMovies] = useState(movies);
     const user = useSelector((store) => store.session.user);
+    const watchlist = useSelector((state) => state.watchlist);
 
 
     useEffect(() => {
-        setMovies(movies)
-    } ,[movies])
+        setMovies(movies.map(movie => ({
+            ...movie,
+            isInWatchlist: Object.values(watchlist).some(watchlistMovie => watchlistMovie.id === movie.id)
+        })))
+    } ,[movies,watchlist])
 
     const nextMovies = () => {
         if (currentIndex + 5 < movies.length) {

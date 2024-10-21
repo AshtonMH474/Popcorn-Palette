@@ -17,7 +17,6 @@ function Home(){
     const user = useSelector((store) => store.session.user)
     const watchlist = useSelector(state => state.watchlist)
     const watchlistArr = Object.values(watchlist)
-    // if(moviesArr)console.log(moviesArr.filter(movie => movie.genres.some(genre => genre.type == 'action')))
     const [recent,setRecent] = useState([])
     const [highlyRated,setHighly] = useState([])
     const [active,setActive] = useState('action')
@@ -35,23 +34,33 @@ function Home(){
         let filteredMovies;
         if(active === 'action'){
             filteredMovies = moviesArr.filter(movie => movie.genres.some(genre => genre.type == 'action'))
-            setActiveMovies(filteredMovies)
+            setActiveMovies(filteredMovies.map(movie => ({
+                ...movie,isInWatchlist:watchlistArr.some(watchlistMovie => watchlistMovie.id === movie.id)
+            })))
         }
         if(active === 'romance'){
             filteredMovies = moviesArr.filter(movie => movie.genres.some(genre => genre.type == 'romance'))
-            setActiveMovies(filteredMovies)
+            setActiveMovies(filteredMovies.map(movie => ({
+                ...movie,isInWatchlist:watchlistArr.some(watchlistMovie => watchlistMovie.id === movie.id)
+            })))
         }
         if(active === 'scifi'){
             filteredMovies = moviesArr.filter(movie => movie.genres.some(genre => genre.type == 'scifi'))
-            setActiveMovies(filteredMovies)
+            setActiveMovies(filteredMovies.map(movie => ({
+                ...movie,isInWatchlist:watchlistArr.some(watchlistMovie => watchlistMovie.id === movie.id)
+            })))
         }
         if(active === 'horror'){
             filteredMovies = moviesArr.filter(movie => movie.genres.some(genre => genre.type == 'horror'))
-            setActiveMovies(filteredMovies)
+            setActiveMovies(filteredMovies.map(movie => ({
+                ...movie,isInWatchlist:watchlistArr.some(watchlistMovie => watchlistMovie.id === movie.id)
+            })))
         }
         if(active === 'comedy'){
             filteredMovies = moviesArr.filter(movie => movie.genres.some(genre => genre.type == 'comedy'))
-            setActiveMovies(filteredMovies)
+            setActiveMovies(filteredMovies.map(movie => ({
+                ...movie,isInWatchlist:watchlistArr.some(watchlistMovie => watchlistMovie.id === movie.id)
+            })))
         }
 
 
