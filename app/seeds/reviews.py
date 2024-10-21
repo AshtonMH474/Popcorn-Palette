@@ -88,7 +88,7 @@ def seed_reviews():
 
     review10 = Review(
         user_id=1,
-        movie_id=45,
+        movie_id=54,
         review='Amazing new addition to the scifi genre',
         rating=5
     )
