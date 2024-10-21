@@ -25,7 +25,7 @@ function MovieDetails(){
     const watchlist = useSelector(state => state.watchlist)
     const watchlistArr = Object.values(watchlist)
     const [isInWatchlist, setIsInWatchlist] = useState(false);
-
+    console.log(movieItem)
 
 
     useEffect(() => {
@@ -145,6 +145,16 @@ function MovieDetails(){
                 <div className="moveLeft50px movieInfo">
                     <div className="white movieDetailsTitle">{movieItem.title}</div>
                     <p className="white movieDescription largePaddingBottom">{movieItem.description}</p>
+                    <div className="displayFlex">
+                        <h2 className="white">GENRES</h2>
+                    </div>
+                    <div className="displayFlex gap10px genresGroup">
+                        {movieItem && movieItem.genres.length && movieItem.genres.map(genre => (
+                            <div key={genre.id} className="white  genres">
+                                {genre.type}
+                            </div>
+                        ))}
+                    </div>
                     <div>
                         <Reviews movieId={movieId}/>
                     </div>
@@ -155,7 +165,7 @@ function MovieDetails(){
             ) : (
                 <div>Loading...</div>
             )}
-            <div className='footer '>
+            <div className='footer'>
                 <BottomInfo/>
             </div>
         </div>
