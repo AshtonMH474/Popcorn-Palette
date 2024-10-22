@@ -37,7 +37,7 @@ def upgrade():
     sa.Column('updated_at', sa.DateTime(), nullable=True),
     sa.ForeignKeyConstraint(['artist_id'], ['artists.id'], ),
     sa.ForeignKeyConstraint(['movie_id'], ['movies.id'], ),
-    sa.PrimaryKeyConstraint('artist_id', 'movie_id')
+    sa.PrimaryKeyConstraint('artist_id', 'movie_id','role')
     )
     # ### end Alembic commands ###
     if environment == "production":
