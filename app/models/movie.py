@@ -3,6 +3,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 from datetime import datetime,timezone
 from .genre import movie_genres
+from .artist import crew
 
 watchlist = db.Table(
     'watchlist',
@@ -42,6 +43,9 @@ class Movie(db.Model):
 
     # genres
     genres = db.relationship('Genre',secondary=movie_genres,back_populates='movies')
+
+    # artists
+    movie_artists=db.relationship('Artist',secondary=crew,back_populates='artist_movies')
 
     def to_dict(self):
         new_dict =  {
