@@ -73,7 +73,7 @@ function Navigation() {
           {showDropDown && searchArr.length > 0 && (
                 <div className="dropdown-search">
                   {searchArr.map((movie) => (
-                    <NavLink onClick={() => goToMovie(movie.id)} key={movie.id} to={`/movies/${movie.id}`} className="dropdown-item-search">
+                    <NavLink onClick={() => goToMovie(movie.id)} key={movie.id} to={`/movies/${movie.id}`} className="dropdown-item-search cursor">
                       {movie.title}
                     </NavLink>
                   ))}
