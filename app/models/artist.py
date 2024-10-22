@@ -7,7 +7,8 @@ crew = db.Table(
     db.Model.metadata,
     db.Column('artist_id',db.Integer,db.ForeignKey(add_prefix_for_prod('artists.id')), primary_key=True),
     db.Column('movie_id',db.Integer,db.ForeignKey(add_prefix_for_prod('movies.id')), primary_key=True),
-    db.Column('role',db.String(50)),
+    db.Column('role',db.String(50),primary_key=True),
+    db.Column('played',db.String(50),nullable=True),
     db.Column("created_at",db.DateTime, default=lambda: datetime.now(timezone.utc)),
     db.Column("updated_at",db.DateTime, default=lambda: datetime.now(timezone.utc), onupdate=lambda: datetime.now(timezone.utc)),
     schema=SCHEMA if environment == "production" else None
@@ -16,8 +17,10 @@ crew = db.Table(
 class Artist(db.Model):
     __tablename__ = 'artists'
 
-    if environment == "production":
-        __table_args__ = {'schema': SCHEMA}
+    __table_args__ = (
+        db.UniqueConstraint('first_name', 'last_name', name='uq_first_last_name'),  # Unique constraint for all environments
+        {'schema': SCHEMA} if environment == "production" else None
+    )
 
     id = db.Column(db.Integer, primary_key=True)
     first_name = db.Column(db.String(50),nullable=False)
