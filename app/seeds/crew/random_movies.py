@@ -730,6 +730,282 @@ def seed_random_movie_artists():
     db.session.commit()
 
 
+    # Artists for "Haunted Mansion" (2024)
+    haunted_mansion_artist1 = Artist(
+    first_name='LaKeith',
+    last_name='Stanfield',
+    img_url='https://res.cloudinary.com/dzsguqdmg/image/upload/v1729645971/Lakeiith_a5s6m2.jpg'
+    )
+
+    haunted_mansion_artist2 = Artist(
+    first_name='Tiffany',
+    last_name='Haddish',
+    img_url='https://res.cloudinary.com/dzsguqdmg/image/upload/v1729645984/tiffany-haddish_qpcgdo.jpg'
+    )
+
+    haunted_mansion_artist3 = Artist(
+    first_name='Owen',
+    last_name='Wilson',
+    img_url='https://res.cloudinary.com/dzsguqdmg/image/upload/v1729646024/OwenWIlson_stugu4.jpg'
+    )
+
+    haunted_mansion_artist4 = Artist(
+    first_name='Danny',
+    last_name='DeVito',
+    img_url='https://res.cloudinary.com/dzsguqdmg/image/upload/v1729645941/DannyD_mokqbq.jpg'
+    )
+
+    haunted_mansion_artist5 = Artist(
+    first_name='Rosario',
+    last_name='Dawson',
+    img_url='https://res.cloudinary.com/dzsguqdmg/image/upload/v1729645992/RosarioDawson_deg7p4.jpg'
+    )
+
+# Director for "Haunted Mansion" (2024)
+    haunted_mansion_director = Artist(
+    first_name='Justin',
+    last_name='Simien',
+    img_url='https://res.cloudinary.com/dzsguqdmg/image/upload/v1729645956/JustinSimien_zxqnrm.jpg'
+    )
+
+# Add artists to the database
+    haunted_mansion_artists = [haunted_mansion_artist1, haunted_mansion_artist2, haunted_mansion_artist3, haunted_mansion_artist4, haunted_mansion_artist5,haunted_mansion_director]
+    for person in haunted_mansion_artists:
+        db.session.add(person)
+
+    db.session.commit()
+
+# Crew entries for "Haunted Mansion" (2024)
+    haunted_mansion_crew1 = crew.insert().values(
+    artist_id=haunted_mansion_artist1.id,
+    movie_id=8,  # Replace with actual movie ID
+    role='Actor',
+    played='Ben Matthias'
+    )
+
+    haunted_mansion_crew2 = crew.insert().values(
+    artist_id=haunted_mansion_artist2.id,
+    movie_id=8,
+    role='Actor',
+    played='Harriet'
+    )
+
+    haunted_mansion_crew3 = crew.insert().values(
+    artist_id=haunted_mansion_artist3.id,
+    movie_id=8,
+    role='Actor',
+    played='Kent'
+    )
+
+    haunted_mansion_crew4 = crew.insert().values(
+    artist_id=haunted_mansion_artist4.id,
+    movie_id=8,
+    role='Actor',
+    played='Bruce Davis'
+    )
+
+    haunted_mansion_crew5 = crew.insert().values(
+    artist_id=haunted_mansion_artist5.id,
+    movie_id=8,
+    role='Actor',
+    played='Gabbie'
+    )
+
+    haunted_mansion_crew6 = crew.insert().values(
+    artist_id=haunted_mansion_director.id,
+    movie_id=8,
+    role='Director'
+    )
+
+# Add crew entries to the database
+    haunted_mansion_crew = [haunted_mansion_crew1, haunted_mansion_crew2, haunted_mansion_crew3, haunted_mansion_crew4, haunted_mansion_crew5, haunted_mansion_crew6]
+    for person in haunted_mansion_crew:
+        db.session.execute(person)
+    db.session.commit()
+
+
+    # Artists for "Barbie" (2023)
+    barbie_artist1 = Artist(
+    first_name='Margot',
+    last_name='Robbie',
+    img_url='https://res.cloudinary.com/dzsguqdmg/image/upload/v1729646674/MargotRobbie_xcbbvp.webp'
+    )
+
+    barbie_artist2 = Artist(
+    first_name='Ryan',
+    last_name='Gosling',
+    img_url='https://res.cloudinary.com/dzsguqdmg/image/upload/v1729646629/RyanGosling_bz1ifc.webp'
+    )
+    barbie_artist4 = Artist(
+    first_name='Kate',
+    last_name='McKinnon',
+    img_url='https://res.cloudinary.com/dzsguqdmg/image/upload/v1729646618/KateMcKinnon_htudkf.jpg'
+    )
+
+    barbie_artist5 = Artist(
+    first_name='Issa',
+    last_name='Rae',
+    img_url='https://res.cloudinary.com/dzsguqdmg/image/upload/v1729646609/IssaRae_pj1a9p.jpg'
+    )
+
+# Director for "Barbie" (2023)
+    barbie_director = Artist(
+    first_name='Greta',
+    last_name='Gerwig',
+    img_url='https://res.cloudinary.com/dzsguqdmg/image/upload/v1729646696/GretaGerwig_g9ppe0.webp'
+    )
+
+# Add artists to the database
+    barbie_artists = [barbie_artist1, barbie_artist2, barbie_artist4, barbie_artist5,barbie_director]
+    for person in barbie_artists:
+        db.session.add(person)
+
+    db.session.commit()
+
+# Crew entries for "Barbie" (2023)
+    barbie_crew1 = crew.insert().values(
+    artist_id=barbie_artist1.id,
+    movie_id=9,  # Replace with actual movie ID
+    role='Actor',
+    played='Barbie'
+    )
+
+    barbie_crew2 = crew.insert().values(
+    artist_id=barbie_artist2.id,
+    movie_id=9,
+    role='Actor',
+    played='Ken'
+    )
+
+    barbie_artist3 = Artist.query.filter_by(first_name='America',last_name='Ferrera').first()
+    barbie_crew3 = crew.insert().values(
+    artist_id=barbie_artist3.id,
+    movie_id=9,
+    role='Actor',
+    played='Gloria'
+    )
+
+    barbie_crew4 = crew.insert().values(
+    artist_id=barbie_artist4.id,
+    movie_id=9,
+    role='Actor',
+    played='Weird Barbie'
+    )
+
+    barbie_crew5 = crew.insert().values(
+    artist_id=barbie_artist5.id,
+    movie_id=9,
+    role='Actor',
+    played='President Barbie'
+    )
+
+    barbie_crew6 = crew.insert().values(
+    artist_id=barbie_director.id,
+    movie_id=9,
+    role='Director'
+    )
+
+# Add crew entries to the database
+    barbie_crew = [barbie_crew1, barbie_crew2, barbie_crew3, barbie_crew4, barbie_crew5, barbie_crew6]
+    for person in barbie_crew:
+        db.session.execute(person)
+    db.session.commit()
+
+
+    # Artists for "Oppenheimer"
+    oppenheimer_artist1 = Artist(
+    first_name='Cillian',
+    last_name='Murphy',
+    img_url='https://res.cloudinary.com/dzsguqdmg/image/upload/v1729647081/CillianMurphy_dqqmxk.webp'
+    )
+
+    oppenheimer_artist2 = Artist(
+    first_name='Emily',
+    last_name='Blunt',
+    img_url='https://res.cloudinary.com/dzsguqdmg/image/upload/v1729647092/EmilyBlunt_mucor4.webp'
+    )
+
+    oppenheimer_artist3 = Artist(
+    first_name='Matt',
+    last_name='Damon',
+    img_url='https://res.cloudinary.com/dzsguqdmg/image/upload/v1729647055/MattDamon_wj22ec.jpg'
+    )
+
+    oppenheimer_artist4 = Artist(
+    first_name='Robert',
+    last_name='Downey Jr.',
+    img_url='https://res.cloudinary.com/dzsguqdmg/image/upload/v1729647066/RDJ_crmnwv.webp'
+    )
+
+    oppenheimer_artist5 = Artist(
+    first_name='Florence',
+    last_name='Pugh',
+    img_url='https://res.cloudinary.com/dzsguqdmg/image/upload/v1729647099/FlorencePugh_mgggmq.webp'
+    )
+
+# Director for "Oppenheimer"
+    oppenheimer_director = Artist(
+    first_name='Christopher',
+    last_name='Nolan',
+    img_url='https://res.cloudinary.com/dzsguqdmg/image/upload/v1729647163/ChristoperNolan_x3asd3.jpg'
+    )
+
+# Add artists to the database
+    oppenheimer_artists = [oppenheimer_artist1, oppenheimer_artist2, oppenheimer_artist3, oppenheimer_artist4, oppenheimer_artist5,oppenheimer_director]
+    for person in oppenheimer_artists:
+        db.session.add(person)
+
+    db.session.commit()
+
+# Crew entries for "Oppenheimer"
+    oppenheimer_crew1 = crew.insert().values(
+    artist_id=oppenheimer_artist1.id,
+    movie_id=10,  # Replace with actual movie ID
+    role='Actor',
+    played='J. Robert Oppenheimer'
+    )
+
+    oppenheimer_crew2 = crew.insert().values(
+    artist_id=oppenheimer_artist2.id,
+    movie_id=10,
+    role='Actor',
+    played='Kitty Oppenheimer'
+    )
+
+    oppenheimer_crew3 = crew.insert().values(
+    artist_id=oppenheimer_artist3.id,
+    movie_id=10,
+    role='Actor',
+    played='Gen. Leslie Groves'
+    )
+
+    oppenheimer_crew4 = crew.insert().values(
+    artist_id=oppenheimer_artist4.id,
+    movie_id=10,
+    role='Actor',
+    played='Lewis Strauss'
+    )
+
+    oppenheimer_crew5 = crew.insert().values(
+    artist_id=oppenheimer_artist5.id,
+    movie_id=10,
+    role='Actor',
+    played='Jean Tatlock'
+    )
+
+    oppenheimer_crew6 = crew.insert().values(
+    artist_id=oppenheimer_director.id,
+    movie_id=10,
+    role='Director'
+    )
+
+# Add crew entries to the database
+    oppenheimer_crew = [oppenheimer_crew1, oppenheimer_crew2, oppenheimer_crew3, oppenheimer_crew4, oppenheimer_crew5, oppenheimer_crew6]
+    for person in oppenheimer_crew:
+        db.session.execute(person)
+    db.session.commit()
+
+
 def undo_random_movie_artists():
     if environment == "production":
         db.session.execute(f"TRUNCATE table {SCHEMA}.artists RESTART IDENTITY CASCADE;")
