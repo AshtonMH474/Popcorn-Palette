@@ -7,8 +7,9 @@ from .watchlist import seed_watchlist,undo_watchlist
 from.reviews import seed_reviews,undo_reviews
 from .genres import seed_genres,undo_genres
 from .movie_genres import seed_movie_genres,undo_movie_genres
-from .crew.randomMovies import seed_random_movie_artists,undo_random_movie_artists
-
+from .crew.random_movies import seed_random_movie_artists,undo_random_movie_artists
+from .crew.recent_movies import seed_recent_movie_artists,undo_recent_movie_artists
+from .crew.comedies import seed_comedy_movie_artists,undo_comedy_movie_artists
 
 # Creates a seed group to hold our commands
 # So we can type `flask seed --help`
@@ -23,6 +24,8 @@ def seed():
         # command, which will  truncate all tables prefixed with
         # the schema name (see comment in users.py undo_users function).
         # Make sure to add all your other model's undo functions below
+        undo_comedy_movie_artists()
+        undo_recent_movie_artists()
         undo_random_movie_artists()
         undo_movie_genres()
         undo_genres()
@@ -40,12 +43,16 @@ def seed():
     seed_genres()
     seed_movie_genres()
     seed_random_movie_artists()
+    seed_recent_movie_artists()
+    seed_comedy_movie_artists()
     # Add other seed functions here
 
 
 # Creates the `flask seed undo` command
 @seed_commands.command('undo')
 def undo():
+    undo_comedy_movie_artists()
+    undo_recent_movie_artists
     undo_random_movie_artists()
     undo_movie_genres()
     undo_genres()
