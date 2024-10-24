@@ -12,12 +12,14 @@ import UpdateReview from "./updateReview";
 import DeleteReview from "./DeleteReview";
 import { deleteFromWatchlist } from "../../redux/watchlist";
 import { addingToWatchList, getWatchlist } from "../../redux/watchlist";
+import { getCrew } from "../../redux/crew";
 
 function MovieDetails(){
     const {movieId} = useParams()
     const dispatch = useDispatch()
     const movie = useSelector(state => state.movies)
     const user = useSelector((store) => store.session.user);
+    const crew = useSelector((state) => state.crew)
     const movieItem = Object.values(movie)[0]
     const [year,setYear] = useState(0)
     const [hasReview,setHasReview] = useState(false)
@@ -25,13 +27,15 @@ function MovieDetails(){
     const watchlist = useSelector(state => state.watchlist)
     const watchlistArr = Object.values(watchlist)
     const [isInWatchlist, setIsInWatchlist] = useState(false);
-    console.log(movieItem)
+    const crewArr = Object.values(crew)
+    const [active,setActive] = useState('crew')
 
+    console.log(crewArr)
 
     useEffect(() => {
         const fetchData = async () => {
             await dispatch(getMovieDetails(movieId));
-
+            await dispatch(getCrew(movieId))
             if (user) {
                 await dispatch(getWatchlist()); // Fetch watchlist
             }
@@ -148,13 +152,23 @@ function MovieDetails(){
                     <div className="displayFlex">
                         <h2 className="white">GENRES</h2>
                     </div>
-                    <div className="displayFlex gap10px genresGroup">
+                    {active == 'crew' && (
+                        <div className="displayFlex">
+                        {movieItem && crewArr.length && crewArr.map(artist => (
+                            <div key={artist.id}>
+                                <img src={artist.imgUrl} alt='artist'/>
+                                <div className="white">{artist.firstName} {artist.lastName}</div>
+                            </div>
+                        ))}
+                        </div>
+                    )}
+                    {active == 'genre' && (<div className="displayFlex gap10px genresGroup">
                         {movieItem && movieItem.genres.length && movieItem.genres.map(genre => (
                             <div key={genre.id} className="white  genres">
                                 {genre.type}
                             </div>
                         ))}
-                    </div>
+                    </div>)}
                     <div>
                         <Reviews movieId={movieId}/>
                     </div>
