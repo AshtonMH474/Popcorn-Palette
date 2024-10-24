@@ -13,6 +13,8 @@ import DeleteReview from "./DeleteReview";
 import { deleteFromWatchlist } from "../../redux/watchlist";
 import { addingToWatchList, getWatchlist } from "../../redux/watchlist";
 import { getCrew } from "../../redux/crew";
+import { HiArrowSmallRight } from "react-icons/hi2";
+import { HiArrowSmallLeft } from "react-icons/hi2";
 
 function MovieDetails(){
     const {movieId} = useParams()
@@ -29,8 +31,8 @@ function MovieDetails(){
     const [isInWatchlist, setIsInWatchlist] = useState(false);
     const crewArr = Object.values(crew)
     const [active,setActive] = useState('crew')
+    const [currentIndex, setCurrentIndex] = useState(0);
 
-    console.log(crewArr)
 
     useEffect(() => {
         const fetchData = async () => {
@@ -99,6 +101,19 @@ function MovieDetails(){
     function removeFromWatchlist(movieId){
         dispatch(deleteFromWatchlist(movieId))
     }
+
+    const nextCast = () => {
+        if (currentIndex + 4 < crewArr.length) {
+            setCurrentIndex(currentIndex + 4);
+        }
+    };
+
+
+    const prevCast = () => {
+        if (currentIndex - 4 >= 0) {
+            setCurrentIndex(currentIndex - 4);
+        }
+    };
     return (
         <>
         <div className="homeScreen minHeightBackground">
@@ -149,17 +164,26 @@ function MovieDetails(){
                 <div className="moveLeft50px movieInfo">
                     <div className="white movieDetailsTitle">{movieItem.title}</div>
                     <p className="white movieDescription largePaddingBottom">{movieItem.description}</p>
-                    <div className="displayFlex">
-                        <h2 className="white">GENRES</h2>
+                    <div className="displayFlex gap10px">
+                        <h2 onClick={() => setActive('crew')} className={`white cursor ${active == 'crew' ? 'red':''}`}>CAST</h2>
+                        <h2 onClick={() => setActive('genre')} className={`white cursor ${active == 'genre' ? 'red':''}`}>GENRES</h2>
                     </div>
                     {active == 'crew' && (
-                        <div className="displayFlex">
-                        {movieItem && crewArr.length && crewArr.map(artist => (
-                            <div key={artist.id}>
-                                <img src={artist.imgUrl} alt='artist'/>
-                                <div className="white">{artist.firstName} {artist.lastName}</div>
+                        <div className={`displayFlex gap10px ${currentIndex > 0 ? 'moveCast' : ''}`}>
+                        {currentIndex > 0 && (<button className='arrowCrew arrowLeftCrew'  onClick={prevCast} ><HiArrowSmallLeft/></button>)}
+                        {movieItem && crewArr.length && crewArr.slice(currentIndex,currentIndex+4).map(artist => (
+                            <div key={artist.id} className="artist">
+                                <img className="imgArtist" src={artist.imgUrl} alt='artist'/>
+                                <div className="white artistName bold ">{artist.firstName} {artist.lastName}</div>
+                                {artist.played && (<div className="fadedWhite center paddTop">{artist.played}</div>)}
+                                {!artist.played && (<div className="fadedWhite center paddTop">{artist.role}</div>)}
                             </div>
                         ))}
+                        {currentIndex + 4 < crewArr.length && (
+                                <button className='arrowCrew arrowRightCrew'  onClick={nextCast}>
+                                    <HiArrowSmallRight />
+                                    </button>
+                                    )}
                         </div>
                     )}
                     {active == 'genre' && (<div className="displayFlex gap10px genresGroup">
