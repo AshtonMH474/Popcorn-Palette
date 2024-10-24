@@ -844,6 +844,287 @@ def seed_recent_movie_artists():
     db.session.commit()
 
 
+    # Artists for "Ghostbusters: Frozen Empire"
+    ghostbusters_artist1 = Artist(
+    first_name='Paul',
+    last_name='Rudd',
+    img_url='https://res.cloudinary.com/dzsguqdmg/image/upload/v1729736571/PaulRudd_u5tnfy.jpg'
+    )
+
+    ghostbusters_artist2 = Artist(
+    first_name='Carrie',
+    last_name='Coon',
+    img_url='https://res.cloudinary.com/dzsguqdmg/image/upload/v1729736531/CarrieCoon_ddbukb.jpg'
+    )
+
+    ghostbusters_artist3 = Artist(
+    first_name='Finn',
+    last_name='Wolfhard',
+    img_url='https://res.cloudinary.com/dzsguqdmg/image/upload/v1729736546/FinnWolfhard_vvsomi.jpg'
+    )
+
+    ghostbusters_artist4 = Artist(
+    first_name='Mckenna',
+    last_name='Grace',
+    img_url='https://res.cloudinary.com/dzsguqdmg/image/upload/v1729736656/MckennaGrace_kk2qnw.webp'
+    )
+
+    ghostbusters_artist5 = Artist(
+    first_name='Ernie',
+    last_name='Hudson',
+    img_url='https://res.cloudinary.com/dzsguqdmg/image/upload/v1729736538/ErnieHudson_wumfag.webp'
+    )
+
+# Director for "Ghostbusters: Frozen Empire"
+    ghostbusters_director = Artist(
+    first_name='Gil',
+    last_name='Kenan',
+    img_url='https://res.cloudinary.com/dzsguqdmg/image/upload/v1729736551/GilKenan_qt9azk.jpg'
+    )
+
+# Add artists to the database
+    ghostbusters_artists = [ghostbusters_artist1, ghostbusters_artist2, ghostbusters_artist3, ghostbusters_artist4, ghostbusters_artist5,ghostbusters_director]
+    for person in ghostbusters_artists:
+        db.session.add(person)
+
+    db.session.commit()
+
+# Crew entries for "Ghostbusters: Frozen Empire"
+    ghostbusters_crew1 = crew.insert().values(
+    artist_id=ghostbusters_artist1.id,
+    movie_id=20,  # Ghostbusters: Frozen Empire movie ID
+    role='Actor',
+    played='Antony "Troy" Cavanaugh'
+    )
+
+    ghostbusters_crew2 = crew.insert().values(
+    artist_id=ghostbusters_artist2.id,
+    movie_id=20,
+    role='Actor',
+    played='Callie Spengler'
+    )
+
+    ghostbusters_crew3 = crew.insert().values(
+    artist_id=ghostbusters_artist3.id,
+    movie_id=20,
+    role='Actor',
+    played='Phoebe Spengler'
+    )
+
+    ghostbusters_crew4 = crew.insert().values(
+    artist_id=ghostbusters_artist4.id,
+    movie_id=20,
+    role='Actor',
+    played='Trevor Spengler'
+    )
+
+    ghostbusters_crew5 = crew.insert().values(
+    artist_id=ghostbusters_artist5.id,
+    movie_id=20,
+    role='Actor',
+    played='Winston Zeddemore'
+    )
+
+    ghostbusters_crew6 = crew.insert().values(
+    artist_id=ghostbusters_director.id,
+    movie_id=20,
+    role='Director'
+    )
+
+# Add crew entries to the database
+    ghostbusters_crew = [ghostbusters_crew1, ghostbusters_crew2, ghostbusters_crew3, ghostbusters_crew4, ghostbusters_crew5, ghostbusters_crew6]
+    for person in ghostbusters_crew:
+        db.session.execute(person)
+    db.session.commit()
+
+
+# Artists for "Godzilla x Kong: The New Empire"
+    godzilla_kong_artist1 = Artist(
+    first_name='Dan',
+    last_name='Stevens',
+    img_url='https://res.cloudinary.com/dzsguqdmg/image/upload/v1729737717/DanStevens_gvqecn.jpg'
+    )
+
+    godzilla_kong_artist2 = Artist(
+    first_name='Rebecca',
+    last_name='Hall',
+    img_url='https://res.cloudinary.com/dzsguqdmg/image/upload/v1729737784/RebeccaHall_hpyrfb.jpg'
+    )
+
+    godzilla_kong_artist3 = Artist.query.filter_by(
+    first_name='Brian',
+    last_name='Tyree Henry',
+    ).first()
+
+    godzilla_kong_artist4 = Artist(
+    first_name='Kaylee',
+    last_name='Hottle',
+    img_url='https://res.cloudinary.com/dzsguqdmg/image/upload/v1729737755/KayleeHottle_rhzaor.jpg'
+        )
+
+    godzilla_kong_artist5 = Artist(
+    first_name='Fala',
+    last_name='Chen',
+    img_url='https://res.cloudinary.com/dzsguqdmg/image/upload/v1729737727/FalaChen_n413hy.jpg'
+    )
+
+# Director for "Godzilla x Kong: The New Empire"
+    godzilla_kong_director = Artist(
+    first_name='Adam',
+    last_name='Wingard',
+    img_url='https://res.cloudinary.com/dzsguqdmg/image/upload/v1729737708/AdamWingard_mgoych.jpg'
+    )
+
+# Add artists to the database
+    godzilla_kong_artists = [godzilla_kong_artist1, godzilla_kong_artist2, godzilla_kong_artist3, godzilla_kong_artist4, godzilla_kong_artist5,godzilla_kong_director]
+    for person in godzilla_kong_artists:
+        db.session.add(person)
+
+    db.session.commit()
+
+# Crew entries for "Godzilla x Kong: The New Empire"
+    godzilla_kong_crew1 = crew.insert().values(
+    artist_id=godzilla_kong_artist1.id,
+    movie_id=21,  # Godzilla x Kong: The New Empire movie ID
+    role='Actor',
+    played='Trapper'  # Replace with actual character name
+    )
+
+    godzilla_kong_crew2 = crew.insert().values(
+    artist_id=godzilla_kong_artist2.id,
+    movie_id=21,
+    role='Actor',
+    played='Dr IIene Andrews'  # Replace with actual character name
+    )
+
+    godzilla_kong_crew3 = crew.insert().values(
+    artist_id=godzilla_kong_artist3.id,
+    movie_id=21,
+    role='Actor',
+    played='Bernie Hayes'  # Replace with actual character name
+    )
+
+    godzilla_kong_crew4 = crew.insert().values(
+    artist_id=godzilla_kong_artist4.id,
+    movie_id=21,
+    role='Actor',
+    played='Jia'  # Replace with actual character name
+    )
+
+    godzilla_kong_crew5 = crew.insert().values(
+    artist_id=godzilla_kong_artist5.id,
+    movie_id=21,
+    role='Actor',
+    played='Iwi Queen'  # Replace with actual character name
+    )
+
+    godzilla_kong_crew6 = crew.insert().values(
+    artist_id=godzilla_kong_director.id,
+    movie_id=21,
+    role='Director'
+    )
+
+# Add crew entries to the database
+    godzilla_kong_crew = [godzilla_kong_crew1, godzilla_kong_crew2, godzilla_kong_crew3, godzilla_kong_crew4, godzilla_kong_crew5, godzilla_kong_crew6]
+    for person in godzilla_kong_crew:
+        db.session.execute(person)
+    db.session.commit()
+
+
+    # Artists for "Sonic the Hedgehog 3"
+    sonic_artist1 = Artist(
+    first_name='Ben',
+    last_name='Schwartz',
+    img_url='https://res.cloudinary.com/dzsguqdmg/image/upload/v1729738192/BenSchwartz2_bpu8rl.webp'
+    )
+
+    sonic_artist2 = Artist(
+    first_name='Idris',
+    last_name='Elba',
+    img_url='https://res.cloudinary.com/dzsguqdmg/image/upload/v1729738313/IdrisElba_fkqewb.webp'
+    )
+
+    sonic_artist3 = Artist(
+    first_name='James',
+    last_name='Marsden',
+    img_url='https://res.cloudinary.com/dzsguqdmg/image/upload/v1729738248/JamesMardson_fcqond.jpg'
+    )
+
+    sonic_artist4 = Artist(
+    first_name='Tika',
+    last_name='Sumpter',
+    img_url='https://res.cloudinary.com/dzsguqdmg/image/upload/v1729738290/tika_xesuif.jpg'
+    )
+
+    sonic_artist5 = Artist(
+    first_name='Colleen',
+    last_name="O'Shaughnessey",
+    img_url='https://res.cloudinary.com/dzsguqdmg/image/upload/v1729738205/ColleenOS_jhdq4r.jpg'
+    )
+
+# Director for "Sonic the Hedgehog 3"
+    sonic_director = Artist(
+    first_name='Jeff',
+    last_name='Fowler',
+    img_url='https://res.cloudinary.com/dzsguqdmg/image/upload/v1729738237/JeffFowler_cvbahp.jpg'
+    )
+
+# Add artists to the database
+    sonic_artists = [sonic_artist1, sonic_artist2, sonic_artist3, sonic_artist4, sonic_artist5,sonic_director]
+    for person in sonic_artists:
+        db.session.add(person)
+
+    db.session.commit()
+
+# Crew entries for "Sonic the Hedgehog 3"
+    sonic_crew1 = crew.insert().values(
+    artist_id=sonic_artist1.id,
+    movie_id=22,  # Sonic the Hedgehog 3 movie ID
+    role='Actor',
+    played='Sonic'
+    )
+
+    sonic_crew2 = crew.insert().values(
+    artist_id=sonic_artist2.id,
+    movie_id=22,
+    role='Actor',
+    played='Knuckles'
+    )
+
+    sonic_crew3 = crew.insert().values(
+    artist_id=sonic_artist3.id,
+    movie_id=22,
+    role='Actor',
+    played='Tom Wachowski'
+    )
+
+    sonic_crew4 = crew.insert().values(
+    artist_id=sonic_artist4.id,
+    movie_id=22,
+    role='Actor',
+    played='Maddie Wachowski'
+    )
+
+    sonic_crew5 = crew.insert().values(
+    artist_id=sonic_artist5.id,
+    movie_id=22,
+    role='Actor',
+    played='Tails'
+    )
+
+    sonic_crew6 = crew.insert().values(
+    artist_id=sonic_director.id,
+    movie_id=22,
+    role='Director'
+    )
+
+# Add crew entries to the database
+    sonic_crew = [sonic_crew1, sonic_crew2, sonic_crew3, sonic_crew4, sonic_crew5, sonic_crew6]
+    for person in sonic_crew:
+        db.session.execute(person)
+    db.session.commit()
+
+
 
 def undo_recent_movie_artists():
     if environment == "production":
