@@ -4,7 +4,7 @@ import { HiArrowSmallRight } from "react-icons/hi2";
 import { HiArrowSmallLeft } from "react-icons/hi2";
 import { FaPlus } from "react-icons/fa6";
 import { IoIosCheckmark } from "react-icons/io";
-import { NavLink } from "react-router-dom";
+import { NavLink, useOutletContext } from "react-router-dom";
 import { addingToWatchList } from "../../redux/watchlist";
 import { useDispatch,useSelector } from "react-redux";
 import { deleteFromWatchlist } from "../../redux/watchlist";
@@ -16,7 +16,7 @@ function Recent({recent}){
     const [movies, setMovies] = useState(recent);
     const user = useSelector((store) => store.session.user);
     const watchlist = useSelector((state) => state.watchlist);
-
+    const {showZ} = useOutletContext();
 
 
     useEffect(() => {
@@ -55,7 +55,8 @@ function Recent({recent}){
     return (
         <>
                 <h2 className='textCenter white topPaddingHome'>RECENTLY RELEASED</h2>
-                <div className='movieFlex alignCenter'>
+                <div className={`movieFlex alignCenter ${currentIndex > 0 ? 'moveMovie' : ''}`}>
+                {currentIndex > 0 && (<button className={`arrow arrowLeft ${showZ ? 'arrowZ': ''}`}  onClick={prevMovies} ><HiArrowSmallLeft/></button>)}
                 {movies.slice(currentIndex, currentIndex + 5).map(movie =>(
                     <div key={movie.id} className='movieItem lightBlack'>
                         <NavLink className='noTextUnderline' to={`/movies/${movie.id}`}>
@@ -73,15 +74,13 @@ function Recent({recent}){
                     </div>
 
                 ))}
-                </div>
-                <div>
-                    {currentIndex > 0 && (<button className='arrow arrowLeft'  onClick={prevMovies} ><HiArrowSmallLeft/></button>)}
-                    {currentIndex + 5 < recent.length && (
-                    <button className='arrow arrowRight'  onClick={nextMovies}>
+                {currentIndex + 5 < recent.length && (
+                    <button className={`arrow arrowRight ${showZ ? 'arrowZ': ''} `}  onClick={nextMovies}>
                     <HiArrowSmallRight />
                     </button>
                     )}
                 </div>
+
         </>
     )
 }

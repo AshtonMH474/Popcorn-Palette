@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { useParams } from "react-router-dom"
+import { useOutletContext, useParams } from "react-router-dom"
 import { getMovieDetails } from "../../redux/movies"
 import { IoStarSharp } from "react-icons/io5";
 import './movieDetails.css'
@@ -32,6 +32,7 @@ function MovieDetails(){
     const crewArr = Object.values(crew)
     const [active,setActive] = useState('crew')
     const [currentIndex, setCurrentIndex] = useState(0);
+    const {showZ,setZ} = useOutletContext()
 
 
     useEffect(() => {
@@ -140,16 +141,16 @@ function MovieDetails(){
                     <button onClick={() => alert('Feature coming soon...')} className="detailButton">Add to a List</button>
                     {!hasReview && (
                     <button className="detailButton noListStyleType marginButton">
-                        <OpenModalMenuItem itemText={'Add a Review'} modalComponent={<AddReview movieItem={movieItem} year={year} />} />
+                        <OpenModalMenuItem onItemClick={() => setZ(false)} itemText={'Add a Review'} modalComponent={<AddReview  movieItem={movieItem} year={year} />} />
                     </button>
                     )}
                 {hasReview && (
                     <>
                         <button className="detailButton noListStyleType">
-                        <OpenModalMenuItem itemText={'Update Your Review'} modalComponent={<UpdateReview movieItem={movieItem} year={year} userReview={userReview} />} />
+                        <OpenModalMenuItem onItemClick={() => setZ(false)} itemText={'Update Your Review'} modalComponent={<UpdateReview movieItem={movieItem} year={year} userReview={userReview} />} />
                         </button>
                         <button className="detailButton noListStyleType">
-                        <OpenModalMenuItem itemText={'Delete Your Review'} modalComponent={<DeleteReview movieItem={movieItem} userReview={userReview} setHasReview={setHasReview} />} />
+                        <OpenModalMenuItem onItemClick={() => setZ(false)} itemText={'Delete Your Review'} modalComponent={<DeleteReview movieItem={movieItem} userReview={userReview} setHasReview={setHasReview} />} />
                         </button>
                     </>
                 )}
@@ -170,7 +171,7 @@ function MovieDetails(){
                     </div>
                     {active == 'crew' && (
                         <div className={`displayFlex gap10px ${currentIndex > 0 ? 'moveCast' : ''}`}>
-                        {currentIndex > 0 && (<button className='arrowCrew arrowLeftCrew'  onClick={prevCast} ><HiArrowSmallLeft/></button>)}
+                        {currentIndex > 0 && (<button className={`arrowCrew arrowLeftCrew ${showZ ? 'arrowZ': ''}`}  onClick={prevCast} ><HiArrowSmallLeft/></button>)}
                         {movieItem && crewArr.length && crewArr.slice(currentIndex,currentIndex+4).map(artist => (
                             <div key={artist.id} className="artist">
                                 <img className="imgArtist" src={artist.imgUrl} alt='artist'/>
@@ -180,7 +181,7 @@ function MovieDetails(){
                             </div>
                         ))}
                         {currentIndex + 4 < crewArr.length && (
-                                <button className='arrowCrew arrowRightCrew'  onClick={nextCast}>
+                                <button className={`arrowCrew arrowRightCrew ${showZ ? 'arrowZ': ''}`}  onClick={nextCast}>
                                     <HiArrowSmallRight />
                                     </button>
                                     )}

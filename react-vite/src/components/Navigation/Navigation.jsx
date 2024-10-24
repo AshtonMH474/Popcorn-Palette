@@ -8,7 +8,7 @@ import { useEffect, useRef, useState } from "react";
 import { searchMovies } from "../../redux/search";
 import { getReviewsFromMovie } from "../../redux/reviews";
 
-function Navigation() {
+function Navigation({showZ,setZ}) {
   const dispatch = useDispatch()
   const sessionUser = useSelector(state=> state.session.user);
   const searchedMovies = useSelector(state => state.search)
@@ -90,7 +90,7 @@ function Navigation() {
 
       <li className="moveRight50px  moveDown5px">
         <div>
-        <ProfileButton />
+        <ProfileButton showZ={showZ} setZ={setZ} />
         </div>
       </li>
     </ul>

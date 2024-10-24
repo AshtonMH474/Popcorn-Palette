@@ -44,7 +44,6 @@ function LoginFormModal() {
     if (serverResponse) {
       setErrors(serverResponse);
     } else {
-
       closeModal();
     }
   }
