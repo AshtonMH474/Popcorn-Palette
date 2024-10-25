@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { useParams } from "react-router-dom"
+import { useOutletContext, useParams } from "react-router-dom"
 import { getMovieDetails } from "../../redux/movies"
 import { IoStarSharp } from "react-icons/io5";
 import './movieDetails.css'
@@ -12,12 +12,17 @@ import UpdateReview from "./updateReview";
 import DeleteReview from "./DeleteReview";
 import { deleteFromWatchlist } from "../../redux/watchlist";
 import { addingToWatchList, getWatchlist } from "../../redux/watchlist";
+import { getCrew } from "../../redux/crew";
+import { HiArrowSmallRight } from "react-icons/hi2";
+import { HiArrowSmallLeft } from "react-icons/hi2";
+
 
 function MovieDetails(){
     const {movieId} = useParams()
     const dispatch = useDispatch()
     const movie = useSelector(state => state.movies)
     const user = useSelector((store) => store.session.user);
+    const crew = useSelector((state) => state.crew)
     const movieItem = Object.values(movie)[0]
     const [year,setYear] = useState(0)
     const [hasReview,setHasReview] = useState(false)
@@ -25,13 +30,17 @@ function MovieDetails(){
     const watchlist = useSelector(state => state.watchlist)
     const watchlistArr = Object.values(watchlist)
     const [isInWatchlist, setIsInWatchlist] = useState(false);
-    console.log(movieItem)
+    const crewArr = Object.values(crew)
+    const [newCrew,setCrew] = useState([])
+    // console.log(newCrew)
+    const [active,setActive] = useState('crew')
+    const [currentIndex, setCurrentIndex] = useState(0);
+    const {showZ,setZ} = useOutletContext()
 
 
     useEffect(() => {
         const fetchData = async () => {
             await dispatch(getMovieDetails(movieId));
-
             if (user) {
                 await dispatch(getWatchlist()); // Fetch watchlist
             }
@@ -40,12 +49,41 @@ function MovieDetails(){
         fetchData();
     }, [dispatch, movieId, user]);
 
+
     useEffect(() => {
         if (user && watchlist && movieItem) {
             const inWatchlist = watchlistArr.some(watchlistMovie => watchlistMovie.id === movieItem.id);
             setIsInWatchlist(inWatchlist);
         }
     }, [watchlist, movieItem, user]);
+
+    useEffect(() => {
+
+        const fetchData = async () => {
+            if(movieItem)await dispatch(getCrew(movieItem))
+        }
+        fetchData()
+
+        function changeCrew(){
+            let newArr = []
+            crewArr.forEach((person) => {
+                const imgUrl = `https://image.tmdb.org/t/p/w500${person.profile_path}`
+                if(!imgUrl.includes('null')){
+                let new_obj = {...person,imgUrl:imgUrl}
+                newArr.push(new_obj)
+                }
+            })
+            return newArr
+        }
+
+        if(crewArr.length){
+                let actors = changeCrew()
+                setCrew(actors)
+
+
+        }
+    },[movieItem,dispatch,movieId,crewArr.length])
+
 
     useEffect(() => {
         if(movieItem){
@@ -95,6 +133,19 @@ function MovieDetails(){
     function removeFromWatchlist(movieId){
         dispatch(deleteFromWatchlist(movieId))
     }
+
+    const nextCast = () => {
+        if (currentIndex + 4 < crewArr.length) {
+            setCurrentIndex(currentIndex + 4);
+        }
+    };
+
+
+    const prevCast = () => {
+        if (currentIndex - 4 >= 0) {
+            setCurrentIndex(currentIndex - 4);
+        }
+    };
     return (
         <>
         <div className="homeScreen minHeightBackground">
@@ -121,16 +172,16 @@ function MovieDetails(){
                     <button onClick={() => alert('Feature coming soon...')} className="detailButton">Add to a List</button>
                     {!hasReview && (
                     <button className="detailButton noListStyleType marginButton">
-                        <OpenModalMenuItem itemText={'Add a Review'} modalComponent={<AddReview movieItem={movieItem} year={year} />} />
+                        <OpenModalMenuItem onItemClick={() => setZ(false)} itemText={'Add a Review'} modalComponent={<AddReview  movieItem={movieItem} year={year} />} />
                     </button>
                     )}
                 {hasReview && (
                     <>
                         <button className="detailButton noListStyleType">
-                        <OpenModalMenuItem itemText={'Update Your Review'} modalComponent={<UpdateReview movieItem={movieItem} year={year} userReview={userReview} />} />
+                        <OpenModalMenuItem onItemClick={() => setZ(false)} itemText={'Update Your Review'} modalComponent={<UpdateReview movieItem={movieItem} year={year} userReview={userReview} />} />
                         </button>
                         <button className="detailButton noListStyleType">
-                        <OpenModalMenuItem itemText={'Delete Your Review'} modalComponent={<DeleteReview movieItem={movieItem} userReview={userReview} setHasReview={setHasReview} />} />
+                        <OpenModalMenuItem onItemClick={() => setZ(false)} itemText={'Delete Your Review'} modalComponent={<DeleteReview movieItem={movieItem} userReview={userReview} setHasReview={setHasReview} />} />
                         </button>
                     </>
                 )}
@@ -145,16 +196,34 @@ function MovieDetails(){
                 <div className="moveLeft50px movieInfo">
                     <div className="white movieDetailsTitle">{movieItem.title}</div>
                     <p className="white movieDescription largePaddingBottom">{movieItem.description}</p>
-                    <div className="displayFlex">
-                        <h2 className="white">GENRES</h2>
+                    <div className="displayFlex gap10px">
+                        <h2 onClick={() => setActive('crew')} className={`white cursor ${active == 'crew' ? 'red':''}`}>CAST</h2>
+                        <h2 onClick={() => setActive('genre')} className={`white cursor ${active == 'genre' ? 'red':''}`}>GENRES</h2>
                     </div>
-                    <div className="displayFlex gap10px genresGroup">
+                    {active == 'crew' && (
+                        <div className={`displayFlex gap10px ${currentIndex > 0 ? 'moveCast' : ''}`}>
+                        {currentIndex > 0 && (<button className={`arrowCrew arrowLeftCrew ${showZ ? 'arrowZ': ''}`}  onClick={prevCast} ><HiArrowSmallLeft/></button>)}
+                        {movieItem && newCrew.length && newCrew.slice(currentIndex,currentIndex+4).map(artist => (
+                            <div key={artist.id} className="artist">
+                                {artist.imgUrl && (<img className="imgArtist" src={artist.imgUrl} alt='/src/Static/Profile.jpeg'/>)}
+                                {artist.imgUrl && (<div className="white artistName bold ">{artist.name}</div>)}
+                                {artist.imgUrl && artist.character && (<div className="fadedWhite center paddTop">{artist.character}</div>)}
+                            </div>
+                        ))}
+                        {currentIndex + 4 < newCrew.length && (
+                                <button className={`arrowCrew arrowRightCrew ${showZ ? 'arrowZ': ''}`}  onClick={nextCast}>
+                                    <HiArrowSmallRight />
+                                    </button>
+                                    )}
+                        </div>
+                    )}
+                    {active == 'genre' && (<div className="displayFlex gap10px genresGroup">
                         {movieItem && movieItem.genres.length && movieItem.genres.map(genre => (
                             <div key={genre.id} className="white  genres">
                                 {genre.type}
                             </div>
                         ))}
-                    </div>
+                    </div>)}
                     <div>
                         <Reviews movieId={movieId}/>
                     </div>

@@ -114,3 +114,66 @@
   .genresGroup{
     padding-bottom: 100px;
   }
+
+  .imgArtist {
+    width: 120px; /* Adjust size as needed */
+    height: 120px; /* Same as width to make it a perfect circle */
+    border-radius: 50%; /* This makes the image circular */
+    object-fit: cover; /* Ensures the image maintains aspect ratio and fits the circle */
+
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Add a subtle shadow */
+  }
+  .artist{
+    width: 120px;
+  }
+
+  .fadedWhite{
+    color : gray
+  }
+  .artistName{
+    text-align: center;
+    overflow-wrap: break-word;
+  }
+  .center{
+    text-align: center;
+  }
+  .paddTop{
+    padding-top: 5px;
+  }
+
+  .arrowCrew{
+
+    border: none;
+    border-radius: 50%;
+    padding: 10px;
+    font-size: 20px;
+    cursor: pointer;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s, background-color 0.2s;
+    height: 40px;
+    width: 40px;
+    margin-top: 40px;
+}
+.arrowCrew:hover{
+    cursor: pointer;
+    background-color:#B22222 ;
+    transform: scale(1.1);
+}
+.arrowCrew:active {
+    transform: scale(0.95);
+}
+
+.arrowRightCrew{
+   position: relative;
+   right: 40px;
+
+}
+.arrowLeftCrew{
+    position: relative;
+   left: 40px;
+}
+
+.moveCast{
+    position: relative;
+    right: 60px;
+}

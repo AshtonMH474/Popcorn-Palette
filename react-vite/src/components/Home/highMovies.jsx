@@ -4,7 +4,7 @@ import { HiArrowSmallRight } from "react-icons/hi2";
 import { HiArrowSmallLeft } from "react-icons/hi2";
 import { IoIosCheckmark } from "react-icons/io";
 import { FaPlus } from "react-icons/fa6";
-import { NavLink } from "react-router-dom";
+import { NavLink, useOutletContext } from "react-router-dom";
 import { addingToWatchList } from "../../redux/watchlist";
 import { useDispatch,useSelector } from "react-redux";
 import { deleteFromWatchlist } from "../../redux/watchlist";
@@ -15,6 +15,8 @@ function HighMovies({high}){
     const user = useSelector((store) => store.session.user);
     const [movies, setMovies] = useState(high);
     const watchlist = useSelector((state) => state.watchlist);
+    const {showZ,setZ} = useOutletContext();
+    setZ(true)
 
     useEffect(() => {
         // Whenever recent or watchlist changes, update local movie state
@@ -51,7 +53,8 @@ function HighMovies({high}){
     return (
         <>
         <h2 className='textCenter white'>HIGHLY RATED MOVIES</h2>
-                <div className='movieFlex alignCenter'>
+                <div className={`movieFlex alignCenter ${currentIndex > 0 ? 'moveMovie' : ''}`}>
+                {currentIndex > 0 && (<button className={`arrow arrowLeft ${showZ ? 'arrowZ': ''}`}  onClick={prevMovies} ><HiArrowSmallLeft/></button>)}
                 {movies.slice(currentIndex, currentIndex + 5).map(movie =>(
                     <div key={movie.id} className='movieItem lightBlack'>
                         <NavLink className='noTextUnderline' to={`/movies/${movie.id}`}>
@@ -69,15 +72,13 @@ function HighMovies({high}){
                     </div>
 
                 ))}
-                </div>
-                <div>
-                    {currentIndex > 0 && (<button className='arrow arrowLeft'  onClick={prevMovies} ><HiArrowSmallLeft/></button>)}
-                    {currentIndex + 5 < movies.length && (
-                    <button className='arrow arrowRight'  onClick={nextMovies}>
+                {currentIndex + 5 < movies.length && (
+                    <button className={`arrow arrowRight ${showZ ? 'arrowZ': ''} `}  onClick={nextMovies}>
                     <HiArrowSmallRight />
                     </button>
                     )}
                 </div>
+
         </>
     )
 }

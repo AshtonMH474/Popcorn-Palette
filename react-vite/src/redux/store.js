@@ -10,13 +10,15 @@ import movieReducer from "./movies";
 import watchlistReducer from "./watchlist";
 import reviewReducer from "./reviews";
 import searchReducer from "./search";
+import crewReducer from "./crew";
 
 const rootReducer = combineReducers({
   session: sessionReducer,
   movies:movieReducer,
   watchlist:watchlistReducer,
   reviews:reviewReducer,
-  search: searchReducer
+  search: searchReducer,
+  crew:crewReducer
 });
 
 let enhancer;

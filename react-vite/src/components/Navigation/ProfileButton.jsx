@@ -8,7 +8,7 @@ import SignupFormModal from "../SignupFormModal";
 import { useNavigate } from "react-router-dom";
 
 
-function ProfileButton() {
+function ProfileButton({setZ}) {
   const navigate = useNavigate()
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
@@ -34,7 +34,10 @@ function ProfileButton() {
     return () => document.removeEventListener("click", closeMenu);
   }, [showMenu]);
 
-  const closeMenu = () => setShowMenu(false);
+  const closeMenu = () => {
+    setZ(false)
+    setShowMenu(false);
+  }
 
   const logout = (e) => {
     e.preventDefault();
@@ -72,7 +75,7 @@ function ProfileButton() {
               <OpenModalMenuItem
                 itemText="Log In"
                 onItemClick={closeMenu}
-                modalComponent={<LoginFormModal />}
+                modalComponent={<LoginFormModal/>}
               />
             </div>
             <div className="profileButton cursor ">
