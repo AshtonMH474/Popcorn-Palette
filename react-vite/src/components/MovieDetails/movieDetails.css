@@ -8,11 +8,12 @@
 .movieItemDetails{
     background-color: #36454F;
     border-radius: 10px;
+
 }
 .movieOptions{
     position: relative;
-    top: 100px;
-    left: 25%;
+    top: 90px;
+    left: 22%;
 }
 
 .paddingTop{
