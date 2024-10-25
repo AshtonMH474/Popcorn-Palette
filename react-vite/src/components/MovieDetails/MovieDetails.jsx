@@ -32,7 +32,6 @@ function MovieDetails(){
     const [isInWatchlist, setIsInWatchlist] = useState(false);
     const crewArr = Object.values(crew)
     const [newCrew,setCrew] = useState([])
-    // console.log(newCrew)
     const [active,setActive] = useState('crew')
     const [currentIndex, setCurrentIndex] = useState(0);
     const {showZ,setZ} = useOutletContext()
@@ -78,7 +77,8 @@ function MovieDetails(){
 
         if(crewArr.length){
                 let actors = changeCrew()
-                setCrew(actors)
+                let orderedActors = actors.sort((a,b) => a.order - b.order)
+                setCrew(orderedActors)
 
 
         }
@@ -165,7 +165,7 @@ function MovieDetails(){
 
 
                 <div className={`displayFlex movieDetailButtons paddingTop ${user ? '' : 'noUserButtons'}`}>
-            {user ? (
+                {user ? (
                 <>
                     {!isInWatchlist && (<button onClick={() => addToWatchList(movieId)} className="detailButton">Add to Watchlist</button>)}
                     {isInWatchlist && (<button onClick={() => removeFromWatchlist(movieId)} className="detailButton">Remove From Watchlist</button>)}
@@ -186,9 +186,9 @@ function MovieDetails(){
                     </>
                 )}
                 </>
-            ) : (
+                ) : (
                 <div className="noUserPadding"></div>  // Placeholder when no user is present
-            )}
+                )}
             </div>
 
             </div>
