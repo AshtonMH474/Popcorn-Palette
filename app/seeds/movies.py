@@ -1,6 +1,7 @@
 from app.models import db, Movie, environment, SCHEMA
 from sqlalchemy.sql import text
 from datetime import date
+import requests
 
 
 
@@ -81,6 +82,24 @@ def seed_movies():
     for random_movie in randomMovies:
         db.session.add(random_movie)
     # movies that just came out
+
+
+    # api_key = '79009e38d3509a590d6510f6e91c4cd8'
+    # page = 1
+    # recent_movies = []
+    # while True:
+    #     url = f'https://api.themoviedb.org/3/movie/now_playing?api_key={api_key}&page={page}'
+    #     response = requests.get(url)
+    #     data = response.json()
+
+    #     if not data['results']:
+    #         break  # Exit if no more results
+
+    #     recent_movies.append(data['results'])
+    #     print(data['results'])
+    #     page += 1
+
+    # print(recent_movies)
     recentMovie1 = Movie(
     title='Transformers: One',
     description='An origin story set in the 1980s that chronicles the early days of the Transformers, exploring their home planet Cybertron and the battles that shaped their world.',

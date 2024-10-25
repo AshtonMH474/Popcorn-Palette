@@ -116,3 +116,22 @@ def delete_review(review_id):
     except Exception:
         db.session.rollback()
         return jsonify({'error': "Couldn't Delete Review"}), 400
+
+
+@review_routes.route('/avgRating/<int:movie_id>')
+def avgRating(movie_id):
+    reviews = Review.query.filter_by(movie_id=movie_id).all()
+
+    if len(reviews) == 0:
+        return jsonify({
+        'avgRating': 0, 'numReviews':0
+    })
+
+    count = 0
+    for review in reviews:
+        count += review.rating
+    avergae = count / len(reviews)
+
+    return jsonify({
+        'avgRating': avergae, 'numReviews':len(reviews)
+    })
