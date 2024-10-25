@@ -485,7 +485,7 @@ def seed_random_movie_artists():
     )
 
     dumbmoney_artist5 = Artist(
-    first_name='=Talia',
+    first_name='Talia',
     last_name='Ryder',
     img_url='https://res.cloudinary.com/dzsguqdmg/image/upload/v1729633140/Talia_a3prps.jpg'
     )

@@ -7,8 +7,10 @@ import logo from '../../Static/2938928.webp'
 import { useEffect, useRef, useState } from "react";
 import { searchMovies } from "../../redux/search";
 import { getReviewsFromMovie } from "../../redux/reviews";
+import { getMovieDetails } from "../../redux/movies";
+import { getCrew } from "../../redux/crew";
 
-function Navigation() {
+function Navigation({showZ,setZ}) {
   const dispatch = useDispatch()
   const sessionUser = useSelector(state=> state.session.user);
   const searchedMovies = useSelector(state => state.search)
@@ -48,7 +50,13 @@ function Navigation() {
   function goToMovie(movieId){
     setMovie('')
     setDropDown(false)
-    dispatch(getReviewsFromMovie(movieId))
+    async function getMovie(){
+      await dispatch(getReviewsFromMovie(movieId))
+      let movie = await dispatch(getMovieDetails(movieId))
+      await dispatch(getCrew(movie.movie))
+    }
+    getMovie()
+
   }
 
   return (
@@ -90,7 +98,7 @@ function Navigation() {
 
       <li className="moveRight50px  moveDown5px">
         <div>
-        <ProfileButton />
+        <ProfileButton showZ={showZ} setZ={setZ} />
         </div>
       </li>
     </ul>
