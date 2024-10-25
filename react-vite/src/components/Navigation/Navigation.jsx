@@ -7,6 +7,8 @@ import logo from '../../Static/2938928.webp'
 import { useEffect, useRef, useState } from "react";
 import { searchMovies } from "../../redux/search";
 import { getReviewsFromMovie } from "../../redux/reviews";
+import { getMovieDetails } from "../../redux/movies";
+import { getCrew } from "../../redux/crew";
 
 function Navigation({showZ,setZ}) {
   const dispatch = useDispatch()
@@ -48,7 +50,13 @@ function Navigation({showZ,setZ}) {
   function goToMovie(movieId){
     setMovie('')
     setDropDown(false)
-    dispatch(getReviewsFromMovie(movieId))
+    async function getMovie(){
+      await dispatch(getReviewsFromMovie(movieId))
+      let movie = await dispatch(getMovieDetails(movieId))
+      await dispatch(getCrew(movie.movie))
+    }
+    getMovie()
+
   }
 
   return (

@@ -8,13 +8,12 @@ import SignupFormModal from "../SignupFormModal";
 import { useNavigate } from "react-router-dom";
 
 
-function ProfileButton({showZ,setZ}) {
+function ProfileButton({setZ}) {
   const navigate = useNavigate()
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
   const user = useSelector((store) => store.session.user);
   const ulRef = useRef();
-  console.log(showZ)
 
   const toggleMenu = (e) => {
     e.stopPropagation(); // Keep from bubbling up to document and triggering closeMenu
