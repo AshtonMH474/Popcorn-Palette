@@ -51,6 +51,7 @@ function Navigation({showZ,setZ}) {
     setMovie('')
     setDropDown(false)
     async function getMovie(){
+      await dispatch(getMovieDetails(movieId))
       await dispatch(getReviewsFromMovie(movieId))
       let movie = await dispatch(getMovieDetails(movieId))
       await dispatch(getCrew(movie.movie))

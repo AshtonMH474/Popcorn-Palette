@@ -51,14 +51,24 @@ export const getUserReviews = () => async(dispatch) => {
 
 
 export const addingToReviews = (payload) => async(dispatch) => {
-    const res = await csrfFetch('/api/reviews/',{
+    const apiKey = '79009e38d3509a590d6510f6e91c4cd8'
+    const movieRes = await fetch(`https://api.themoviedb.org/3/movie/${payload.movieId}?api_key=${apiKey}&language=en-US`);
+    if (movieRes){
+        const movieData = await movieRes.json()
+
+        payload['title'] = movieData.title
+        payload['id'] = movieData.id
+        payload['releaseDate'] = movieData.release_date
+
+        const res = await csrfFetch('/api/reviews/',{
         method:'POST',
         body:JSON.stringify(payload)
     })
-    if(res.ok){
+        if(res.ok){
         const data = await res.json()
-        dispatch(newReview(data))
-    }
+        await dispatch(newReview(data))
+        }
+}
 }
 
 export const updatingReview = (id,payload) => async(dispatch) => {
@@ -68,7 +78,8 @@ export const updatingReview = (id,payload) => async(dispatch) => {
     })
     if(res.ok){
         const data = await res.json()
-        dispatch(updateReview(data))
+        await dispatch(updateReview(data))
+        return data
     }
 }
 

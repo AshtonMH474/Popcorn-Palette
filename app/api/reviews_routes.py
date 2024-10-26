@@ -2,6 +2,8 @@ from flask import Blueprint, jsonify,request
 from flask_login import login_required,current_user
 from app.models import Review,Movie,db
 from app.seeds.utilis import update_rating
+from datetime import date
+
 review_routes = Blueprint('reviews',__name__)
 
 
@@ -29,7 +31,13 @@ def make_review():
 
 
     if movie is None:
-        return {'errors': {'message': 'Movie can not be found'}}, 404
+        # return {'errors': {'message': 'Movie can not be found'}}, 404
+        release_date_arr= data.get('releaseDate').split('-')
+        title = data.get('title')
+        id = data.get('id')
+
+        movie = Movie(id=id,title=title,release_date=date(int(release_date_arr[0]),int(release_date_arr[1]),int(release_date_arr[2])),custom=False)
+        db.session.add(movie)
 
     current_review = Review.query.filter_by(movie_id=movie_id,user_id=current_user.id).first()
     if current_review and getattr(current_review,'id',None) is not None:

@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { IoStarSharp } from "react-icons/io5";
-import {updatingReview } from "../../redux/reviews";
+import { updatingReview } from "../../redux/reviews";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 import { getMovieDetails } from "../../redux/movies";
 import { ImCancelCircle } from "react-icons/im";
 
-function UpdateReview({movieItem,year,userReview}){
+function UpdateReview({movieItem,year,userReview,setUserReview}){
     const [rating,setRating] = useState(userReview.rating)
     const [review,setReview] = useState(userReview.review)
     const [hoveredRating, setHoveredRating] = useState(0);
@@ -14,7 +14,7 @@ function UpdateReview({movieItem,year,userReview}){
     const {closeModal} = useModal()
     const [errors,setErrors] =useState({})
 
-    function submitReview(){
+    async function submitReview(){
         let obj = {}
         if(review.length < 1){
             obj['review'] = 'Review can not be empty'
@@ -29,7 +29,8 @@ function UpdateReview({movieItem,year,userReview}){
             review:review,
             rating:rating
         }
-        dispatch(updatingReview(userReview.id,payload))
+        let newReview = await dispatch(updatingReview(userReview.id,payload))
+        await setUserReview(newReview.review)
         closeModal()
 
 

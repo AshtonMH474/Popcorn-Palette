@@ -4,10 +4,12 @@ import { HiArrowSmallRight } from "react-icons/hi2";
 import { HiArrowSmallLeft } from "react-icons/hi2";
 import { FaPlus } from "react-icons/fa6";
 import { IoIosCheckmark } from "react-icons/io";
-import { NavLink, useOutletContext } from "react-router-dom";
-import { addingToWatchList } from "../../redux/watchlist";
+import {  useNavigate, useOutletContext } from "react-router-dom";
+import { addingToWatchList, getWatchlist } from "../../redux/watchlist";
 import { useDispatch,useSelector } from "react-redux";
 import { deleteFromWatchlist } from "../../redux/watchlist";
+import { getMovieDetails } from "../../redux/movies";
+// import { NavLink } from "react-router-dom";
 
 
 function Recent({recent}){
@@ -17,6 +19,7 @@ function Recent({recent}){
     const user = useSelector((store) => store.session.user);
     const watchlist = useSelector((state) => state.watchlist);
     const {showZ} = useOutletContext();
+    const navigate = useNavigate()
 
 
     useEffect(() => {
@@ -41,15 +44,22 @@ function Recent({recent}){
         }
     };
 
-    function addToWatchList(movieId){
+    async function addToWatchList(movieId){
         const movieData = {movieId}
-        dispatch(addingToWatchList(movieData))
+        await dispatch(addingToWatchList(movieData))
+        await dispatch(getWatchlist())
 
 
     }
 
     function removeMovieFromWatchList(id){
         dispatch(deleteFromWatchlist(id))
+    }
+
+    async function navigateToMovie(movie) {
+        await dispatch(getMovieDetails(movie.id))
+        navigate(`/movies/${movie.id}`)
+
     }
 
     return (
@@ -59,9 +69,9 @@ function Recent({recent}){
                 {currentIndex > 0 && (<button className={`arrow arrowLeft ${showZ ? 'arrowZ': ''}`}  onClick={prevMovies} ><HiArrowSmallLeft/></button>)}
                 {movies.slice(currentIndex, currentIndex + 5).map(movie =>(
                     <div key={movie.id} className='movieItem lightBlack'>
-                        <NavLink className='noTextUnderline' to={`/movies/${movie.id}`}>
-                        <img className='posters' src={movie.movieImages[0].imgUrl} alt='moviePoster' />
-                        </NavLink>
+                        {/* <NavLink className='noTextUnderline' to={`/movies/${movie.id}`}> */}
+                        <img onClick={() => navigateToMovie(movie)}className='posters' src={movie.movieImages[0].imgUrl} alt='moviePoster' />
+                        {/* </NavLink> */}
                         <div className='paddingLeft10px'>
                             <div className='white title'>{movie.title}</div>
                             <div className="displayFlex spaceBetween littleRightPadding">

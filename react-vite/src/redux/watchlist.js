@@ -1,4 +1,5 @@
 import { csrfFetch } from "./.csrf"
+import { changeFormat } from "./movies"
 
 const GET_WATCHLIST = 'watchlist/GET_WATCHLIST'
 const ADD_TO_WATCHLIST = 'watchlist/ADD_TO_WATCHLIST'
@@ -33,17 +34,40 @@ const removeFromWatchlist = id => {
 
 
 export const getWatchlist = () => async(dispatch) => {
+    const apiKey = '79009e38d3509a590d6510f6e91c4cd8'
     const res = await fetch("/api/watchlist/current")
     if(res.ok){
         const data = await res.json();
+        // console.log(data.watchlistMovies)
+        let newArr = []
+        for(let i = 0; i < data.watchlistMovies.length; i++){
+            let movie = data.watchlistMovies[i]
+            const movieRes = await fetch(`https://api.themoviedb.org/3/movie/${movie.id}?api_key=${apiKey}&language=en-US`);
+            let newMovie = await movieRes.json()
 
-        if(data.errors) return;
-        dispatch(setWatchlist(data));
+            let obj = await changeFormat(newMovie)
+            obj['watched'] = movie.watched
+            newArr.push(obj)
+
+        }
+    //     if(data.errors) return;
+        // dispatch(setWatchlist(data));
+        await dispatch(setWatchlist({'watchlistMovies':newArr}))
     }
 }
 
 
 export const addingToWatchList = (payload) => async(dispatch) => {
+    const apiKey = '79009e38d3509a590d6510f6e91c4cd8'
+    const movieRes = await fetch(`https://api.themoviedb.org/3/movie/${payload.movieId}?api_key=${apiKey}&language=en-US`);
+    if(movieRes.ok){
+    const movieData = await movieRes.json()
+
+    payload['title'] = movieData.title
+    payload['id'] = movieData.id
+    payload['releaseDate'] = movieData.release_date
+
+
     const res = await csrfFetch('/api/watchlist/',{
         method:"POST",
         body:JSON.stringify(payload)
@@ -53,6 +77,8 @@ export const addingToWatchList = (payload) => async(dispatch) => {
         const data = await res.json()
         dispatch(newMovieToWatchlist(data))
     }
+
+}
 }
 
 export const updateMovieInWatchlist = (id) => async(dispatch) => {

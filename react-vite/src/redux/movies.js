@@ -20,10 +20,10 @@ export const getMovies = () => async(dispatch) => {
     const apiKey = '79009e38d3509a590d6510f6e91c4cd8'
     let newArr = []
     await nowPlaying(newArr,apiKey)
-    await getMovieByGenre('Romance',apiKey,newArr)
+    await getMovieByGenre('Crime',apiKey,newArr)
     await getMovieByGenre('Action',apiKey,newArr)
     await getMovieByGenre('Science Fiction',apiKey,newArr)
-    await getMovieByGenre('Drama',apiKey,newArr)
+    // await getMovieByGenre('Drama',apiKey,newArr)
     await getMovieByGenre('Horror',apiKey,newArr)
     await getMovieByGenre('Comedy',apiKey,newArr)
 
@@ -53,13 +53,15 @@ export const getMovieDetails = (movieId) => async(dispatch) => {
     // }
     const apiKey = '79009e38d3509a590d6510f6e91c4cd8'
     const response = await fetch(`https://api.themoviedb.org/3/movie/${movieId}?api_key=${apiKey}&language=en-US`);
-
+    if(response.ok){
     const movieData = await response.json();
+
     let movie = await changeFormat(movieData)
     let obj = {
         'movie':movie
     }
     dispatch(getMovie(obj))
+}
 }
 
 
@@ -70,7 +72,6 @@ function movieReducer(state = initialState, action) {
   switch (action.type) {
     case GET_MOVIES:{
       const newState = {...state};
-
       action.payload.movies.forEach((movie)=> newState[movie.id] = movie)
       return newState;
     }
@@ -123,6 +124,7 @@ async function getMovieByGenre(genreName,apiKey,newArr) {
     const response = await fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&with_genres=${objGenre.id}`)
 
     const moviesData = await response.json();
+
     for(let i = 0; i < 10; i++){
         let movie = moviesData.results[i]
         let img = `https://image.tmdb.org/t/p/w500${movie.poster_path}`
@@ -146,8 +148,6 @@ async function getMovieByGenre(genreName,apiKey,newArr) {
 
         const reviewsRes = await csrfFetch(`/api/reviews/avgRating/${movie.id}`)
         if (reviewsRes.ok) {
-            // Check if the response status is in the range 200-299
-         // Parse the JSON response
             let reviews = await reviewsRes.json()
             obj['avgRating'] = reviews.avgRating;
             obj['numReviews'] = reviews.numReviews;
@@ -161,7 +161,7 @@ async function getMovieByGenre(genreName,apiKey,newArr) {
 
 
 
-async function changeFormat(movie) {
+ export const  changeFormat = async (movie) => {
     let img = `https://image.tmdb.org/t/p/w500${movie.poster_path}`
     let genres = await createGenres(movie.genre_ids)
 
