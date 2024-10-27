@@ -50,7 +50,7 @@ function Watchlist(){
     if(!user) return <Navigate to='/'/>
 
 
-    console.log('ehloooo')
+
 
     return (
         <>
