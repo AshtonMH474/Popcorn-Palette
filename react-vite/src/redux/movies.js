@@ -14,19 +14,6 @@ const getMovie = (movie) => ({
 
 export const getMovies = () => async(dispatch) => {
     const res = await fetch("/api/movies/")
-    // let page = 1
-    // const apiKey = '79009e38d3509a590d6510f6e91c4cd8'
-    // while(true){
-    //     const url = `https://api.themoviedb.org/3/movie/now_playing?api_key=${apiKey}&page=${1}`;
-    //     const testRes = await fetch(url)
-    //     let data = await testRes.json()
-    //     if(!data.results.length)break
-
-    //     console.log(data.results)
-    //     page++
-
-    // }
-
     if(res.ok){
         const data = await res.json();
         if(data.errors) return;

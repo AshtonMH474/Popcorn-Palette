@@ -16,7 +16,7 @@ function HighMovies({high}){
     const [movies, setMovies] = useState(high);
     const watchlist = useSelector((state) => state.watchlist);
     const {showZ,setZ} = useOutletContext();
-    setZ(true)
+
 
     useEffect(() => {
         // Whenever recent or watchlist changes, update local movie state
