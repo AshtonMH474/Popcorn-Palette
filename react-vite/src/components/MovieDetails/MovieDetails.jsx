@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { useOutletContext, useParams } from "react-router-dom"
+import { useNavigate, useOutletContext, useParams } from "react-router-dom"
 import { getMovieDetails } from "../../redux/movies"
 import { IoStarSharp } from "react-icons/io5";
 import './movieDetails.css'
@@ -35,17 +35,19 @@ function MovieDetails(){
     const [active,setActive] = useState('crew')
     const [currentIndex, setCurrentIndex] = useState(0);
     const {showZ,setZ} = useOutletContext()
-
-
+    const reviews = useSelector(state=> state.reviews)
+    const reviewsArr = Object.values(reviews)
+    const navigate = useNavigate()
     useEffect(() => {
         const fetchData = async () => {
-            await dispatch(getMovieDetails(movieId));
+            let data = await dispatch(getMovieDetails(movieId));
             if (user) {
                 await dispatch(getWatchlist()); // Fetch watchlist
             }
+            if(data == 'error') navigate('/')
         };
 
-        fetchData();
+        fetchData()
     }, [dispatch, movieId, user]);
 
 
@@ -94,11 +96,11 @@ function MovieDetails(){
     },[movieItem])
 
     useEffect(() => {
-        if(user && movieItem?.reviews){
+        if(user){
             checkIfUserHasReview()
             setUserReview()
         }
-    },[movieItem?.reviews])
+    },[reviewsArr.length,movieId])
 
     useEffect(() => {
         if(user)dispatch(getWatchlist())
@@ -106,8 +108,8 @@ function MovieDetails(){
 
 
     function checkIfUserHasReview() {
-        if (Array.isArray(movieItem.reviews)) {
-            const userHasReview = movieItem.reviews.some((review) => review.userId === user.id);
+        if (reviewsArr.length) {
+            const userHasReview = reviewsArr.some((review) => review.userId === user.id);
             setHasReview(userHasReview);
         } else {
             setHasReview(false);
@@ -115,23 +117,25 @@ function MovieDetails(){
     }
 
     function setUserReview(){
-        if(Array.isArray(movieItem.reviews)) {
-            const userReview = movieItem.reviews.filter((review) => review.userId === user.id);
+        if(reviewsArr.length) {
+            const userReview = reviewsArr.filter((review) => review.userId === user.id);
             setTheReview(userReview[0])
         }else{
             setTheReview(null)
         }
 
     }
-    function addToWatchList(movieId){
+    async function addToWatchList(movieId){
         const movieData = {movieId}
-        dispatch(addingToWatchList(movieData))
+        await dispatch(addingToWatchList(movieData))
+        await dispatch(getWatchlist())
 
 
     }
 
-    function removeFromWatchlist(movieId){
-        dispatch(deleteFromWatchlist(movieId))
+    async function removeFromWatchlist(movieId){
+        await dispatch(deleteFromWatchlist(movieId))
+        await dispatch(getWatchlist())
     }
 
     const nextCast = () => {
@@ -146,6 +150,8 @@ function MovieDetails(){
             setCurrentIndex(currentIndex - 4);
         }
     };
+    if(!movie) return <h1>Loading...</h1>
+
     return (
         <>
         <div className="homeScreen minHeightBackground">
@@ -178,7 +184,7 @@ function MovieDetails(){
                 {hasReview && (
                     <>
                         <button className="detailButton noListStyleType">
-                        <OpenModalMenuItem onItemClick={() => setZ(false)} itemText={'Update Your Review'} modalComponent={<UpdateReview movieItem={movieItem} year={year} userReview={userReview} />} />
+                        <OpenModalMenuItem onItemClick={() => setZ(false)} itemText={'Update Your Review'} modalComponent={<UpdateReview movieItem={movieItem} year={year} userReview={userReview} setUserReview={setTheReview} />} />
                         </button>
                         <button className="detailButton noListStyleType">
                         <OpenModalMenuItem onItemClick={() => setZ(false)} itemText={'Delete Your Review'} modalComponent={<DeleteReview movieItem={movieItem} userReview={userReview} setHasReview={setHasReview} />} />
