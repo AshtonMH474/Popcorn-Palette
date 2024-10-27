@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 import { thunkSignup } from "../../redux/session";
 import "./SignupForm.css";
+import { getWatchlist } from "../../redux/watchlist";
 
 
 function SignupFormModal() {
@@ -42,7 +43,7 @@ function SignupFormModal() {
     if (serverResponse) {
       setErrors(serverResponse);
     } else {
-
+      await dispatch(getWatchlist())
       closeModal();
     }
   };

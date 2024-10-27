@@ -1,9 +1,9 @@
 import { useDispatch, useSelector } from "react-redux"
 import BottomInfo from "../BottomInfo"
 import { useEffect } from "react"
-import { Navigate, useNavigate } from "react-router-dom"
+import { Navigate } from "react-router-dom"
 import { getUserReviews } from "../../redux/reviews"
-// import { NavLink } from "react-router-dom"
+import { NavLink } from "react-router-dom"
 import { IoStarSharp } from "react-icons/io5";
 import { FaRegTrashAlt } from "react-icons/fa";
 import { FiEdit2 } from "react-icons/fi";
@@ -11,7 +11,6 @@ import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
 import DeleteReview from "../MovieDetails/DeleteReview"
 import UpdateReview from "../MovieDetails/updateReview"
 import './userReviews.css'
-import { getMovieDetails } from "../../redux/movies"
 
 
 function UserReviews(){
@@ -19,7 +18,7 @@ function UserReviews(){
     const user = useSelector((store) => store.session.user);
     const reviews = useSelector(state => state.reviews)
     const reviewsArr = Object.values(reviews)
-    const navigate = useNavigate()
+    console.log(reviewsArr)
 
 
 
@@ -29,11 +28,6 @@ function UserReviews(){
 
     if(!user) return <Navigate to='/'/>
 
-    async function navigateToMovie(movie) {
-        await dispatch(getMovieDetails(movie.id))
-        navigate(`/movies/${movie.id}`)
-
-    }
 
     if(reviewsArr.length < 1){
         return (
@@ -49,7 +43,6 @@ function UserReviews(){
         )
     }
 
-    if(!reviews) return <h1>Loading...</h1>
     return (
         <>
             <div className="homeScreen topPaddingHome">
@@ -60,9 +53,9 @@ function UserReviews(){
                         {review.movie ? (
                             <div className="displayFlex ">
                                 <div className="reviewMovieItem lightBlack">
-                                    {/* <NavLink className='noTextUnderline' to={`/movies/${review.movie.id}`}> */}
-                                    <img onClick={() => navigateToMovie(review.movie)}  className='posters' src={review.movie.movieImages[0].imgUrl} alt='moviePoster' />
-                                    {/* </NavLink> */}
+                                    <NavLink className='noTextUnderline' to={`/movies/${review.movie.id}`}>
+                                    <img className='posters' src={review.movie.movieImages[0].imgUrl} alt='moviePoster' />
+                                    </NavLink>
                                     <div className='paddingLeft10px'>
                                         <div className="displayFlex  spaceBetween">
                                             <div className='white'><IoStarSharp className='star' />{review.movie.avgRating.toFixed(1)}</div>
@@ -93,6 +86,7 @@ function UserReviews(){
 
                         ):(
                             <div className="white">Loading...</div>
+
                         )}
                     </div>
                 ))}

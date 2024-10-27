@@ -32,6 +32,6 @@ class Review(db.Model):
             'createdAt':self.created_at,
             'updatedAt':self.updated_at,
             'user':self.user.to_dict(),
-            # 'movie':self.movie.to_dict_reviews()
+            'movie':self.movie.to_dict_reviews()
 
         }
