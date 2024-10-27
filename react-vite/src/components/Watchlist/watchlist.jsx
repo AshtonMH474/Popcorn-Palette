@@ -8,7 +8,7 @@ import { FaRegTrashAlt } from "react-icons/fa";
 import { IoEyeOutline } from "react-icons/io5";
 import { Navigate,  useNavigate } from 'react-router-dom';
 // import { NavLink } from 'react-router-dom'
-import { getMovieDetails, getMovies } from '../../redux/movies'
+import { getMovieDetails} from '../../redux/movies'
 
 function Watchlist(){
     const dispatch = useDispatch()
@@ -22,7 +22,7 @@ function Watchlist(){
 
     useEffect(() => {
         dispatch(getWatchlist())
-        dispatch(getMovies()) //grabs movies so it knows if user has review or not
+        // dispatch(getMovies()) //grabs movies so it knows if user has review or not
         if(watchlistArr.length)setWatchlist(watchlistArr.filter(movie => movie.watched == false))
     },[dispatch,watchlistArr.length])
 
@@ -38,10 +38,14 @@ function Watchlist(){
     }
 
     useEffect(() => {
-        if(watchlistArr.length){
-        const filteredArr = watchlistArr.filter(movie => active === 'unwatched' ? !movie.watched : movie.watched)
-        setWatchlist(filteredArr)
+        async function filterWatchlist(){
+            if(watchlistArr.length){
+            const filteredArr = await watchlistArr.filter(movie => active === 'unwatched' ? !movie.watched : movie.watched)
+            await setWatchlist(filteredArr)
+            }
+
         }
+        filterWatchlist()
 
     }, [watchlist,active])
 
