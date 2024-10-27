@@ -1,9 +1,59 @@
 from app.models import db, Review,Movie, environment, SCHEMA
 from sqlalchemy.sql import text
 from .utilis import update_rating
+from datetime import date
 
 
 def seed_reviews():
+    movie_ids = [
+                 {
+        'id':138843,
+        'title':'The Conjuring',
+        'release_date':date(2013,7,19),
+        'custom':False
+                     },
+                     {
+        'id':335984,
+        'title':'Blade Runner 2049',
+        'release_date':date(2017,10,6),
+        'custom':False
+                     },
+                     {
+        'id':157336,
+        'title':'Interstellar',
+        'release_date':date(2014,10,26),
+        'custom':False
+                     },
+                     {
+        'id':245891,
+        'title':'John Wick',
+        'release_date':date(2014,10,24),
+        'custom':False
+                     },
+                     {
+        'id':693134,
+        'title':'Dune: Part Two',
+        'release_date':date(2024,3,1),
+        'custom':False
+                     },
+                                {
+        'id':967847,
+        'title':'Ghostbusters: Frozen Empire',
+        'release_date':date(2024,3,22),
+        'custom':False
+                     },
+                     {
+        'id':299534,
+        'title':'Avengers: Endgame',
+        'release_date':date(2019,4,26),
+        'custom':False
+                     }
+                     ]
+    for movie in movie_ids:
+        new_movie=Movie(id=movie['id'],title=movie['title'],release_date=movie['release_date'],custom=movie['custom'])
+        db.session.add(new_movie)
+    db.session.commit()
+
     review1 = Review(
         user_id=1,
         movie_id=698687,
