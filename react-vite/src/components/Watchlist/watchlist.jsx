@@ -23,7 +23,7 @@ function Watchlist(){
     useEffect(() => {
         dispatch(getWatchlist())
         dispatch(getMovies()) //grabs movies so it knows if user has review or not
-        setWatchlist(watchlistArr.filter(movie => movie.watched == false))
+        if(watchlistArr.length)setWatchlist(watchlistArr.filter(movie => movie.watched == false))
     },[dispatch,watchlistArr.length])
 
 
