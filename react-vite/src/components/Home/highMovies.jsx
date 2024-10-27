@@ -19,7 +19,7 @@ function HighMovies({high}){
     const watchlist = useSelector((state) => state.watchlist);
     const {showZ} = useOutletContext();
 
-    const navigate = useNavigate()
+
 
     useEffect(() => {
         // Whenever recent or watchlist changes, update local movie state

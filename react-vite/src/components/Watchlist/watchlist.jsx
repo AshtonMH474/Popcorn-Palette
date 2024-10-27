@@ -69,10 +69,7 @@ function Watchlist(){
         await dispatch(getMovieDetails(movie.id))
         navigate(`/movies/${movie.id}`)
 
-    }
 
-    if(!user) return <Navigate to='/'/>
-    if(!watchlist) return <h1>Loading...</h1>
     return (
         <>
 
