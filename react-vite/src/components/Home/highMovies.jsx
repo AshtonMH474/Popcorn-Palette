@@ -4,12 +4,12 @@ import { HiArrowSmallRight } from "react-icons/hi2";
 import { HiArrowSmallLeft } from "react-icons/hi2";
 import { IoIosCheckmark } from "react-icons/io";
 import { FaPlus } from "react-icons/fa6";
-import {  useNavigate, useOutletContext } from "react-router-dom";
+import { useOutletContext } from "react-router-dom";
 import { addingToWatchList } from "../../redux/watchlist";
 import { useDispatch,useSelector } from "react-redux";
 import { deleteFromWatchlist } from "../../redux/watchlist";
 import { getMovieDetails } from "../../redux/movies";
-// import { NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 function HighMovies({high}){
     const [currentIndex, setCurrentIndex] = useState(0);
@@ -52,7 +52,6 @@ function HighMovies({high}){
     }
     async function navigateToMovie(movie) {
         await dispatch(getMovieDetails(movie.id))
-        navigate(`/movies/${movie.id}`)
 
     }
 
@@ -64,9 +63,9 @@ function HighMovies({high}){
                 {currentIndex > 0 && (<button className={`arrow arrowLeft ${showZ ? 'arrowZ': ''}`}  onClick={prevMovies} ><HiArrowSmallLeft/></button>)}
                 {movies.slice(currentIndex, currentIndex + 5).map(movie =>(
                     <div key={movie.id} className='movieItem lightBlack'>
-                        {/* <NavLink className='noTextUnderline' to={`/movies/${movie.id}`}> */}
+                        <NavLink className='noTextUnderline' to={`/movies/${movie.id}`}>
                         <img onClick={() => navigateToMovie(movie)} className='posters' src={movie.movieImages[0].imgUrl} alt='moviePoster' />
-                        {/* </NavLink> */}
+                        </NavLink>
                         <div className='paddingLeft10px'>
                             <div className='white title'>{movie.title}</div>
                             <div className="displayFlex spaceBetween littleRightPadding">
