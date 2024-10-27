@@ -13,6 +13,9 @@
     overflow: hidden;
     min-height: 93.5vh;
 }
+.home{
+    min-height: 99vh;
+}
 
 
 .white{

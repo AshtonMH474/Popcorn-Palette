@@ -11,6 +11,7 @@ import { getMovieDetails, getMovies } from "../../redux/movies";
 // import { getCrew } from "../../redux/crew";
 
 function Navigation({showZ,setZ}) {
+
   const dispatch = useDispatch()
   const sessionUser = useSelector(state=> state.session.user);
   const searchedMovies = useSelector(state => state.search)

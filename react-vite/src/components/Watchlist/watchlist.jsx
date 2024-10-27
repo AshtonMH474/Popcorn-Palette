@@ -58,7 +58,7 @@ function Watchlist(){
     }
 
     if(!user) return <Navigate to='/'/>
-
+    if(!watchlist) return <h1>Loading...</h1>
     return (
         <>
 

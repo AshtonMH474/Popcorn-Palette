@@ -23,9 +23,9 @@ export const getMovies = () => async(dispatch) => {
     await getMovieByGenre('Crime',apiKey,newArr)
     await getMovieByGenre('Action',apiKey,newArr)
     await getMovieByGenre('Science Fiction',apiKey,newArr)
-    // await getMovieByGenre('Drama',apiKey,newArr)
     await getMovieByGenre('Horror',apiKey,newArr)
     await getMovieByGenre('Comedy',apiKey,newArr)
+
     const movieIdData = await csrfFetch(`/api/reviews/highly_rated`)
     if(movieIdData.ok){
     let movieIds = await movieIdData.json()
@@ -63,6 +63,7 @@ export const getMovieDetails = (movieId) => async(dispatch) => {
     // }
     const apiKey = '79009e38d3509a590d6510f6e91c4cd8'
     const response = await fetch(`https://api.themoviedb.org/3/movie/${movieId}?api_key=${apiKey}&language=en-US`);
+    if(response)
     if(response.ok){
     const movieData = await response.json();
     let genres = []
@@ -77,6 +78,10 @@ export const getMovieDetails = (movieId) => async(dispatch) => {
         'movie':movie
     }
     dispatch(getMovie(obj))
+    return obj
+}
+else{
+    return 'error'
 }
 }
 
@@ -87,7 +92,7 @@ const initialState = {};
 function movieReducer(state = initialState, action) {
   switch (action.type) {
     case GET_MOVIES:{
-      const newState = {...state};
+      const newState = {};
       action.payload.movies.forEach((movie)=> newState[movie.id] = movie)
       return newState;
     }

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { useOutletContext, useParams } from "react-router-dom"
+import { useNavigate, useOutletContext, useParams } from "react-router-dom"
 import { getMovieDetails } from "../../redux/movies"
 import { IoStarSharp } from "react-icons/io5";
 import './movieDetails.css'
@@ -37,16 +37,17 @@ function MovieDetails(){
     const {showZ,setZ} = useOutletContext()
     const reviews = useSelector(state=> state.reviews)
     const reviewsArr = Object.values(reviews)
-
+    const navigate = useNavigate()
     useEffect(() => {
         const fetchData = async () => {
-            await dispatch(getMovieDetails(movieId));
+            let data = await dispatch(getMovieDetails(movieId));
             if (user) {
                 await dispatch(getWatchlist()); // Fetch watchlist
             }
+            if(data == 'error') navigate('/')
         };
 
-        fetchData();
+        fetchData()
     }, [dispatch, movieId, user]);
 
 
@@ -149,6 +150,8 @@ function MovieDetails(){
             setCurrentIndex(currentIndex - 4);
         }
     };
+    if(!movie) return <h1>Loading...</h1>
+
     return (
         <>
         <div className="homeScreen minHeightBackground">

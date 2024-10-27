@@ -122,7 +122,7 @@ function Home(){
     return (
         <>
 
-        <div className='homeScreen'>
+        <div className='homeScreen home'>
             <div className='moveLeft50px movieBottomPadding'>
                 <Recent recent={recent}/>
             </div>
