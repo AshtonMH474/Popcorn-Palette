@@ -7,10 +7,11 @@ import logo from '../../Static/2938928.webp'
 import { useEffect, useRef, useState } from "react";
 import { searchMovies } from "../../redux/search";
 import { getReviewsFromMovie } from "../../redux/reviews";
-import { getMovieDetails } from "../../redux/movies";
-import { getCrew } from "../../redux/crew";
+import { getMovieDetails, getMovies } from "../../redux/movies";
+// import { getCrew } from "../../redux/crew";
 
 function Navigation({showZ,setZ}) {
+
   const dispatch = useDispatch()
   const sessionUser = useSelector(state=> state.session.user);
   const searchedMovies = useSelector(state => state.search)
@@ -51,9 +52,12 @@ function Navigation({showZ,setZ}) {
     setMovie('')
     setDropDown(false)
     async function getMovie(){
+      await dispatch(getMovieDetails(movieId))
       await dispatch(getReviewsFromMovie(movieId))
-      let movie = await dispatch(getMovieDetails(movieId))
-      await dispatch(getCrew(movie.movie))
+      // let movie = await dispatch(getMovieDetails(movieId))
+      // await dispatch(getCrew(movie.movie))
+      await dispatch(getMovieDetails(movieId))
+      // await dispatch(getReviewsFromMovie(movieId))
     }
     getMovie()
 
@@ -65,7 +69,7 @@ function Navigation({showZ,setZ}) {
     <ul className="lightBlack noMargin removeDecorations displayFlex spaceBetween alignCenter noPadding ">
       <li>
         <div className="displayFlex alignCenter spaceBetween moveLeft50px">
-          <NavLink className='noTextUnderline' to="/">
+          <NavLink onClick={() => dispatch(getMovies())} className='noTextUnderline' to="/">
           <div className="displayFlex alignCenter">
             <img className="logo" src={logo} alt="logo"/>
             <div className="logoTitle">POPCORN PALETTE</div>
