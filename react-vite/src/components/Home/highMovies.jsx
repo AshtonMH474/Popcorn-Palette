@@ -15,7 +15,7 @@ function HighMovies({high}){
     const user = useSelector((store) => store.session.user);
     const [movies, setMovies] = useState(high);
     const watchlist = useSelector((state) => state.watchlist);
-    const {showZ,setZ} = useOutletContext();
+    const {showZ} = useOutletContext();
 
 
     useEffect(() => {
