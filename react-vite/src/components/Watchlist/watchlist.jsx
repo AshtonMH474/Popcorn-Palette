@@ -50,11 +50,19 @@ function Watchlist(){
     }, [watchlist,active])
 
     const changeToUnwatched = () => {
-        setActive('unwatched')
+        async function changeUnwatched(){
+            await dispatch(getWatchlist())
+            await setActive('unwatched')
+        }
+        changeUnwatched()
     }
 
     const changeToWatched = () => {
-        setActive('watched')
+        async function changeWatched() {
+            await dispatch(getWatchlist())
+           await setActive('watched')
+        }
+        changeWatched()
     }
 
     async function navigateToMovie(movie) {
