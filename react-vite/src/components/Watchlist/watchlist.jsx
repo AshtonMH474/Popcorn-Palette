@@ -38,8 +38,10 @@ function Watchlist(){
     }
 
     useEffect(() => {
+        if(watchlistArr.length){
         const filteredArr = watchlistArr.filter(movie => active === 'unwatched' ? !movie.watched : movie.watched)
         setWatchlist(filteredArr)
+        }
 
     }, [watchlist,active])
 
