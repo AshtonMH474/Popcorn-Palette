@@ -8,6 +8,7 @@ import { useEffect, useRef, useState } from "react";
 import { searchMovies } from "../../redux/search";
 import { getReviewsFromMovie } from "../../redux/reviews";
 import { getMovieDetails, getMovies } from "../../redux/movies";
+import { getCrew } from "../../redux/crew";
 // import { getCrew } from "../../redux/crew";
 
 function Navigation({showZ,setZ}) {
@@ -54,10 +55,8 @@ function Navigation({showZ,setZ}) {
     async function getMovie(){
       await dispatch(getMovieDetails(movieId))
       await dispatch(getReviewsFromMovie(movieId))
-      // let movie = await dispatch(getMovieDetails(movieId))
-      // await dispatch(getCrew(movie.movie))
-      await dispatch(getMovieDetails(movieId))
-      // await dispatch(getReviewsFromMovie(movieId))
+      await dispatch(getCrew(movie.movie))
+
     }
     getMovie()
 
