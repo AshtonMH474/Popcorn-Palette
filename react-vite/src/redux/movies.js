@@ -26,6 +26,16 @@ export const getMovies = () => async(dispatch) => {
     // await getMovieByGenre('Drama',apiKey,newArr)
     await getMovieByGenre('Horror',apiKey,newArr)
     await getMovieByGenre('Comedy',apiKey,newArr)
+    const movieIdData = await csrfFetch(`/api/reviews/highly_rated`)
+    if(movieIdData.ok){
+    let movieIds = await movieIdData.json()
+    let highRatedIds = movieIds.movie_ids
+    for(let i = 0; i < highRatedIds.length; i++){
+        let id = highRatedIds[i]
+        let movie = await getMoviebyId(id)
+        newArr.push(movie)
+    }
+}
 
 
     let obj = {'movies': newArr}
@@ -55,8 +65,14 @@ export const getMovieDetails = (movieId) => async(dispatch) => {
     const response = await fetch(`https://api.themoviedb.org/3/movie/${movieId}?api_key=${apiKey}&language=en-US`);
     if(response.ok){
     const movieData = await response.json();
-
+    let genres = []
+    movieData.genres.forEach((genre) => {
+        genre['type'] = genre.name
+        delete genre.name
+        genres.push(genre)
+    })
     let movie = await changeFormat(movieData)
+    movie['genres'] = genres
     let obj = {
         'movie':movie
     }
@@ -90,7 +106,22 @@ function movieReducer(state = initialState, action) {
 export default movieReducer;
 
 
-
+async function getMoviebyId(movieId){
+    const apiKey = '79009e38d3509a590d6510f6e91c4cd8'
+    const response = await fetch(`https://api.themoviedb.org/3/movie/${movieId}?api_key=${apiKey}&language=en-US`);
+    if(response.ok){
+        const movieData = await response.json();
+        let genres = []
+        movieData.genres.forEach((genre) => {
+            genre['type'] = genre.name
+            delete genre.name
+            genres.push(genre)
+        })
+        let movie = await changeFormat(movieData)
+        movie['genres'] = genres
+        return movie
+    }
+}
 async function createGenres(genre_ids){
     const apiKey = '79009e38d3509a590d6510f6e91c4cd8'
     const resGenre = await fetch(`https://api.themoviedb.org/3/genre/movie/list?api_key=${apiKey}&language=en-US`);

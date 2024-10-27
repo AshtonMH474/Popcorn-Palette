@@ -1,10 +1,25 @@
 from flask import Blueprint, jsonify,request
 from flask_login import login_required,current_user
 from app.models import Review,Movie,db
-from app.seeds.utilis import update_rating
+# from app.seeds.utilis import update_rating, get_average,get_all_review_movie_ids
+from app.seeds.utilis import get_average,get_all_review_movie_ids,update_rating
 from datetime import date
 
 review_routes = Blueprint('reviews',__name__)
+
+@review_routes.route('/highly_rated')
+def get_highly_rated():
+    movie_ids  = get_all_review_movie_ids()
+    new_list = []
+    for movie_id in movie_ids:
+        all_reviews = Review.query.filter_by(movie_id=movie_id).all()
+        average = get_average(all_reviews)
+        if average  > 4.5:
+            new_list.append(movie_id)
+
+    return {'movie_ids':new_list}
+
+
 
 
 @review_routes.route('/current')

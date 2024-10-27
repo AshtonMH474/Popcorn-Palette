@@ -8,7 +8,7 @@ function Reviews({movieId}){
     const dispatch = useDispatch()
     const reviews = useSelector(state=> state.reviews)
     const reviewsArr = Object.values(reviews)
-    console.log(reviewsArr)
+
 
     useEffect(() => {
         dispatch(getReviewsFromMovie(movieId))

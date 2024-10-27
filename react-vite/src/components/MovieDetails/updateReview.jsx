@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { IoStarSharp } from "react-icons/io5";
-import { updatingReview } from "../../redux/reviews";
+import { getUserReviews, updatingReview } from "../../redux/reviews";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 import { getMovieDetails } from "../../redux/movies";
@@ -30,7 +30,8 @@ function UpdateReview({movieItem,year,userReview,setUserReview}){
             rating:rating
         }
         let newReview = await dispatch(updatingReview(userReview.id,payload))
-        await setUserReview(newReview.review)
+        if(setUserReview)await setUserReview(newReview.review)
+        else await dispatch(getUserReviews())
         closeModal()
 
 

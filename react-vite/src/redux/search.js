@@ -1,4 +1,4 @@
-import { csrfFetch } from "./.csrf"
+
 import { changeFormat } from "./movies"
 const GET_SEARCH = 'search/GET_SEARCH'
 

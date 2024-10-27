@@ -95,11 +95,11 @@ function MovieDetails(){
     },[movieItem])
 
     useEffect(() => {
-        if(user && reviewsArr.length){
+        if(user){
             checkIfUserHasReview()
             setUserReview()
         }
-    },[reviewsArr.length])
+    },[reviewsArr.length,movieId])
 
     useEffect(() => {
         if(user)dispatch(getWatchlist())
