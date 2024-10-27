@@ -1,4 +1,5 @@
 import { csrfFetch } from "./.csrf"
+import { changeFormat } from "./movies"
 
 
 const GET_MOVIEREVIEWS = 'reviews/GET_MOVIEREVIEWS'
@@ -41,24 +42,47 @@ export const getReviewsFromMovie = (movieId) => async(dispatch) => {
 }
 
 export const getUserReviews = () => async(dispatch) => {
+    const apiKey = '79009e38d3509a590d6510f6e91c4cd8'
     const res = await csrfFetch(`/api/reviews/current`)
     if(res.ok){
         const data = await res.json();
-        dispatch(setUserReviews(data.reviews))
+        let newArr = []
+            for(let i = 0; i < data.reviews.length; i++){
+            let review = data.reviews[i]
+            const response = await fetch(`https://api.themoviedb.org/3/movie/${review.movieId}?api_key=${apiKey}&language=en-US`);
+            const movieData = await response.json()
+            let movie = await changeFormat(movieData)
+            let obj = {
+                ...review,
+                'movie':movie
+            }
+            newArr.push(obj)
+            }
+        dispatch(setUserReviews(newArr))
         return data
     }
 }
 
 
 export const addingToReviews = (payload) => async(dispatch) => {
-    const res = await csrfFetch('/api/reviews/',{
+    const apiKey = '79009e38d3509a590d6510f6e91c4cd8'
+    const movieRes = await fetch(`https://api.themoviedb.org/3/movie/${payload.movieId}?api_key=${apiKey}&language=en-US`);
+    if (movieRes){
+        const movieData = await movieRes.json()
+
+        payload['title'] = movieData.title
+        payload['id'] = movieData.id
+        payload['releaseDate'] = movieData.release_date
+
+        const res = await csrfFetch('/api/reviews/',{
         method:'POST',
         body:JSON.stringify(payload)
     })
-    if(res.ok){
+        if(res.ok){
         const data = await res.json()
-        dispatch(newReview(data))
-    }
+        await dispatch(newReview(data))
+        }
+}
 }
 
 export const updatingReview = (id,payload) => async(dispatch) => {
@@ -68,7 +92,8 @@ export const updatingReview = (id,payload) => async(dispatch) => {
     })
     if(res.ok){
         const data = await res.json()
-        dispatch(updateReview(data))
+        await dispatch(updateReview(data))
+        return data
     }
 }
 

@@ -6,19 +6,19 @@ from .utilis import update_rating
 def seed_reviews():
     review1 = Review(
         user_id=1,
-        movie_id=11,
+        movie_id=698687,
         review='Best Transformers Movie I have seen',
         rating=5
     )
     review2 = Review(
         user_id=2,
-        movie_id=11,
+        movie_id=698687,
         review='Wow i am shocked i am saying this but it was perfect. From the first act all the way to the end. It was a fun and impactful movie in the Transformers franchise',
         rating=5
     )
     review3 = Review(
         user_id=3,
-        movie_id=11,
+        movie_id=698687,
         review='Deftintely top 5 transformer movie',
         rating=4
     )
@@ -29,23 +29,23 @@ def seed_reviews():
         db.session.add(review)
     db.session.commit()
 
-    update_rating(11)
+    # update_rating(11)
 
     review4 = Review(
         user_id=1,
-        movie_id=66,
+        movie_id=155,
         review='Heath Ledger gave one of the best villan performaces I have ever seen.',
         rating=5
     )
     review5 = Review(
         user_id=2,
-        movie_id=66,
+        movie_id=155,
         review='Christoper Nolan knows what hes doing',
         rating=5
     )
     review6 = Review(
         user_id=3,
-        movie_id=66,
+        movie_id=155,
         review='Deftintely top 5 movie all time',
         rating=5
     )
@@ -56,24 +56,24 @@ def seed_reviews():
         db.session.add(review)
     db.session.commit()
 
-    update_rating(66)
+    # update_rating(66)
 
 
     review7 = Review(
         user_id=1,
-        movie_id=45,
-        review='Amazing performance',
+        movie_id=138843,
+        review='Had fun with this one',
         rating=5
     )
     review8 = Review(
         user_id=2,
-        movie_id=45,
-        review='Emma Stone was amazing',
+        movie_id=138843,
+        review='I was actually scared',
         rating=5
     )
     review9 = Review(
         user_id=3,
-        movie_id=45,
+        movie_id=138843,
         review='I get why people love this film',
         rating=4
     )
@@ -84,23 +84,23 @@ def seed_reviews():
         db.session.add(review)
     db.session.commit()
 
-    update_rating(45)
+    # update_rating(45)
 
     review10 = Review(
         user_id=1,
-        movie_id=54,
+        movie_id=335984,
         review='Amazing new addition to the scifi genre',
         rating=5
     )
     review11 = Review(
         user_id=2,
-        movie_id=54,
+        movie_id=335984,
         review='Why do people not wanna see this',
         rating=5
     )
     review12 = Review(
         user_id=3,
-        movie_id=54,
+        movie_id=335984,
         review='I get why people love this film',
         rating=5
     )
@@ -111,23 +111,23 @@ def seed_reviews():
         db.session.add(review)
     db.session.commit()
 
-    update_rating(54)
+    # update_rating(54)
 
     review13 = Review(
         user_id=1,
-        movie_id=56,
+        movie_id=157336,
         review='Would watch again',
         rating=5
     )
     review14 = Review(
         user_id=2,
-        movie_id=56,
+        movie_id=157336,
         review='Top tier',
         rating=5
     )
     review15 = Review(
         user_id=3,
-        movie_id=56,
+        movie_id=157336,
         review='This movie was super well made',
         rating=4
     )
@@ -138,24 +138,24 @@ def seed_reviews():
         db.session.add(review)
     db.session.commit()
 
-    update_rating(56)
+    # update_rating(56)
 
 
     review16 = Review(
         user_id=1,
-        movie_id=64,
+        movie_id=245891,
         review='The action was insane',
         rating=5
     )
     review17 = Review(
         user_id=2,
-        movie_id=64,
+        movie_id=245891,
         review='Gotta love Kenua Reves',
         rating=5
     )
     review18 = Review(
         user_id=3,
-        movie_id=64,
+        movie_id=245891,
         review='So glad they made another one',
         rating=4
     )
@@ -166,23 +166,23 @@ def seed_reviews():
         db.session.add(review)
     db.session.commit()
 
-    update_rating(64)
+    # update_rating(64)
 
     review19 = Review(
         user_id=1,
-        movie_id=57,
+        movie_id=11,
         review='This is why I love Movies',
         rating=5
     )
     review20 = Review(
         user_id=2,
-        movie_id=57,
+        movie_id=11,
         review='The reason I love scifi',
         rating=5
     )
     review21 = Review(
         user_id=3,
-        movie_id=57,
+        movie_id=11,
         review='Theres a reason this is a classic',
         rating=5
     )
@@ -193,23 +193,23 @@ def seed_reviews():
         db.session.add(review)
     db.session.commit()
 
-    update_rating(57)
+    # update_rating(57)
 
     review22 = Review(
         user_id=1,
-        movie_id=61,
+        movie_id=693134,
         review='Why do I love scifi so much',
         rating=5
     )
     review23 = Review(
         user_id=2,
-        movie_id=61,
+        movie_id=693134,
         review='Im in shock',
         rating=5
     )
     review24 = Review(
         user_id=3,
-        movie_id=61,
+        movie_id=693134,
         review='I get why people love this film',
         rating=5
     )
@@ -220,23 +220,23 @@ def seed_reviews():
         db.session.add(review)
     db.session.commit()
 
-    update_rating(61)
+    # update_rating(61)
 
     review25 = Review(
         user_id=1,
-        movie_id=20,
+        movie_id=967847,
         review='I wanted to leave the theater',
         rating=2
     )
     review26 = Review(
         user_id=2,
-        movie_id=20,
+        movie_id=967847,
         review='Why make this',
         rating=1
     )
     review27 = Review(
         user_id=3,
-        movie_id=20,
+        movie_id=967847,
         review='This is the reason ghostbusters died',
         rating=2
     )
@@ -247,24 +247,24 @@ def seed_reviews():
         db.session.add(review)
     db.session.commit()
 
-    update_rating(20)
+    # update_rating(20)
 
 
     review28 = Review(
         user_id=1,
-        movie_id=68,
+        movie_id=299534,
         review='This is what we have been waiting on. It all came together perfeclty and shows us whats to come.',
         rating=5
     )
     review29 = Review(
         user_id=2,
-        movie_id=68,
+        movie_id=299534,
         review='The MCU is becoming big i guess',
         rating=4
     )
     review30 = Review(
         user_id=3,
-        movie_id=68,
+        movie_id=299534,
         review='Comedy was there and action and acting abilites',
         rating=4
     )
@@ -275,7 +275,7 @@ def seed_reviews():
         db.session.add(review)
     db.session.commit()
 
-    update_rating(68)
+    # update_rating(68)
 
 
 
