@@ -23,6 +23,10 @@
 .trash{
     font-size: small;
     padding-top: 2px;
+
+}
+.noListType{
+    list-style-type: none;
 }
 .trash:hover{
     color:red
