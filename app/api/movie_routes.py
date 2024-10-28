@@ -20,6 +20,8 @@ def movie_details(movie_id):
     Query for certain movie
     """
      movie = Movie.query.filter_by(id=movie_id).first()
+     if movie is None:
+         return {'errors': {'message': 'Movie Not Found'}}, 404
      return {'movie':movie.to_dict()}
 
 
