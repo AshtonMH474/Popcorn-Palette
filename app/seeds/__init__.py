@@ -7,6 +7,7 @@ from .watchlist import seed_watchlist,undo_watchlist
 from.reviews import seed_reviews,undo_reviews
 from .genres import seed_genres,undo_genres
 from .movie_genres import seed_movie_genres,undo_movie_genres
+from .movies_api import seed_api_movies
 # from .crew.random_movies import seed_random_movie_artists,undo_random_movie_artists
 # from .crew.recent_movies import seed_recent_movie_artists,undo_recent_movie_artists
 # from .crew.comedies import seed_comedy_movie_artists,undo_comedy_movie_artists
@@ -38,12 +39,13 @@ def seed():
         undo_users()
 
     seed_users()
-    seed_movies()
-    seed_movie_images()
+    seed_api_movies()
+    # seed_movies()
+    # seed_movie_images()
     seed_watchlist()
     seed_reviews()
-    seed_genres()
-    seed_movie_genres()
+    # seed_genres()
+    # seed_movie_genres()
     # seed_random_movie_artists()
     # seed_recent_movie_artists()
     # seed_comedy_movie_artists()

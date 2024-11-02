@@ -226,7 +226,7 @@ function MovieDetails(){
                     {active == 'genre' && (<div className="displayFlex gap10px genresGroup">
                         {movieItem && movieItem.genres.length && movieItem.genres.map(genre => (
                             <div key={genre.id} className="white  genres">
-                                {genre.type}
+                                {genre.type === "Science Fiction" ? "SciFi" : genre.type}
                             </div>
                         ))}
                     </div>)}
