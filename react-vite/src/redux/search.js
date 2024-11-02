@@ -1,5 +1,5 @@
 import { csrfFetch } from "./.csrf"
-// import { changeFormat } from "./movies"
+import { changeFormat } from "./movies"
 const GET_SEARCH = 'search/GET_SEARCH'
 
 const setSearch = movies => {

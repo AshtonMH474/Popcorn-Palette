@@ -68,3 +68,37 @@ function movieReducer(state = initialState, action) {
 }
 
 export default movieReducer;
+
+
+
+
+export const  changeFormat = async (movie) => {
+    let img = `https://image.tmdb.org/t/p/w500${movie.poster_path}`
+    let genres = await createGenres(movie.genre_ids)
+
+    let obj = {
+        'custom':false,
+        'description':movie.overview,
+        'id':movie.id,
+        'title':movie.title,
+        'releaseDate':`${new Date(movie.release_date)}`,
+        'genres': genres,
+        'movieImages':[
+            {
+                'imgUrl':img,
+                'poster':true
+            }
+        ]
+    }
+
+    const reviewsRes = await csrfFetch(`/api/reviews/avgRating/${movie.id}`)
+    if (reviewsRes.ok) {
+        // Check if the response status is in the range 200-299
+     // Parse the JSON response
+        let reviews = await reviewsRes.json()
+        obj['avgRating'] = reviews.avgRating;
+        obj['numReviews'] = reviews.numReviews;
+    }
+    return obj;
+
+}
