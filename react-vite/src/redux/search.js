@@ -1,4 +1,4 @@
-import { csrfFetch } from "./.csrf"
+// import { csrfFetch } from "./.csrf"
 import { changeFormat } from "./movies"
 const GET_SEARCH = 'search/GET_SEARCH'
 
@@ -33,6 +33,7 @@ export const searchMovies = (title) => async(dispatch) => {
         }
 
         dispatch(setSearch({'movies':newArr}))
+
 
 }
 
