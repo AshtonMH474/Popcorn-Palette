@@ -10,14 +10,20 @@ const setCrew = (crew) => ({
 
 
 export const getCrew = (movie) => async(dispatch) => {
+    // changes release date into format to filter movies
+    const dateString = movie.releaseDate;
+    const dateObject = new Date(dateString);
+    const releaseDate = `${dateObject.getFullYear()}-${String(dateObject.getMonth() + 1).padStart(2, '0')}-${String(dateObject.getDate()).padStart(2, '0')}`;
 
     const apiKey = '79009e38d3509a590d6510f6e91c4cd8'
     const searchUrl = `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${encodeURIComponent(movie.title)}`;
     const response = await fetch(searchUrl);
     const movieData = await response.json();
 
+    // makes it so movie is correct based on title and year
+    const filteredMovies = movieData.results.filter(m => m.release_date.split('-')[0] == releaseDate.split('-')[0]);
 
-    const creditsUrl = `https://api.themoviedb.org/3/movie/${movieData.results[0].id}/credits?api_key=${apiKey}`;
+    const creditsUrl = `https://api.themoviedb.org/3/movie/${filteredMovies[0].id}/credits?api_key=${apiKey}`;
     const res = await fetch(creditsUrl);
     const data = await res.json();
 
