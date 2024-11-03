@@ -1,3 +1,4 @@
+import { csrfFetch } from "./.csrf"
 const GET_MOVIES = 'movies/GET_MOVIES'
 const GRAB_MOVIE = 'movies/GRAB_MOVIE'
 
@@ -34,11 +35,22 @@ export const getMovies = () => async(dispatch) => {
     }
 }
 
-export const getMovieDetails = (movieId) => async(dispatch) => {
+export const getMovieDetails = (movieId,movie) => async(dispatch) => {
+
+    if(movie && movie.movieImages.length){
+
+    const checkMovie = await csrfFetch(`/api/movies`,{
+        method:'POST',
+        body:JSON.stringify(movie)
+    })
+    await checkMovie.json()
+    }
+
+
     const res = await fetch(`/api/movies/${movieId}`);
     if(res.ok){
         const data = await res.json()
-        dispatch(getMovie(data))
+        await dispatch(getMovie(data))
         return data
     }
 }
@@ -68,3 +80,56 @@ function movieReducer(state = initialState, action) {
 }
 
 export default movieReducer;
+
+
+
+
+export const  changeFormat = async (movie) => {
+    let img = `https://image.tmdb.org/t/p/w500${movie.poster_path}`
+    let genres = await createGenres(movie.genre_ids)
+
+    let obj = {
+        'custom':false,
+        'description':movie.overview,
+        'id':movie.id,
+        'title':movie.title,
+        'releaseDate':movie.release_date,
+        'genres': genres,
+        'movieImages':[
+            {
+                'imgUrl':img,
+                'poster':true
+            }
+        ]
+    }
+
+    const reviewsRes = await csrfFetch(`/api/reviews/avgRating/${movie.id}`)
+    if (reviewsRes.ok) {
+        // Check if the response status is in the range 200-299
+     // Parse the JSON response
+        let reviews = await reviewsRes.json()
+        obj['avgRating'] = reviews.avgRating;
+        obj['numReviews'] = reviews.numReviews;
+    }
+    return obj;
+
+}
+
+async function createGenres(genre_ids){
+    const apiKey = '79009e38d3509a590d6510f6e91c4cd8'
+    const resGenre = await fetch(`https://api.themoviedb.org/3/genre/movie/list?api_key=${apiKey}&language=en-US`);
+    const data = await resGenre.json()
+
+    let newArr = []
+
+    data.genres.forEach((genre) => {
+        if(genre_ids && genre_ids.includes(genre.id)){
+            let obj = {
+                type:genre.name
+            }
+            newArr.push(obj)
+        }
+    })
+    return newArr
+
+}

@@ -49,13 +49,13 @@ function Navigation({showZ,setZ}) {
 
 
 
-  function goToMovie(movieId){
+  function goToMovie(movie){
     setMovie('')
     setDropDown(false)
     async function getMovie(){
-      await dispatch(getMovieDetails(movieId))
-      await dispatch(getReviewsFromMovie(movieId))
-      await dispatch(getCrew(movie.movie))
+      await dispatch(getMovieDetails(movie.id,movie))
+      await dispatch(getReviewsFromMovie(movie.id))
+      await dispatch(getCrew(movie))
 
     }
     getMovie()
@@ -84,7 +84,7 @@ function Navigation({showZ,setZ}) {
           {showDropDown && searchArr.length > 0 && (
                 <div className="dropdown-search">
                   {searchArr.map((movie) => (
-                    <NavLink onClick={() => goToMovie(movie.id)} key={movie.id} to={`/movies/${movie.id}`} className="dropdown-item-search cursor">
+                    <NavLink onClick={() => goToMovie(movie)} key={movie.id} to={`/movies/${movie.id}`} className="dropdown-item-search cursor">
                       {movie.title}
                     </NavLink>
                   ))}

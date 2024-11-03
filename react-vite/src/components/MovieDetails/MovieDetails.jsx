@@ -34,21 +34,28 @@ function MovieDetails(){
     const [newCrew,setCrew] = useState([])
     const [active,setActive] = useState('crew')
     const [currentIndex, setCurrentIndex] = useState(0);
+    const [loading, setLoading] = useState(true);
     const {showZ,setZ} = useOutletContext()
     const reviews = useSelector(state=> state.reviews)
     const reviewsArr = Object.values(reviews)
     const navigate = useNavigate()
     useEffect(() => {
         const fetchData = async () => {
-            let data = await dispatch(getMovieDetails(movieId));
+            await dispatch(getMovieDetails(movieId));
             if (user) {
                 await dispatch(getWatchlist()); // Fetch watchlist
             }
-            if(data == 'error') navigate('/')
+            setLoading(false); // Set loading to false after fetching
         };
 
-        fetchData()
+        fetchData();
     }, [dispatch, movieId, user]);
+
+    useEffect(() => {
+        if (!loading && !movieItem) {
+            navigate('/'); // Navigate home if no movieItem found after loading
+        }
+    }, [loading, movieItem, navigate]);
 
 
     useEffect(() => {
@@ -226,7 +233,7 @@ function MovieDetails(){
                     {active == 'genre' && (<div className="displayFlex gap10px genresGroup">
                         {movieItem && movieItem.genres.length && movieItem.genres.map(genre => (
                             <div key={genre.id} className="white  genres">
-                                {genre.type}
+                                {genre.type === "Science Fiction" ? "SciFi" : genre.type}
                             </div>
                         ))}
                     </div>)}

@@ -43,15 +43,18 @@ function ProfileButton({setZ}) {
     e.preventDefault();
     dispatch(thunkLogout());
     closeMenu();
+    setZ(true)
   };
 
   function naviagteWatchlist(){
     navigate('/watchlist')
     closeMenu()
+    setZ(true)
   }
   function navigateReviews(){
     navigate('/reviews')
     closeMenu()
+    setZ(true)
   }
 
   return (

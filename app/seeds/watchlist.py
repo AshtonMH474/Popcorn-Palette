@@ -5,8 +5,8 @@ from datetime import date
 
 def seed_watchlist():
     demo = User.query.filter_by(email='demo@aa.io').first()
-    movie1 = Movie.query.filter_by(title='Transformers: One').first()
-    movie2 = Movie.query.filter_by(title='Star Wars: Episode IV - A New Hope').first()
+    movie1 = Movie.query.filter_by(title='Transformers One').first()
+    movie2 = Movie.query.filter_by(title='Star Wars').first()
     movie3 = Movie.query.filter_by(title='The Dark Knight').first()
     movie4 = Movie.query.filter_by(title='10 Things I Hate About You').first()
     movie5 = Movie.query.filter_by(title='A Quiet Place').first()
