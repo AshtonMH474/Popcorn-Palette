@@ -1,4 +1,4 @@
-from app.models import db, Review,Movie, environment, SCHEMA
+from app.models import db, Review, environment, SCHEMA
 from sqlalchemy.sql import text
 from .utilis import update_rating
 
@@ -58,33 +58,6 @@ def seed_reviews():
 
     update_rating(155)
 
-
-    # review7 = Review(
-    #     user_id=1,
-    #     movie_id=533535,
-    #     review='Deadpool was not ruined',
-    #     rating=4
-    # )
-    # review8 = Review(
-    #     user_id=2,
-    #     movie_id=45,
-    #     review='Hugh Jackman was amazing',
-    #     rating=5
-    # )
-    # review9 = Review(
-    #     user_id=3,
-    #     movie_id=533535,
-    #     review='I get why people love this film',
-    #     rating=4
-    # )
-
-    # movie3_reviews = [review7,review8,review9]
-
-    # for review in movie3_reviews:
-    #     db.session.add(review)
-    # db.session.commit()
-
-    # update_rating(533535)
 
     review10 = Review(
         user_id=1,
