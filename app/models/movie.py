@@ -49,7 +49,7 @@ class Movie(db.Model):
     movie_artists=db.relationship('Artist',secondary=crew,back_populates='artist_movies')
 
     # for collections
-    movies = db.relationship('Collection',secondary=collection_movies,back_populates='movies')
+    collections = db.relationship('Collection', secondary=collection_movies, back_populates='movies')
 
     def to_dict(self):
         new_dict =  {
