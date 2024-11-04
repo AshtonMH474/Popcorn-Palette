@@ -1,6 +1,7 @@
 from app.models import db, Review,Movie
 
 def update_rating(movie_id):
+    print(movie_id)
     all_reviews = Review.query.filter_by(movie_id=movie_id).all()
     average = get_average(all_reviews)
     movie = Movie.query.filter_by(id=movie_id).first()

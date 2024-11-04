@@ -26,10 +26,6 @@ def seed():
         # command, which will  truncate all tables prefixed with
         # the schema name (see comment in users.py undo_users function).
         # Make sure to add all your other model's undo functions below
-        # undo_horror_movie_artists()
-        # undo_comedy_movie_artists()
-        # undo_recent_movie_artists()
-        # undo_random_movie_artists()
         undo_movie_genres()
         undo_genres()
         undo_reviews()
@@ -40,26 +36,14 @@ def seed():
 
     seed_users()
     seed_api_movies()
-    # seed_movies()
-    # seed_movie_images()
     seed_watchlist()
     seed_reviews()
-    # seed_genres()
-    # seed_movie_genres()
-    # seed_random_movie_artists()
-    # seed_recent_movie_artists()
-    # seed_comedy_movie_artists()
-    # seed_horror_movie_artists()
     # Add other seed functions here
 
 
 # Creates the `flask seed undo` command
 @seed_commands.command('undo')
 def undo():
-    # undo_horror_movie_artists()
-    # undo_comedy_movie_artists()
-    # undo_recent_movie_artists
-    # undo_random_movie_artists()
     undo_movie_genres()
     undo_genres()
     undo_reviews()
