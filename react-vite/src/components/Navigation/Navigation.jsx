@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import ProfileButton from "./ProfileButton";
 import "./Navigation.css";
 import { FaPlus } from "react-icons/fa6";
@@ -12,7 +12,7 @@ import { getCrew } from "../../redux/crew";
 // import { getCrew } from "../../redux/crew";
 
 function Navigation({showZ,setZ}) {
-
+  const nav = useNavigate()
   const dispatch = useDispatch()
   const sessionUser = useSelector(state=> state.session.user);
   const searchedMovies = useSelector(state => state.search)
@@ -49,7 +49,7 @@ function Navigation({showZ,setZ}) {
 
 
 
-  function goToMovie(movie){
+  async function goToMovie(movie){
     setMovie('')
     setDropDown(false)
     async function getMovie(){
@@ -58,8 +58,8 @@ function Navigation({showZ,setZ}) {
       await dispatch(getCrew(movie))
 
     }
-    getMovie()
-
+    await getMovie()
+    await nav(`/movies/${movie.id}`)
   }
 
   return (
@@ -84,9 +84,9 @@ function Navigation({showZ,setZ}) {
           {showDropDown && searchArr.length > 0 && (
                 <div className="dropdown-search">
                   {searchArr.map((movie) => (
-                    <NavLink onClick={() => goToMovie(movie)} key={movie.id} to={`/movies/${movie.id}`} className="dropdown-item-search cursor">
+                    <div onClick={() => goToMovie(movie)} key={movie.id}  className="dropdown-item-search cursor">
                       {movie.title}
-                    </NavLink>
+                    </div>
                   ))}
                 </div>
               )}
