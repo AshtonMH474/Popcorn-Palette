@@ -5,4 +5,5 @@ from .review import Review
 from .movie_image import Movie_Image
 from .genre import Genre
 from .artist import Artist
+from .collection import Collection
 from .db import environment, SCHEMA

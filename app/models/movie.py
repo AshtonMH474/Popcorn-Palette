@@ -4,6 +4,7 @@ from flask_login import UserMixin
 from datetime import datetime,timezone
 from .genre import movie_genres
 from .artist import crew
+from .collection import collection_movies
 
 watchlist = db.Table(
     'watchlist',
@@ -46,6 +47,9 @@ class Movie(db.Model):
 
     # artists
     movie_artists=db.relationship('Artist',secondary=crew,back_populates='artist_movies')
+
+    # for collections
+    movies = db.relationship('Collection',secondary=collection_movies,back_populates='movies')
 
     def to_dict(self):
         new_dict =  {
