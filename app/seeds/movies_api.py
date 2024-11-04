@@ -108,8 +108,9 @@ def seed_movies_by_genre(genre_name):
     for movie in movies_data['results']:
 
             has_movie = Movie.query.filter_by(id=movie['id']).first()
-            if has_movie is None:
-                release_date = movie['release_date'].split('-')
+            if has_movie is None and len(movie['release_date']) > 0:
+                release_date = movie['release_date'].split('-') if movie['release_date'] else []
+
                 img = f"https://image.tmdb.org/t/p/w500{movie['poster_path']}"
                 genres = create_genres(movie['genre_ids'])
 

@@ -197,20 +197,20 @@ def seed_reviews():
 
     review25 = Review(
         user_id=1,
-        movie_id=385687,
-        review='this was crazy',
+        movie_id=802219,
+        review='fun watch',
         rating=4
     )
     review26 = Review(
         user_id=2,
-        movie_id=385687,
-        review='It was fun but not great',
+        movie_id=802219,
+        review='learned enough',
         rating=3
     )
     review27 = Review(
         user_id=3,
-        movie_id=385687,
-        review='This needs to end',
+        movie_id=802219,
+        review='not great',
         rating=2
     )
 
@@ -220,25 +220,25 @@ def seed_reviews():
         db.session.add(review)
     db.session.commit()
 
-    update_rating(385687)
+    update_rating(802219)
 
 
     review28 = Review(
         user_id=1,
-        movie_id=9479,
-        review='Classic',
+        movie_id=872585,
+        review='great history lesson',
         rating=5
     )
     review29 = Review(
         user_id=2,
-        movie_id=9479,
-        review='Woahhh love this',
+        movie_id=872585,
+        review='I see why these actors got oscars',
         rating=5
     )
     review30 = Review(
         user_id=3,
-        movie_id=9479,
-        review='Always come back to this',
+        movie_id=872585,
+        review='Best Movie of Year',
         rating=5
     )
 
@@ -248,7 +248,7 @@ def seed_reviews():
         db.session.add(review)
     db.session.commit()
 
-    update_rating(9479)
+    update_rating(872585)
 
 
 
