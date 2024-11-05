@@ -57,6 +57,12 @@ function ProfileButton({setZ}) {
     setZ(true)
   }
 
+  function navigateCollections(){
+    navigate('/collections')
+    closeMenu()
+    setZ(true)
+  }
+
   return (
     <>
       <div className="mouseOver rightPageBorder xx-largeFont noPadding whiteFont noBackground noBorder" onClick={toggleMenu}>
@@ -68,6 +74,7 @@ function ProfileButton({setZ}) {
             <>
               <li onClick={naviagteWatchlist} className="profileButton cursor">Watchlist</li>
               <li onClick={navigateReviews} className="profileButton cursor">Reviews</li>
+              <li onClick={navigateCollections} className="profileButton cursor">Collections</li>
               <li>
                 <div className='profileButton cursor' onClick={logout}>Log Out</div>
               </li>
