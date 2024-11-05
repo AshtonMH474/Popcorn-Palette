@@ -41,6 +41,6 @@ class Collection(db.Model):
         }
 
         if self.movies:
-            new_dict['movies'] = [movie.to_dict() for movie in self.movies]
+            new_dict['movies'] = [movie.to_dict_reviews() for movie in self.movies]
 
         return new_dict
