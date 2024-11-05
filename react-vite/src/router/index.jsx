@@ -4,6 +4,7 @@ import Home from '../components/Home';
 import Watchlist from '../components/Watchlist';
 import MovieDetails from '../components/MovieDetails';
 import UserReviews from '../components/Reviews';
+import Collections from '../components/Collections';
 
 export const router = createBrowserRouter([
   {
@@ -24,6 +25,10 @@ export const router = createBrowserRouter([
       {
         path:'/reviews',
         element:<UserReviews/>
+      },
+      {
+        path:'/collections',
+        element:<Collections/>
       }
 
     ],

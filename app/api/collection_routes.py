@@ -13,6 +13,8 @@ collection_routes = Blueprint('collections',__name__)
 @login_required
 def get_collections():
     collections = Collection.query.filter_by(user_id=current_user.id).all()
+    if len(collections) < 1:
+        return {'collections':[]}
     return {'collections': [collection.to_dict() for collection in collections]}
 
 
