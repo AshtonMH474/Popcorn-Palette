@@ -5,52 +5,46 @@ from datetime import date
 
 
 def seed_collections():
-    # Create collections
-    collection1 = Collection(title='SciFi', description='Science Fiction might be my favorite genre, so why not keep some of my favorites together', user_id=1)
-    collection2 = Collection(title='Superhero', description='Batman, Superman, you name it', user_id=1)
-    collection3 = Collection(title='Throwbacks', description='Some I love rewatching', user_id=1)
+    collection1 = Collection(title='SciFi',description='Science Fiction might be my favorite gerne so why not keep some of my favoirtes togteher',user_id=1)
+    collection2 = Collection(title='Superhero',description='Batman Superman you name it',user_id=1)
+    collection3 = Collection(title='Throwbacks',description='Some I love rewatching',user_id=1)
 
-    collections = [collection1, collection2, collection3]
+    collections = [collection1,collection2,collection3]
 
-    # Add collections to the session
     for collection in collections:
         db.session.add(collection)
     db.session.commit()
 
-    # Adding to the Superhero collection
-    superhero_ids = [155, 335983, 475557, 533535, 580489, 889737, 912649]
-    superheros = [Movie.query.filter_by(id=movie_id).first() for movie_id in superhero_ids]
+    # adding to SuperHero
+    superhero1 = Movie.query.filter_by(id=155).first()
+    superhero2 = Movie.query.filter_by(id=335983).first()
+    superhero3 = Movie.query.filter_by(id=475557).first()
+    superhero4 = Movie.query.filter_by(id=533535).first()
+    superhero5 = Movie.query.filter_by(id=580489).first()
+    superhero6 = Movie.query.filter_by(id=889737).first()
+    superhero7 = Movie.query.filter_by(id=912649).first()
 
-    # Only append valid movies (non-None)
+    superheros = [superhero1,superhero2,superhero3,superhero4,superhero5,superhero6,superhero7]
     for superhero in superheros:
-        if superhero:  # Make sure the movie exists
-            collection2.movies.append(superhero)
-        else:
-            print(f"Superhero movie with id {superhero_ids[superheros.index(superhero)]} not found.")
+        collection2.movies.append(superhero)
 
-    # Adding to the SciFi collection
-    sci_fi_ids = [11, 698687, 945961, 198663]
-    sci_fis = [Movie.query.filter_by(id=movie_id).first() for movie_id in sci_fi_ids]
 
-    # Only append valid movies (non-None)
-    for sci in sci_fis:
-        if sci:  # Make sure the movie exists
-            collection1.movies.append(sci)
-        else:
-            print(f"SciFi movie with id {sci_fi_ids[sci_fis.index(sci)]} not found.")
 
-    # Adding to the Throwback collection
-    throwback_ids = [11, 64688, 4951, 447332, 155]
-    throwbacks = [Movie.query.filter_by(id=movie_id).first() for movie_id in throwback_ids]
+    # throwbacks
 
-    # Only append valid movies (non-None)
+    throw1 = Movie.query.filter_by(id=11).first()
+    throw2 = Movie.query.filter_by(id=64688).first()
+    throw3 = Movie.query.filter_by(id=4951).first()
+    throw4 = Movie.query.filter_by(id=447332).first()
+    throw5 = Movie.query.filter_by(id=155).first()
+
+
+    throwbacks = [throw1,throw2,throw3,throw4,throw5]
+
     for throw in throwbacks:
-        if throw:  # Make sure the movie exists
-            collection3.movies.append(throw)
-        else:
-            print(f"Throwback movie with id {throwback_ids[throwbacks.index(throw)]} not found.")
+        collection3.movies.append(throw)
 
-    # Commit changes
+
     db.session.commit()
 
 
