@@ -25,21 +25,9 @@ def seed_collections():
     superhero7 = Movie.query.filter_by(id=912649).first()
 
     superheros = [superhero1,superhero2,superhero3,superhero4,superhero5,superhero6,superhero7]
-
     for superhero in superheros:
         collection2.movies.append(superhero)
 
-    # scifi now
-
-    sci1 = Movie.query.filter_by(id=11).first()
-    sci2 = Movie.query.filter_by(id=698687).first()
-    sci3 = Movie.query.filter_by(id=945961).first()
-    sci4 = Movie.query.filter_by(id=198663).first()
-
-    scifis = [sci1,sci2,sci3,sci4]
-
-    for sci in scifis:
-        collection1.movies.append(sci)
 
 
     # throwbacks
@@ -55,6 +43,7 @@ def seed_collections():
 
     for throw in throwbacks:
         collection3.movies.append(throw)
+
 
     db.session.commit()
 

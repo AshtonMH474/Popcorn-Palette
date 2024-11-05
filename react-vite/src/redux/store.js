@@ -11,6 +11,7 @@ import watchlistReducer from "./watchlist";
 import reviewReducer from "./reviews";
 import searchReducer from "./search";
 import crewReducer from "./crew";
+import collectionsReducer from "./collections";
 
 
 const rootReducer = combineReducers({
@@ -20,6 +21,7 @@ const rootReducer = combineReducers({
   reviews:reviewReducer,
   search: searchReducer,
   crew:crewReducer,
+  collections:collectionsReducer
 });
 
 let enhancer;
