@@ -47,12 +47,6 @@ def make_review():
 
     if movie is None:
         return {'errors': {'message': 'Movie can not be found'}}, 404
-        # release_date_arr= data.get('releaseDate').split('-')
-        # title = data.get('title')
-        # id = data.get('id')
-
-        # movie = Movie(id=id,title=title,release_date=date(int(release_date_arr[0]),int(release_date_arr[1]),int(release_date_arr[2])),custom=False)
-        # db.session.add(movie)
 
     current_review = Review.query.filter_by(movie_id=movie_id,user_id=current_user.id).first()
     if current_review and getattr(current_review,'id',None) is not None:
