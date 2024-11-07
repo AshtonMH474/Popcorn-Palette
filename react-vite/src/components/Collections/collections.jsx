@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import BottomInfo from "../BottomInfo";
 import { useEffect } from "react";
-import { getCollections } from "../../redux/collections";
+import { getCollectionDetails, getCollections } from "../../redux/collections";
 import './collection.css';
 import { getMovieDetails } from "../../redux/movies";
 import { useNavigate } from "react-router-dom";
@@ -33,7 +33,7 @@ function Collections() {
     const placeholders = [];
     for (let i = 0; i < placeHolderCount; i++) {
       placeholders.push(
-        <div key={i} className={`placeholder-content ${`placeholder${i}`}`} style={{ zIndex: placeHolderCount - i }}>
+        <div key={`placeholder-${i}`} className={`placeholder-content ${`placeholder${i}`}`} style={{ zIndex: placeHolderCount - i }}>
           <h5 className="white noMovie">No Movie</h5>
         </div>
       );
@@ -51,7 +51,7 @@ function Collections() {
 
       placeholders.push(
         <div
-          key={i}
+          key={`placeholder-${i}`}
           className={`placeholder-content ${`placeholder${i}`}`}
           style={{ zIndex: placeHolderCount - i }}
         >
@@ -66,6 +66,7 @@ function Collections() {
   };
 
   async function  navCollection(col) {
+    await dispatch(getCollectionDetails(col.id))
     await nav(`/collections/${col.id}`)
 
   }

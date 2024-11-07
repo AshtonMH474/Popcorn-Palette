@@ -1,0 +1,110 @@
+.collectionWhole{
+    padding-top: 80px;
+}
+.descriptionDetails{
+    color:#B0B0B0;
+    font-size: 18px;
+    min-width: 800px;
+    height:150px;
+    word-wrap: break-word;
+    overflow: hidden;
+    overflow-y: scroll;
+
+
+}
+.collectionDetailsInfo{
+    justify-content: center;
+    padding-bottom: 50px;
+    max-height: 165px;
+}
+.colDetailsPaddingRight{
+    padding-right: 90px;
+}
+.titleCol{
+    font-size: 30px;
+    padding-bottom: 30px;
+}
+.colButtons{
+  flex-direction: column;
+  gap: 10px;
+  padding-bottom: 50px;
+}
+.buttonCol{
+    width: 200px;
+    padding: 10px 20px;
+    background-color: #708090;
+    color: #fff;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 500;
+    text-transform: uppercase;
+    transition: background-color 0.3s ease;
+}
+
+.buttonCol:hover {
+    background-color: #B22222;
+    cursor: pointer;
+}
+
+.colMovies{
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+    padding-bottom: 100px;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+  .movie-itemCol{
+    position: relative;
+    overflow: hidden;
+    border-radius: 12px; /* Rounded corners */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Light shadow for depth */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer; /* Pointer cursor on hover */
+
+  }
+
+  .movie-itemCol:hover {
+    transform: scale(1.05); /* Slightly enlarge on hover */
+    box-shadow: 0 6px 30px rgba(0, 0, 0, 0.2); /* Darker shadow on hover */
+  }
+
+  .movie-itemCol::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.3);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    border-radius: 12px;
+  }
+
+  .movie-itemCol:hover::after {
+    opacity: 1;
+  }
+
+  .movie-itemCol .movie-title {
+    position: absolute;
+    bottom: 150px;
+    left: 10px;
+    right: 20px;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7);
+    opacity: 0; /* Initially hidden */
+    text-align: center;
+    min-width: 150px;
+    word-wrap: break-word;
+    text-overflow: ellipsis;
+  }
+
+
+  /* Show the title when hovering */
+  .movie-itemCol:hover .movie-title {
+    opacity: 1; /* Title fades in on hover */
+  }

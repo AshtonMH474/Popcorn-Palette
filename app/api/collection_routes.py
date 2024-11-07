@@ -19,6 +19,20 @@ def get_collections():
 
 
 
+@collection_routes.route('/<int:collection_id>')
+@login_required
+def get_collection_by_id(collection_id):
+    col = Collection.query.filter_by(id=collection_id).first()
+
+
+    if col is None:
+        return {'errors': {'message': 'Collection can not be found'}}, 404
+    if col.user_id != current_user.id:
+        return {'errors': {'message': 'Not Authoarzied'}}, 401
+
+    return jsonify({'collection': [col.to_dict()]})
+
+
 @collection_routes.route('/',methods=['POST'])
 @login_required
 def create_collection():
