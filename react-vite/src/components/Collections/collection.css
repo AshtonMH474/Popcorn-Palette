@@ -1,0 +1,123 @@
+.allCollections{
+    padding-left: 345px;
+}
+
+.collection-container{
+    padding-bottom: 20px;
+}
+.collectionMovies {
+    position: relative;
+    display: flex;
+    padding-bottom: 50px;
+    width: 530px;
+    align-items: flex-start; /* Align items at the top */
+  }
+
+  .collectionImg, .placeholder-content {
+    height: 185px;
+    width: 105px;
+    object-fit: cover;
+    overflow: hidden;
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    position: relative; /* Keeps things in the normal flow */
+    z-index: 1;  /* Default z-index for both images and placeholders */
+  }
+
+  .placeholder-content{
+    background-color: #0b0b0b;
+  }
+  .collectionImg{
+    position: relative;
+  }
+
+  .collectionImg:hover, .placeholder-content:hover {
+    transform: translateY(-10px);
+  }
+
+  /* .colImg0{
+    z-index: 10;
+  }
+  .colImg1{
+    z-index: 9;
+  }
+  .colImg2{
+    z-index: 8;
+  }
+  .colImg3{
+    z-index: 7;
+  }
+  .colImg4{
+    z-index: 6;
+  } */
+
+  .colImg0, .placeholder0 {
+    transform: translateX(0px);
+  }
+
+  .colImg1, .placeholder1 {
+    transform: translateX(-20px);
+  }
+  .colImg2, .placeholder2 {
+    transform: translateX(-40px);
+  }
+  .colImg3, .placeholder3 {
+    transform: translateX(-60px);
+  }
+  .colImg4, .placeholder4 {
+    transform: translateX(-80px);
+  }
+
+  .colImg4:hover, .placeholder4:hover {
+    transform: translateX(-50px);
+  }
+
+  /* Make sure placeholders have lower z-index than images */
+  .placeholder-content {
+    z-index: 0;  /* Placeholders should appear behind images */
+  }
+
+  .movePlaceholder {
+    position: relative;
+    right: 100px;
+  }
+
+  .collectionInfo {
+    position: relative;
+    bottom: 20px;
+
+
+  }
+
+  .noMovie {
+    text-align: center;
+    padding-top: 60px;
+    font-weight: bold;
+  }
+
+
+  .paddingFromFooter{
+    padding-bottom: 50px;
+  }
+
+  .numberMovies{
+    font-size: 12px;
+    color: #A4A4A4;
+    position: relative;
+    bottom: 8px;
+    padding-right: 8px;
+  }
+
+  .description{
+    color:#B0B0B0;
+    text-overflow: ellipsis;
+    word-wrap: break-word;
+    position: relative;
+    bottom: 15px;
+    max-width: 400px;
+    max-height: 95px;
+  }
+  .colEdit{
+    color: #A4A4A4;
+  }
