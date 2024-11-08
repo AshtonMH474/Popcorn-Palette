@@ -1,18 +1,22 @@
 import { useRef, useState, useContext, createContext } from 'react';
 import ReactDOM from 'react-dom';
 import './Modal.css';
+import { useDispatch } from 'react-redux';
+import { resetPending } from '../redux/pendingMovies';
 
 
 const ModalContext = createContext();
 
 export function ModalProvider({ children,setZ }) {
   const modalRef = useRef();
+  const dispatch = useDispatch()
   const [modalContent, setModalContent] = useState(null);
   // callback function that will be called when modal is closing
   const [onModalClose, setOnModalClose] = useState(null);
 
 
-  const closeModal = () => {
+   const closeModal = async () => {
+    await dispatch(resetPending())
     setZ(true)
     setModalContent(null); // clear the modal contents
     // If callback function is truthy, call the callback function and reset it

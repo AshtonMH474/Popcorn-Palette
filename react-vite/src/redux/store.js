@@ -12,6 +12,7 @@ import reviewReducer from "./reviews";
 import searchReducer from "./search";
 import crewReducer from "./crew";
 import collectionsReducer from "./collections";
+import pendingReducer from "./pendingMovies";
 
 
 const rootReducer = combineReducers({
@@ -21,7 +22,8 @@ const rootReducer = combineReducers({
   reviews:reviewReducer,
   search: searchReducer,
   crew:crewReducer,
-  collections:collectionsReducer
+  collections:collectionsReducer,
+  pending:pendingReducer
 });
 
 let enhancer;

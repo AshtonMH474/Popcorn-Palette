@@ -1,7 +1,7 @@
 import { useNavigate, useParams } from "react-router-dom"
 import BottomInfo from "../BottomInfo"
 import { useDispatch, useSelector } from "react-redux"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { getCollectionDetails } from "../../redux/collections"
 import './colDetails.css'
 import { getMovieDetails } from "../../redux/movies"
@@ -12,12 +12,32 @@ function CollectionDetails(){
     const dispatch = useDispatch()
     const collection = useSelector(state => state.collections);
     const col = Object.values(collection)[0]
+    const [movies,setMovies] = useState([])
     const nav = useNavigate()
 
 
     useEffect(() => {
-        dispatch(getCollectionDetails(collectionId))
+        async function  getCollection() {
+            await dispatch(getCollectionDetails(collectionId))
+        }
+        getCollection()
     },[dispatch,collectionId])
+
+
+
+    useEffect(() => {
+        if(col && col.movies.length){
+            let allMovies = [...col.movies];
+
+            allMovies.sort((a, b) => {
+            return new Date(a.createdAt) - new Date(b.createdAt);
+            });
+
+            setMovies(allMovies)
+
+
+        }
+    },[col.movies.length])
 
 
 
@@ -53,7 +73,7 @@ function CollectionDetails(){
                 <div className="colMovies">
                     {col.movies && col.movies.length > 0 ? (
                         <>
-                        {col.movies.map((movie) => (
+                        {movies.map((movie) => (
                             <div key={movie.id} className="movie-itemCol" onClick={() => navMovie(movie)}>
                                 <img className="posters" src={movie.movieImages[0].imgUrl} alt='poster'/>
                                 <div className="movie-title">{movie.title}</div>

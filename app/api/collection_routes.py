@@ -59,8 +59,9 @@ def create_collection():
 @login_required
 def add_to_collection(collection_id):
     data = request.json
-    movie = Movie.query.filter_by(id=data.get('movieId')).first()
+    movie = Movie.query.filter_by(id=data.get('id')).first()
     collection = Collection.query.filter_by(id=collection_id).first()
+
 
     if movie is None:
         return {'errors': {'message': 'Movie can not be found'}}, 404

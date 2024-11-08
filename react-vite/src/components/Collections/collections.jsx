@@ -86,7 +86,8 @@ function Collections() {
                   {col.movies && col.movies.length > 0 ? (
                     <>
 
-                      {col.movies.slice(0, 5).map((movie, movieIndex) => (
+                      {col.movies.sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt))
+                      .slice(0, 5).map((movie, movieIndex) => (
                         <div key={movie.id}>
                           <img onClick={() => navigateMovie(movie)}
                             className={`cursor collectionImg ${`colImg${movieIndex}`}`}

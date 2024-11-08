@@ -17,7 +17,7 @@ def seed_api_movies():
     seed_movies_by_genre('Comedy')
     seed_watchlist_movies()
 
-
+    db.session.commit()
 
 def undo_api_movies():
     if environment == "production":
