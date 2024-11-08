@@ -33,7 +33,7 @@
 }
 
 .detailButton:hover {
-    background-color: #B22222; /* FireBrick red color on hover */
+    background-color: #B22222;
     cursor: pointer;
 }
 

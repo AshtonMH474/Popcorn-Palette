@@ -19,7 +19,7 @@ function Navigation({showZ,setZ}) {
   const searchArr = Object.values(searchedMovies)
   const [movie,setMovie] = useState('')
   const [showDropDown,setDropDown] = useState(false)
-
+  console.log(searchArr)
   const searchRef = useRef(null);
 
 
@@ -85,7 +85,7 @@ function Navigation({showZ,setZ}) {
                 <div className="dropdown-search">
                   {searchArr.map((movie) => (
                     <div onClick={() => goToMovie(movie)} key={movie.id}  className="dropdown-item-search cursor">
-                      {movie.title}
+                      {movie.title} ({movie.releaseDate.split('-')[0]})
                     </div>
                   ))}
                 </div>
