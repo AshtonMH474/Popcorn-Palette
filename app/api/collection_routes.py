@@ -19,6 +19,20 @@ def get_collections():
 
 
 
+@collection_routes.route('/<int:collection_id>')
+@login_required
+def get_collection_by_id(collection_id):
+    col = Collection.query.filter_by(id=collection_id).first()
+
+
+    if col is None:
+        return {'errors': {'message': 'Collection can not be found'}}, 404
+    if col.user_id != current_user.id:
+        return {'errors': {'message': 'Not Authoarzied'}}, 401
+
+    return jsonify({'collection': [col.to_dict()]})
+
+
 @collection_routes.route('/',methods=['POST'])
 @login_required
 def create_collection():
@@ -45,8 +59,9 @@ def create_collection():
 @login_required
 def add_to_collection(collection_id):
     data = request.json
-    movie = Movie.query.filter_by(id=data.get('movieId')).first()
+    movie = Movie.query.filter_by(id=data.get('id')).first()
     collection = Collection.query.filter_by(id=collection_id).first()
+
 
     if movie is None:
         return {'errors': {'message': 'Movie can not be found'}}, 404

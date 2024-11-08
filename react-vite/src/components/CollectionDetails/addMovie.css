@@ -1,0 +1,94 @@
+.colSearchBar{
+    position: relative;
+    top: 10px;
+    left: 120px;
+}
+
+.smallBottomPadding{
+    padding-bottom: 30px;
+}
+
+.searchOptionsCol{
+    position: absolute;
+    top:-15px
+}
+
+.smallPosters{
+    height: 200px;
+    width: 140px;
+}
+
+.addMoviePosters{
+    padding-left: 80px;
+    padding-top: 20px;
+}
+.movieAddCol {
+    position: relative;  /* Allow absolute positioning of the trash icon */
+    display: inline-block;
+    margin-right: 40px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);  /* Add shadow for depth */
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;  /* Transition for smooth hover effect */
+    cursor: pointer;
+    width: 140px;
+    /* Cursor pointer on hover to indicate interactivity */
+}
+
+.movieAddCol:hover {
+    transform: scale(1.05);  /* Slightly enlarge on hover */
+    box-shadow: 0 6px 30px rgba(0, 0, 0, 0.2);  /* Darker shadow on hover */
+    background-color: rgba(0, 0, 0, 0.5);  /* Change background color when hovered */
+}
+
+/* This will ensure the trash icon is in the center of the poster */
+.movieAddCol::after {
+    content: '';  /* Placeholder for the background */
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.3);  /* Default dark overlay */
+    opacity: 0;  /* Initially hidden */
+    transition: opacity 0.3s ease;  /* Smooth transition for opacity change */
+    border-radius: 12px;
+}
+
+.movieAddCol:hover::after {
+    opacity: 1;  /* Show overlay on hover */
+}
+
+/* Center the trash icon in the middle of the movie poster */
+.AddMovieColTrash {
+    position: absolute;
+    top: 50%;  /* Center vertically */
+    left: 50%;  /* Center horizontally */
+    transform: translate(-50%, -50%);  /* Offset to ensure the icon is centered exactly */
+    color: white;
+    font-size: 24px;  /* Larger icon size */
+    font-weight: bold;
+    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7);  /* Text shadow for better visibility */
+    opacity: 0;  /* Initially hidden */
+    transition: opacity 0.3s ease;  /* Smooth opacity transition */
+    pointer-events: none;
+    z-index: 10;  /* Make sure it's not blocking other actions like clicking the poster */
+}
+
+
+
+.movieAddCol:hover .AddMovieColTrash {
+    opacity: 1;  /* Make the trash icon visible on hover */
+}
+
+/* Optional: Ensure proper spacing and layout for the Add Movie section */
+.addMovieColErr {
+    padding-bottom: 20px;
+    text-align: center;
+    max-width: 825px;
+}
+
+
+
+.moveSumbitAddCol{
+    position: relative;
+    left: 420px;
+}

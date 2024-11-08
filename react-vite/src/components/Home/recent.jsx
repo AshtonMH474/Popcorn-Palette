@@ -58,7 +58,7 @@ function Recent({recent}){
 
     async function navigateToMovie(movie) {
         await dispatch(getMovieDetails(movie.id))
-        navigate(`/movies/${movie.id}`)
+        await navigate(`/movies/${movie.id}`)
 
     }
 
