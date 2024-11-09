@@ -4,6 +4,7 @@ import { csrfFetch } from "./.csrf";
 const GET_COLLECTIONS = 'collections/GET_COLLECTIONS'
 const GET_COLLECTION = 'collections/GET_COLLECTION'
 const ADD_MOVIES = 'collections/ADD_MOVIES'
+const EDIT_COLLECTION ='collection/EDIT_COLLECTION'
 
 const setCollections = collections => {
     return{
@@ -24,6 +25,15 @@ const setMovies = movies => {
         payload:movies
     }
 }
+
+const editCollection = collection => {
+    return {
+        type:EDIT_COLLECTION,
+        payload:collection
+    }
+}
+
+
 export const getCollections = () => async(dispatch) => {
     const res = await csrfFetch('/api/collections/')
     if(res.ok){
@@ -39,6 +49,17 @@ export const getCollectionDetails = (id) => async(dispatch) =>{
         const data = await res.json()
 
         await dispatch(setOneCollection(data.collection[0]))
+    }
+}
+
+export const updateCollection = (id,payload) => async(dispatch) => {
+    const res = await csrfFetch(`/api/collections/${id}`,{
+        method:'PUT',
+        body:JSON.stringify(payload)
+    })
+    if(res.ok){
+        const data = await res.json()
+        await dispatch(editCollection(data.collection))
     }
 }
 
@@ -77,6 +98,12 @@ function collectionsReducer(state = initialState,action){
             action.payload.forEach((movie) => {
                 newState[movie.id] = movie
             })
+            return newState
+        }
+
+        case EDIT_COLLECTION:{
+            const newState = {}
+            newState[action.payload.id] = action.payload
             return newState
         }
 

@@ -1,0 +1,26 @@
+.paddingLabel{
+   position: relative;
+   bottom: 5px;
+    font-size: 15px;
+}
+.titeInput{
+    background-color: #ccddee;
+    max-width: 99%;
+    border-radius: 8px;
+    font-size: 14px;
+}
+.centerEditCol{
+position: relative;
+left: 200px;
+
+}
+
+
+.desInput{
+transition: border-color 0.3s ease;
+}
+
+.desInput:focus{
+    border-color: #3498db;
+    outline: none;
+}

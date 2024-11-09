@@ -7,6 +7,7 @@ import './colDetails.css'
 import { getMovieDetails } from "../../redux/movies"
 import OpenModalMenuItem from "../Navigation/OpenModalMenuItem"
 import AddMovie from "./addMovie"
+import EditCollection from "./editCol"
 function CollectionDetails(){
     const {collectionId} = useParams()
     const dispatch = useDispatch()
@@ -26,7 +27,7 @@ function CollectionDetails(){
 
 
     useEffect(() => {
-        if(col && col.movies.length){
+        if(col && col.movies && col.movies.length > 0){
             let allMovies = [...col.movies];
 
             allMovies.sort((a, b) => {
@@ -37,7 +38,7 @@ function CollectionDetails(){
 
 
         }
-    },[col.movies.length])
+    },[col])
 
 
 
@@ -61,7 +62,7 @@ function CollectionDetails(){
 
                     <div className="displayFlex colButtons">
                         <button className="buttonCol noListStyleType"><OpenModalMenuItem itemText={'Add Movie'} modalComponent={<AddMovie col={col}/>}/></button>
-                        <button className="buttonCol">Edit List</button>
+                        <button className="buttonCol noListStyleType"><OpenModalMenuItem itemText={'Edit Collection'} modalComponent={<EditCollection col={col}/>}/></button>
                         <button className="buttonCol">Delete List</button>
                     </div>
 
@@ -82,6 +83,9 @@ function CollectionDetails(){
                         </>
                     ):(
                         <>
+                        <div className="noMoviesColDetails">
+                        <div className="white bold cursor noListStyleType noMoviesColDetailsButton"><OpenModalMenuItem  itemText={'No Movies'} modalComponent={<AddMovie col={col}/>}/></div>
+                        </div>
                         </>
                     )}
                 </div>

@@ -19,7 +19,7 @@ function Navigation({showZ,setZ}) {
   const searchArr = Object.values(searchedMovies)
   const [movie,setMovie] = useState('')
   const [showDropDown,setDropDown] = useState(false)
-  console.log(searchArr)
+
   const searchRef = useRef(null);
 
 
