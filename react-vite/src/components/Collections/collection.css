@@ -97,12 +97,21 @@
 
   .description{
     color:#B0B0B0;
+
+
     text-overflow: ellipsis;
+    display: -webkit-box;            /* Uses a flexbox layout for the box */
+    -webkit-line-clamp: 6;           /* Limits to 6 lines */
+    -webkit-box-orient: vertical;
+
+
+    overflow: hidden;
     word-wrap: break-word;
     position: relative;
-    bottom: 15px;
+    bottom: 23px;
     max-width: 400px;
-    max-height: 95px;
+    max-height: 115px;
+
   }
   .colEdit{
     color: #A4A4A4;
