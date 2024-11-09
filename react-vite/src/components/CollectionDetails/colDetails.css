@@ -5,11 +5,13 @@
     color:#B0B0B0;
     font-size: 18px;
     min-width: 800px;
-    height:150px;
+    max-width: 800px;
+    height:120px;
     word-wrap: break-word;
     overflow: hidden;
     overflow-y: scroll;
-
+    scrollbar-width: thin;
+    scrollbar-color: #fff #f0f0f0;
 
 }
 .collectionDetailsInfo{
@@ -107,4 +109,23 @@
   /* Show the title when hovering */
   .movie-itemCol:hover .movie-title {
     opacity: 1; /* Title fades in on hover */
+  }
+
+
+  .noMoviesColDetails{
+    border: 1px solid white;
+    width: 600px;
+    height: 300px;
+  }
+
+  .noMoviesColDetailsButton{
+    position: relative;
+    left: 250px;
+    top: 150px;
+    max-width: 85px;
+
+  }
+
+  .noMoviesColDetailsButton:hover{
+    color: #B22222;
   }
