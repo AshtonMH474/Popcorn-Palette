@@ -8,7 +8,6 @@ def seed_collection_movies():
     collection1 = Collection.query.filter_by(id=1).first()
 
     superhero1 = Movie.query.filter_by(title='The Dark Knight').first()
-    superhero2 = Movie.query.filter_by(title='Deadpool').first()
     superhero3 = Movie.query.filter_by(title='Venom').first()
     superhero4 = Movie.query.filter_by(title='Deadpool & Wolverine').first()
     superhero5 = Movie.query.filter_by(title='Joker: Folie à Deux').first()
@@ -17,7 +16,7 @@ def seed_collection_movies():
 
 
     collection2.movies.append(superhero1)
-    collection2.movies.append(superhero2)
+
     collection2.movies.append(superhero3)
     collection2.movies.append(superhero4)
     collection2.movies.append(superhero5)
