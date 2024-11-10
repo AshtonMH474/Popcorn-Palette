@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react'
-// import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
 import './watchlist.css'
 import { useDispatch, useSelector } from 'react-redux'
 import BottomInfo from '../BottomInfo'
@@ -9,7 +8,7 @@ import { FaRegTrashAlt } from "react-icons/fa";
 import { IoEyeOutline } from "react-icons/io5";
 import { Navigate, NavLink } from 'react-router-dom';
 import { getMovies } from '../../redux/movies'
-// import DeleteWatchlist from './deleteWatchlist';
+
 
 function Watchlist(){
     const dispatch = useDispatch()

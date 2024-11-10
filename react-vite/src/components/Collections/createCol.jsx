@@ -1,16 +1,15 @@
 import { useState } from "react";
 import { useModal } from "../../context/Modal";
 import { ImCancelCircle } from "react-icons/im";
-import './editCol.css'
 import { useDispatch } from "react-redux";
-import { updateCollection } from "../../redux/collections";
+import { createCollection } from "../../redux/collections";
 
-function EditCollection({col}){
 
+function CreateCollection(){
     const dispatch = useDispatch()
     const {closeModal} = useModal()
-    const [des,setDes] = useState(col.description)
-    const [title,setTitle] = useState(col.title)
+    const [des,setDes] = useState('')
+    const [title,setTitle] = useState('')
 
 
     async function onsubmit(){
@@ -18,14 +17,13 @@ function EditCollection({col}){
             description:des,
             title:title
         }
-        await dispatch(updateCollection(col.id,obj))
-
+        await dispatch(createCollection(obj))
         closeModal()
     }
     return (
         <div className="addReview">
         <div className="displayFlex spaceBetween">
-            <h1 className="largePaddingLeft smallPaddingTop bold reviewHeader">UPDATE YOUR COLLECTION</h1>
+            <h1 className="largePaddingLeft smallPaddingTop bold reviewHeader">CREATE A COLLECTION</h1>
             <ImCancelCircle onClick={closeModal} className="white cancel" />
         </div>
         <div className="reviewValues centerEditCol">
@@ -49,4 +47,4 @@ function EditCollection({col}){
 }
 
 
-export default EditCollection
+export default CreateCollection

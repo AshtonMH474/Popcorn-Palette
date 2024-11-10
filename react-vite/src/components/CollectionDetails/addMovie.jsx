@@ -6,9 +6,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { searchMovies } from "../../redux/search";
 import { addingPendMovies, removePending } from "../../redux/pendingMovies";
 import { FaRegTrashAlt } from "react-icons/fa";
-import { addMoviesToCollection, getCollectionDetails } from "../../redux/collections";
+import { addMoviesToCollection, getCollectionDetails, getCollections } from "../../redux/collections";
+import { useLocation } from "react-router-dom";
 
 function AddMovie({col}){
+    const location = useLocation()
     const {closeModal} = useModal()
     const dispatch = useDispatch()
     const [movie,setMovie] = useState('')
@@ -16,7 +18,6 @@ function AddMovie({col}){
     const searchedMovies = useSelector(state => state.search)
     const searchArr = Object.values(searchedMovies)
     const [errors,setErrors] = useState({})
-
     const pendingMovies = useSelector(state => state.pending)
     const pendingArr = Object.values(pendingMovies)
 
@@ -72,8 +73,11 @@ function AddMovie({col}){
       async function submitMovies() {
         if(pendingArr.length > 0){
             await dispatch(addMoviesToCollection(col,pendingArr))
-            await dispatch(getCollectionDetails(col.id))
+            if(location.pathname =='/collections'){
+                await dispatch(getCollections())
+            }else await dispatch(getCollectionDetails(col.id))
             closeModal()
+
         }
         else {
             const obj ={
