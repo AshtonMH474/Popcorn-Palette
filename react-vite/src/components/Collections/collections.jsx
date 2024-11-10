@@ -5,9 +5,12 @@ import { getCollectionDetails, getCollections } from "../../redux/collections";
 import './collection.css';
 import { getMovieDetails } from "../../redux/movies";
 import { useNavigate } from "react-router-dom";
-// import { FiEdit2 } from "react-icons/fi";
-// import UpdateCollection from "./updateCollection";
-// import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
+import OpenModalMenuItem from "../Navigation/OpenModalMenuItem"
+import CreateCollection from "./createCol";
+import { FiEdit2 } from "react-icons/fi";
+import EditCollection from "../CollectionDetails/editCol";
+import AddMovie from "../CollectionDetails/addMovie";
+import { useModal } from '../../context/Modal';
 
 function Collections() {
   const dispatch = useDispatch();
@@ -15,11 +18,20 @@ function Collections() {
   const collections = useSelector(state => state.collections);
   const collArr = Object.values(collections);
   const placeHolderCount = 5;
-
+  const { setModalContent } = useModal();
 
   useEffect(() => {
     dispatch(getCollections());
   }, [dispatch]);
+
+
+
+  const openModalCreate = () => {
+    setModalContent(<CreateCollection/>);
+  };
+  const openModalAddMovie = col => {
+    setModalContent(<AddMovie col={col}/>)
+  }
 
 
   async function navigateMovie(movie){
@@ -28,13 +40,13 @@ function Collections() {
   }
 
   // Placeholder for an image
-  const renderPlaceholders = () => {
+  const renderPlaceholders = (col) => {
 
     const placeholders = [];
     for (let i = 0; i < placeHolderCount; i++) {
       placeholders.push(
-        <div key={`placeholder-${i}`} className={`placeholder-content ${`placeholder${i}`}`} style={{ zIndex: placeHolderCount - i }}>
-          <h5 className="white noMovie">No Movie</h5>
+        <div onClick={() => openModalAddMovie(col)} key={`placeholder-${i}`} className={`cursor placeholder-content ${`placeholder${i}`}`} style={{ zIndex: placeHolderCount - i }}>
+          <h5 className=" noListStyleType cursor white noMovie">No Movie</h5>
         </div>
       );
 
@@ -42,7 +54,7 @@ function Collections() {
     return placeholders;
   };
 
-  const renderPlaceholders2 = (numMovies) => {
+  const renderPlaceholders2 = (numMovies,col) => {
     const placeholders = [];
 
 
@@ -50,12 +62,13 @@ function Collections() {
     for (let i = numMovies; i < placeHolderCount; i++) {
 
       placeholders.push(
-        <div
+        <div onClick={() => openModalAddMovie(col)}
           key={`placeholder-${i}`}
-          className={`placeholder-content ${`placeholder${i}`}`}
+          className={`cursor noListStyleType placeholder-content ${`placeholder${i}`}`}
           style={{ zIndex: placeHolderCount - i }}
         >
-          <h5 className="white noMovie">No Movie</h5>
+
+          <h5 className="cursor white noMovie noListStyleType">No Movie</h5>
         </div>
       );
 
@@ -75,7 +88,10 @@ function Collections() {
     <>
       <div className='homeScreen topPaddingHome'>
         <div>
-          <h1 className="white textCenter topPaddingHome">Your Collections</h1>
+          <div className="displayFlex center topPaddingHome">
+          <h1 className="white  ">Your Collections</h1>
+          <button className="createCol noListStyleType" onClick={openModalCreate}>Create Collection</button>
+          </div>
           <div className="paddingFromFooter"></div>
           <div className="allCollections">
             {collArr.map((col) => (
@@ -100,12 +116,12 @@ function Collections() {
 
                       {/* If there are fewer than 5 movies, render placeholders with dynamic z-index */}
                       {col.movies.length < placeHolderCount &&
-                        renderPlaceholders2(col.movies.length).slice(0, placeHolderCount - col.movies.length)
+                        renderPlaceholders2(col.movies.length,col).slice(0, placeHolderCount - col.movies.length)
                       }
                     </>
                   ) : (
                     // If there are no movies, render all placeholders in reverse order with dynamic z-index
-                    renderPlaceholders()
+                    renderPlaceholders(col)
                   )}
 
                 </div>
@@ -114,7 +130,7 @@ function Collections() {
                   <div className="displayFlex">
                     {col.movies && col.movies.length && (<h3 className="numberMovies">{col.movies.length} Films</h3>)}
                     {!col.movies && (<h3 className="numberMovies">0 Films</h3>)}
-                    {/* <div  className='noListStyleType colEdit cursor littleRightPadding editReview'><OpenModalMenuItem itemText={<FiEdit2/>} modalComponent={<UpdateCollection col={col} />}/></div> */}
+                    <div  className='noListStyleType colEdit cursor littleRightPadding editReview'><OpenModalMenuItem itemText={<FiEdit2/>} modalComponent={<EditCollection col={col} />}/></div>
                 </div>
                   <p className="description">{col.description}</p>
 

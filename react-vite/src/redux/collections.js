@@ -1,10 +1,11 @@
 import { csrfFetch } from "./.csrf";
 
-
+const CREATE_COLLECTION = 'collections/CREATE_COLLECTION'
 const GET_COLLECTIONS = 'collections/GET_COLLECTIONS'
 const GET_COLLECTION = 'collections/GET_COLLECTION'
 const ADD_MOVIES = 'collections/ADD_MOVIES'
 const EDIT_COLLECTION ='collection/EDIT_COLLECTION'
+const DELETE_COLLECTION = 'collection/DELETE_COLLECTION'
 
 const setCollections = collections => {
     return{
@@ -33,13 +34,49 @@ const editCollection = collection => {
     }
 }
 
+const newCollection = col => {
+    return {
+        type:CREATE_COLLECTION,
+        payload:col
+    }
+}
 
+const removeCollection = col => {
+    return {
+        type:DELETE_COLLECTION,
+        payload:col
+    }
+}
+
+
+
+export const createCollection = (payload) => async(dispatch) => {
+    const res = await csrfFetch('/api/collections/', {
+        method:'POST',
+        body:JSON.stringify(payload)
+    })
+
+    if(res.ok){
+        const data = await res.json()
+        await dispatch(newCollection(data.collection))
+    }
+}
 export const getCollections = () => async(dispatch) => {
     const res = await csrfFetch('/api/collections/')
     if(res.ok){
         const data = await res.json()
         if(data.errors) return;
         await dispatch(setCollections(data.collections))
+    }
+}
+
+export const deleteMovieFromCollection = (colId,movie) => async() => {
+    const res = await csrfFetch(`/api/collections/${colId}/movies/${movie.id}`,{
+        method:'DELETE'
+    })
+
+    if(res.ok){
+        await res.json()
     }
 }
 
@@ -75,6 +112,17 @@ export const addMoviesToCollection = (col,movies) => async(dispatch) => {
     await dispatch(setMovies(movies))
 }
 
+export const deleteCollection = (col) => async(dispatch) => {
+    const res = await csrfFetch(`/api/collections/${col.id}`,{
+        method:"DELETE"
+    })
+
+    if(res.ok){
+        await res.json()
+        await dispatch(removeCollection(col))
+    }
+}
+
 
 
 const initialState = {};
@@ -92,6 +140,11 @@ function collectionsReducer(state = initialState,action){
             newState[action.payload.id] = action.payload
             return newState
         }
+        case CREATE_COLLECTION:{
+            const newState = {...state}
+            newState[action.payload.id] = action.payload
+            return newState
+        }
 
         case ADD_MOVIES:{
             const newState = {...state}
@@ -102,8 +155,13 @@ function collectionsReducer(state = initialState,action){
         }
 
         case EDIT_COLLECTION:{
-            const newState = {}
+            const newState = {...state}
             newState[action.payload.id] = action.payload
+            return newState
+        }
+        case DELETE_COLLECTION:{
+            const newState = {...state}
+            delete newState[action.payload.id]
             return newState
         }
 

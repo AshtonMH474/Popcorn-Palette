@@ -9,7 +9,7 @@ import { addingToWatchList, getWatchlist } from "../../redux/watchlist";
 import { useDispatch,useSelector } from "react-redux";
 import { deleteFromWatchlist } from "../../redux/watchlist";
 import { getMovieDetails } from "../../redux/movies";
-// import { NavLink } from "react-router-dom";
+
 
 
 function Recent({recent}){
