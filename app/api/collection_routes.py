@@ -8,6 +8,18 @@ from datetime import date
 collection_routes = Blueprint('collections',__name__)
 
 
+@collection_routes.route('/search')
+@login_required
+def search_collection():
+
+    search_term = request.args.get('query',None)
+
+    if not search_term:
+        cols = Collection.query.filter_by(user_id=current_user.id).all()
+    else:
+        cols = Collection.query.filter(Collection.title.ilike(f'%{search_term}%'),Collection.user_id == current_user.id ).all()
+
+    return {'collections': [col.to_dict() for col in cols]}
 
 @collection_routes.route('/')
 @login_required

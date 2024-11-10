@@ -7,7 +7,6 @@ import './movieDetails.css'
 import Reviews from "./Reviews";
 import BottomInfo from "../BottomInfo";
 import AddReview from "./AddReviewModel";
-import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
 import UpdateReview from "./updateReview";
 import DeleteReview from "./DeleteReview";
 import { deleteFromWatchlist } from "../../redux/watchlist";
@@ -15,9 +14,12 @@ import { addingToWatchList, getWatchlist } from "../../redux/watchlist";
 import { getCrew } from "../../redux/crew";
 import { HiArrowSmallRight } from "react-icons/hi2";
 import { HiArrowSmallLeft } from "react-icons/hi2";
+import { useModal } from '../../context/Modal';
+import AddToCollection from "./AddtoCol";
 
 
 function MovieDetails(){
+    const { setModalContent } = useModal();
     const {movieId} = useParams()
     const dispatch = useDispatch()
     const movie = useSelector(state => state.movies)
@@ -157,6 +159,26 @@ function MovieDetails(){
             setCurrentIndex(currentIndex - 4);
         }
     };
+
+
+    const openUpdateReview = () => {
+        setZ(false)
+        setModalContent(<UpdateReview movieItem={movieItem} year={year} userReview={userReview} setUserReview={setTheReview}/>)
+    }
+
+    const openDeleteReview = () => {
+        setZ(false)
+        setModalContent(<DeleteReview movieItem={movieItem} userReview={userReview} setHasReview={setHasReview}/>)
+    }
+
+    const openAddReview = () => {
+        setZ(false)
+        setModalContent(<AddReview movieItem={movieItem} year={year}/>)
+    }
+    const openAddCollection = () => {
+        setZ(false)
+        setModalContent(<AddToCollection movieItem={movieItem} year={year}/>)
+    }
     if(!movie) return <h1>Loading...</h1>
 
     return (
@@ -182,19 +204,19 @@ function MovieDetails(){
                 <>
                     {!isInWatchlist && (<button onClick={() => addToWatchList(movieId)} className="detailButton">Add to Watchlist</button>)}
                     {isInWatchlist && (<button onClick={() => removeFromWatchlist(movieId)} className="detailButton">Remove From Watchlist</button>)}
-                    <button onClick={() => alert('Feature coming soon...')} className="detailButton">Add to a List</button>
+                    <button onClick={openAddCollection} className="detailButton">Add to a Collection</button>
                     {!hasReview && (
-                    <button className="detailButton noListStyleType marginButton">
-                        <OpenModalMenuItem onItemClick={() => setZ(false)} itemText={'Add a Review'} modalComponent={<AddReview  movieItem={movieItem} year={year} />} />
+                    <button onClick={openAddReview} className="detailButton noListStyleType marginButton">
+                        Add Review
                     </button>
                     )}
                 {hasReview && (
                     <>
-                        <button className="detailButton noListStyleType">
-                        <OpenModalMenuItem onItemClick={() => setZ(false)} itemText={'Update Your Review'} modalComponent={<UpdateReview movieItem={movieItem} year={year} userReview={userReview} setUserReview={setTheReview} />} />
+                        <button onClick={openUpdateReview} className="detailButton noListStyleType">
+                        Update Your Review
                         </button>
-                        <button className="detailButton noListStyleType">
-                        <OpenModalMenuItem onItemClick={() => setZ(false)} itemText={'Delete Your Review'} modalComponent={<DeleteReview movieItem={movieItem} userReview={userReview} setHasReview={setHasReview} />} />
+                        <button onClick={openDeleteReview} className="detailButton noListStyleType">
+                        Delete Your Review
                         </button>
                     </>
                 )}

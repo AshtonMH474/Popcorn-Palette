@@ -2,18 +2,25 @@ import { useNavigate, useParams } from "react-router-dom"
 import BottomInfo from "../BottomInfo"
 import { useDispatch, useSelector } from "react-redux"
 import { useEffect, useState } from "react"
-import { getCollectionDetails } from "../../redux/collections"
+import { deleteMovieFromCollection, getCollectionDetails } from "../../redux/collections"
 import './colDetails.css'
 import { getMovieDetails } from "../../redux/movies"
 import OpenModalMenuItem from "../Navigation/OpenModalMenuItem"
 import AddMovie from "./addMovie"
 import EditCollection from "./editCol"
+import { FaRegTrashAlt } from "react-icons/fa";
+import DeleteCollection from "./deleteCol"
+import { useModal } from '../../context/Modal';
+
+
 function CollectionDetails(){
     const {collectionId} = useParams()
     const dispatch = useDispatch()
     const collection = useSelector(state => state.collections);
     const col = Object.values(collection)[0]
     const [movies,setMovies] = useState([])
+    const { setModalContent } = useModal();
+
     const nav = useNavigate()
 
 
@@ -24,7 +31,17 @@ function CollectionDetails(){
         getCollection()
     },[dispatch,collectionId])
 
+    const openAddMovie = (col) => {
+        setModalContent(<AddMovie col={col}/>)
+    }
 
+    const openEditCol = (col) => {
+        setModalContent(<EditCollection col={col}/>)
+    }
+
+    const openDeleteCol = (col) => {
+        setModalContent(<DeleteCollection col={col}/>)
+    }
 
     useEffect(() => {
         if(col && col.movies && col.movies.length > 0){
@@ -40,7 +57,10 @@ function CollectionDetails(){
         }
     },[col])
 
-
+    async function deleteMovie(movie) {
+        await dispatch(deleteMovieFromCollection(collectionId,movie))
+        await dispatch(getCollectionDetails(collectionId))
+    }
 
     async function navMovie(movie) {
         await dispatch(getMovieDetails(movie.id))
@@ -61,9 +81,9 @@ function CollectionDetails(){
                     </div>
 
                     <div className="displayFlex colButtons">
-                        <button className="buttonCol noListStyleType"><OpenModalMenuItem itemText={'Add Movie'} modalComponent={<AddMovie col={col}/>}/></button>
-                        <button className="buttonCol noListStyleType"><OpenModalMenuItem itemText={'Edit Collection'} modalComponent={<EditCollection col={col}/>}/></button>
-                        <button className="buttonCol">Delete List</button>
+                        <button onClick={() => openAddMovie(col)} className="buttonCol noListStyleType">Add Movie</button>
+                        <button onClick={() => openEditCol(col)} className="buttonCol noListStyleType">Edit Collection</button>
+                        <button onClick={() => openDeleteCol(col)} className="buttonCol noListStyleType">Delete Collection</button>
                     </div>
 
 
@@ -77,8 +97,10 @@ function CollectionDetails(){
                         {movies.map((movie) => (
                             <div key={movie.id} className="movie-itemCol" onClick={() => navMovie(movie)}>
                                 <img className="posters" src={movie.movieImages[0].imgUrl} alt='poster'/>
-                                <div className="movie-title">{movie.title}</div>
+                                <div className="movie-title items">{movie.title}</div>
+                                <div onClick={(e) => { e.stopPropagation(); deleteMovie(movie); }} className="trashCol items"><FaRegTrashAlt/></div>
                             </div>
+
                         ))}
                         </>
                     ):(
