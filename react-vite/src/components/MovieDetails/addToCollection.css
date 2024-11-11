@@ -2,3 +2,12 @@
     width: 575px;
     border-radius: 8px;
 }
+.addToColl{
+    position: relative;
+    top: 0px;
+    left: 0px;
+    width: 580px;
+}
+.paddingError{
+    padding-bottom: 15px;
+}
