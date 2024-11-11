@@ -29,9 +29,14 @@ function MovieDetails(){
     const [year,setYear] = useState(0)
     const [hasReview,setHasReview] = useState(false)
     const [userReview,setTheReview] = useState(null)
+    // checks if in watchlist
     const watchlist = useSelector(state => state.watchlist)
     const watchlistArr = Object.values(watchlist)
     const [isInWatchlist, setIsInWatchlist] = useState(false);
+
+    //checks if in collection
+
+
     const crewArr = Object.values(crew)
     const [newCrew,setCrew] = useState([])
     const [active,setActive] = useState('crew')
@@ -41,6 +46,8 @@ function MovieDetails(){
     const reviews = useSelector(state=> state.reviews)
     const reviewsArr = Object.values(reviews)
     const navigate = useNavigate()
+
+
     useEffect(() => {
         const fetchData = async () => {
             await dispatch(getMovieDetails(movieId));
