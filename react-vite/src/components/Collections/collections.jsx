@@ -11,11 +11,13 @@ import { FiEdit2 } from "react-icons/fi";
 import EditCollection from "../CollectionDetails/editCol";
 import AddMovie from "../CollectionDetails/addMovie";
 import { useModal } from '../../context/Modal';
+import { Navigate } from 'react-router-dom';
 
 function Collections() {
   const dispatch = useDispatch();
   const nav = useNavigate();
   const collections = useSelector(state => state.collections);
+  const user = useSelector((store) => store.session.user);
   const collArr = Object.values(collections);
   const placeHolderCount = 5;
   const { setModalContent } = useModal();
@@ -84,6 +86,7 @@ function Collections() {
 
   }
 
+  if(!user) return <Navigate to='/'/>
   return (
     <>
       <div className='homeScreen topPaddingHome'>
@@ -138,7 +141,7 @@ function Collections() {
 
               </div>
             ))}
-
+            {collArr.length < 1 && (<div className="noCollections"><button className="createCol noListStyleType" onClick={openModalCreate}>Create Collection</button></div>)}
             {/* gives some space from last list */}
              <div className="paddingFromFooter"></div>
           </div>
