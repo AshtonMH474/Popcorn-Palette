@@ -34,8 +34,6 @@ function MovieDetails(){
     const watchlistArr = Object.values(watchlist)
     const [isInWatchlist, setIsInWatchlist] = useState(false);
 
-    //checks if in collection
-
 
     const crewArr = Object.values(crew)
     const [newCrew,setCrew] = useState([])
@@ -249,7 +247,7 @@ function MovieDetails(){
                             <div key={artist.id} className="artist">
                                 {artist.imgUrl && (<img className="imgArtist" src={artist.imgUrl} alt='/src/Static/Profile.jpeg'/>)}
                                 {artist.imgUrl && (<div className="white artistName bold ">{artist.name}</div>)}
-                                {artist.imgUrl && artist.character && (<div className="fadedWhite center paddTop">{artist.character}</div>)}
+                                {artist.imgUrl && artist.character && (<div className="fadedWhite artistChar center paddTop">{artist.character}</div>)}
                             </div>
                         ))}
                         {currentIndex + 4 < newCrew.length && (

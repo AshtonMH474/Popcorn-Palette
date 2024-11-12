@@ -72,7 +72,7 @@
     text-align: center;
 }
 .largePaddingBottom{
-    padding-bottom: 255px;
+    padding-bottom: 20px;
 }
 .reviewRating{
     position: relative;
@@ -113,11 +113,12 @@
     gap: 20px;
   }
   .genresGroup{
-    padding-bottom: 100px;
+    flex-wrap: wrap;
+    padding-bottom: 20px;
   }
 
   .imgArtist {
-    width: 120px; /* Adjust size as needed */
+    width: 120px;
     height: 120px; /* Same as width to make it a perfect circle */
     border-radius: 50%; /* This makes the image circular */
     object-fit: cover; /* Ensures the image maintains aspect ratio and fits the circle */
@@ -133,7 +134,15 @@
   }
   .artistName{
     text-align: center;
-    overflow-wrap: break-word;
+  overflow-wrap: break-word;
+  }
+
+  .artistChar{
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* Number of lines you want to display */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   .center{
     text-align: center;
