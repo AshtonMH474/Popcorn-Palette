@@ -26,6 +26,9 @@ class User(db.Model, UserMixin):
     # movies in watchlist
     watchlist_movies = db.relationship('Movie',secondary=watchlist,back_populates='users_watchlist')
 
+    # custom movies
+    movies = db.relationship('Custom_Movie',back_populates='user',cascade='all, delete-orphan')
+
     @property
     def password(self):
         return self.hashed_password

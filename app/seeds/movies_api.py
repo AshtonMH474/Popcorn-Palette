@@ -17,6 +17,7 @@ def seed_api_movies():
     seed_movies_by_genre('Comedy')
     seed_watchlist_movies()
 
+
     db.session.commit()
 
 def undo_api_movies():
@@ -169,26 +170,30 @@ def seed_watchlist_movies():
     batman_data = response.json()
     batman = batman_data['results'][0]
 
-    batman_release_date = batman['release_date'].split('-')
-    batman_img = f"https://image.tmdb.org/t/p/w500{batman['poster_path']}"
-    batman_genres = create_genres(batman['genre_ids'])
-    batman_movie = Movie(id=batman['id'],description=batman['overview'],title=batman['title'],release_date=date(int(batman_release_date[0]),int(batman_release_date[1]),int(batman_release_date[2])))
+    foundMovie = Movie.query.filter_by(id=batman['id']).first()
+
+    if foundMovie is None:
+
+        batman_release_date = batman['release_date'].split('-')
+        batman_img = f"https://image.tmdb.org/t/p/w500{batman['poster_path']}"
+        batman_genres = create_genres(batman['genre_ids'])
+        batman_movie = Movie(id=batman['id'],description=batman['overview'],title=batman['title'],release_date=date(int(batman_release_date[0]),int(batman_release_date[1]),int(batman_release_date[2])))
 
 
-    db.session.add(batman_movie)
-    db.session.commit()
+        db.session.add(batman_movie)
+        db.session.commit()
 
-    for genre in batman_genres:
-        curr_genre = Genre.query.filter_by(type=genre['type']).first()
-        if curr_genre is None:
-            genre1 = Genre(type=genre['type'])
-            db.session.add(genre1)
-            db.session.commit()
-        curr_genre = Genre.query.filter_by(type=genre['type']).first()
-        batman_movie.genres.append(curr_genre)
-    movie_image = Movie_Image(movie_id=batman_movie.id,img_url=batman_img,poster=True)
-    db.session.add(movie_image)
-    db.session.commit()
+        for genre in batman_genres:
+            curr_genre = Genre.query.filter_by(type=genre['type']).first()
+            if curr_genre is None:
+                genre1 = Genre(type=genre['type'])
+                db.session.add(genre1)
+                db.session.commit()
+            curr_genre = Genre.query.filter_by(type=genre['type']).first()
+            batman_movie.genres.append(curr_genre)
+        movie_image = Movie_Image(movie_id=batman_movie.id,img_url=batman_img,poster=True)
+        db.session.add(movie_image)
+        db.session.commit()
 
     url = f'https://api.themoviedb.org/3/search/movie?api_key={api_key}&query=10%20Things%20I%20Hate%20About%20You&page={page}'
     response = requests.get(url)
@@ -230,16 +235,16 @@ def seed_watchlist_movies():
             db.session.commit()
 
 
-    url = f'https://api.themoviedb.org/3/search/movie?api_key={api_key}&query=A%20Quiet%20Place&page={page}'
+    url = f'https://api.themoviedb.org/3/search/movie?api_key={api_key}&query=A%20Quiet%20Place&page={page}&primary_release_year=2018'
 
     response = requests.get(url)
 
 # Ensure the request was successful
     if response.status_code == 200:
         quiet_place_data = response.json()
-        # print('quet_place ----------------------',quiet_place_data)
+        print('quet_place ----------------------',quiet_place_data)
         if quiet_place_data['results']:  # Check if there are results
-            quiet_place_movie = quiet_place_data['results'][1]
+            quiet_place_movie = quiet_place_data['results'][0]
 
         # Process movie details
             quiet_place_release_date = quiet_place_movie['release_date'].split('-')

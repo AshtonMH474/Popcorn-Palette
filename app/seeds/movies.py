@@ -1,7 +1,6 @@
 from app.models import db, Movie, environment, SCHEMA
 from sqlalchemy.sql import text
 from datetime import date
-import requests
 
 
 

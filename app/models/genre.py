@@ -1,5 +1,6 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 from datetime import datetime,timezone
+from .custom_movie import custom_movie_genres
 
 movie_genres = db.Table(
     'movie_genres',
@@ -24,6 +25,9 @@ class Genre(db.Model):
 
     # movies
     movies = db.relationship('Movie',secondary=movie_genres,back_populates='genres')
+
+    # custom movies
+    custom = db.relationship('Custom_Movie',secondary=custom_movie_genres,back_populates='genres')
 
     def to_dict(self):
         new_dict = {
