@@ -19,7 +19,7 @@ class User(db.Model, UserMixin):
     last_name = db.Column(db.String(30), nullable=False)
     created_at = db.Column(db.DateTime, default=lambda: datetime.now(timezone.utc))
     updated_at = db.Column(db.DateTime, default=lambda: datetime.now(timezone.utc), onupdate=lambda: datetime.now(timezone.utc))
-    movies=db.relationship('Movie', back_populates='user', cascade='all, delete-orphan')
+
     collections=db.relationship('Collection', back_populates='user', cascade='all, delete-orphan')
     # reviews
     reviews=db.relationship('Review',back_populates='user',cascade='all, delete-orphan')
