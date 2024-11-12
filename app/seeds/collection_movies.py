@@ -12,7 +12,7 @@ def seed_collection_movies():
     superhero4 = Movie.query.filter_by(title='Deadpool & Wolverine').first()
     superhero5 = Movie.query.filter_by(title='Joker: Folie à Deux').first()
     superhero6 = Movie.query.filter_by(title='Venom: The Last Dance').first()
-    superhero7 = Movie.query.filter_by(title='Avengers: Infinity War').first()
+    superhero7 = Movie.query.filter_by(title='Spider-Man: No Way Home').first()
 
 
     collection2.movies.append(superhero1)
