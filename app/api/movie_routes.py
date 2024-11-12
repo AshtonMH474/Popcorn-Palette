@@ -60,7 +60,7 @@ def check_movie():
 
 
 
-        movie = Movie(id=id,title=title,description=description,custom=False,release_date=date(int(release_date[0]),int(release_date[1]),int(release_date[2])))
+        movie = Movie(id=id,title=title,description=description,release_date=date(int(release_date[0]),int(release_date[1]),int(release_date[2])))
         db.session.add(movie)
         db.session.commit()
         movie_image = Movie_Image(movie_id = movie.id, img_url=movie_images[0]['imgUrl'],poster=movie_images[0]['poster'])
