@@ -89,7 +89,6 @@ export const  changeFormat = async (movie) => {
     let genres = await createGenres(movie.genre_ids)
 
     let obj = {
-        'custom':false,
         'description':movie.overview,
         'id':movie.id,
         'title':movie.title,
