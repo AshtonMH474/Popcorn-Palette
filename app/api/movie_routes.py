@@ -58,8 +58,7 @@ def check_movie():
 
 
 
-        # print('genres ---------------------------',genres)
-        # return
+
 
         movie = Movie(id=id,title=title,description=description,custom=False,release_date=date(int(release_date[0]),int(release_date[1]),int(release_date[2])))
         db.session.add(movie)
