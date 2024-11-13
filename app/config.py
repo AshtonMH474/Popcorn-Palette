@@ -1,4 +1,5 @@
 import os
+import cloudinary
 
 
 class Config:
@@ -12,3 +13,16 @@ class Config:
     SQLALCHEMY_DATABASE_URI = os.environ.get(
         'DATABASE_URL').replace('postgres://', 'postgresql://')
     SQLALCHEMY_ECHO = True
+
+
+    CLOUD_NAME = 'dzsguqdmg'
+    API_KEY = 567866934876169
+    API_SECRET = 'SWPcBeI8FqxZ9Fv4I0tVHB1D9Rk'
+
+
+    def init_cloudinary():
+        cloudinary.config(
+            cloud_name=Config.CLOUD_NAME,
+            api_key=Config.API_KEY,
+            api_secret=Config.API_SECRET
+        )
