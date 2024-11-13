@@ -18,6 +18,7 @@ from .config import Config
 
 app = Flask(__name__, static_folder='../react-vite/dist', static_url_path='/')
 
+
 # Setup login manager
 login = LoginManager(app)
 login.login_view = 'auth.unauthorized'
@@ -32,6 +33,7 @@ def load_user(id):
 app.cli.add_command(seed_commands)
 
 app.config.from_object(Config)
+Config.init_cloudinary()
 app.register_blueprint(user_routes, url_prefix='/api/users')
 app.register_blueprint(auth_routes, url_prefix='/api/auth')
 app.register_blueprint(movie_routes, url_prefix='/api/movies')
