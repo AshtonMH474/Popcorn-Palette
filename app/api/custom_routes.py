@@ -1,10 +1,24 @@
 from flask import Blueprint, jsonify,request
 from flask_login import login_required,current_user
-from app.models import Custom_Movie,db
+from app.models import Custom_Movie,db,Genre
+from app.models.custom_movie import custom_movie_genres
 from datetime import date
 
 custom_routes = Blueprint('customs',__name__)
 
+
+@custom_routes.route('/genres/search')
+@login_required
+def search_genres():
+    search_term = request.args.get('query',None)
+
+    if not search_term:
+        genres = Genre.query.all()
+
+    else:
+        genres = Genre.query.filter(Genre.type.ilike(f'%{search_term}%')).all()
+
+    return {'genres': [genre.to_dict() for genre in genres]}
 
 @custom_routes.route('/')
 @login_required
@@ -101,3 +115,33 @@ def delete_custom(custom_id):
     except Exception:
         db.session.rollback()
         return jsonify({'error': "Couldn't Delete Custom"}), 400
+
+
+@custom_routes.route('/<int:custom_id>/genres/<int:genre_id>',methods=["POST"])
+@login_required
+def add_genre_custom_movie(custom_id,genre_id):
+    custom = Custom_Movie.query.filter_by(id=custom_id).first()
+    genre = Genre.query.filter_by(id=genre_id).first()
+
+    if custom is None:
+        return {'errors': {'message': 'Custom can not be found'}}, 404
+    if genre is None:
+        return {'errors': {'message': 'Genre can not be found'}}, 404
+    if custom.user_id != current_user.id:
+        return {'errors': {'message': 'Not Authoarzied'}}, 401
+
+
+    genre_in_custom=db.session.query(custom_movie_genres).filter_by(custom_movie_id=custom.id,genre_id=genre.id).first()
+
+    if genre_in_custom is not None:
+        return {'errors': {'message': "Genre is in User's Custom"}}, 400
+
+    try:
+        custom.genres.append(genre)
+        db.session.commit()
+
+        return jsonify({'custom':custom.to_dict()})
+
+    except Exception:
+        db.session.rollback()
+        return jsonify({'error': "Couldn't Add Genre To Custom"}), 400
