@@ -56,6 +56,7 @@
 
 .reviewReview{
     max-height:215px;
+
     overflow-y: auto;
     white-space: normal;
     padding-right: 10px;

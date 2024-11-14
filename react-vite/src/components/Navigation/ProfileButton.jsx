@@ -63,6 +63,12 @@ function ProfileButton({setZ}) {
     setZ(true)
   }
 
+  function navCustoms(){
+    navigate('/customs')
+    closeMenu()
+    setZ(true)
+  }
+
   return (
     <>
       <div className="mouseOver rightPageBorder xx-largeFont noPadding whiteFont noBackground noBorder" onClick={toggleMenu}>
@@ -74,6 +80,7 @@ function ProfileButton({setZ}) {
             <>
               <li onClick={naviagteWatchlist} className="profileButton cursor">Watchlist</li>
               <li onClick={navigateReviews} className="profileButton cursor">Reviews</li>
+              <li onClick={navCustoms} className="profileButton cursor">My Movies </li>
               <li onClick={navigateCollections} className="profileButton cursor">Collections</li>
               <li>
                 <div className='profileButton cursor' onClick={logout}>Log Out</div>
