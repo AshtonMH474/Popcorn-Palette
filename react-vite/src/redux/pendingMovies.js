@@ -3,6 +3,7 @@ import { csrfFetch } from "./.csrf";
 const PEND_MOVIES = 'pending/PEND_MOVIES'
 const RESET_PEND = 'pending/RESET_PEND'
 const DELETE_PENDING = 'pending/DELETE_PENDING'
+const PEND_GENRES = 'pending/PEND_GENRES'
 
 const setPending = movie => {
         return{
@@ -23,7 +24,16 @@ const removeMovie = (movie) => {
         payload:movie
     }
 }
+const setPendingGenre = genre => {
+    return {
+        type:PEND_GENRES,
+        payload:genre
+    }
+}
 
+export const addingPendGenre = (genre) => async(dispatch) => {
+    await dispatch(setPendingGenre(genre))
+}
 
 export const resetPending = () => async(dispatch) => {
     await dispatch(resetMovies())
@@ -64,6 +74,11 @@ function pendingReducer(state = initialState,action){
         case DELETE_PENDING:{
             const newState = {...state}
             delete newState[action.payload.id]
+            return newState
+        }
+        case PEND_GENRES:{
+            const newState  = {...state}
+            newState[action.payload.id] = action.payload
             return newState
         }
         default:

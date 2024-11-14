@@ -27,6 +27,7 @@ function CollectionDetails(){
     useEffect(() => {
         async function  getCollection() {
             await dispatch(getCollectionDetails(collectionId))
+
         }
         getCollection()
     },[dispatch,collectionId])
