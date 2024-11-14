@@ -3,6 +3,7 @@ import { changeFormat } from "./movies"
 const GET_SEARCH = 'search/GET_SEARCH'
 const GET_COL = 'search/GET_COL'
 const CLEAR_SEARCH = 'search/CLEAR_SEARCH'
+const GET_GENRE = 'search/GET_GENRE'
 
 const setSearch = movies => {
     return {
@@ -22,7 +23,22 @@ const clear = () => {
     }
 }
 
+const setSearchGenre = (gernes) => {
+    return {
+        type:GET_GENRE,
+        payload:gernes
+    }
+}
 
+
+export const searchGenres = (name) => async(dispatch) => {
+    const res = await csrfFetch(`/api/customs/genres/search?query=${name}`)
+    if(res.ok){
+        const data = await res.json()
+        await dispatch(setSearchGenre(data.genres))
+    }
+
+}
 
 export const searchMovies = (title) => async(dispatch) => {
     const apiKey = '79009e38d3509a590d6510f6e91c4cd8'
@@ -57,6 +73,8 @@ export const clearSearch = () => async(dispatch) =>{
     dispatch(clear())
 }
 
+
+
 const initialState = {}
 
 function searchReducer(state = initialState, action) {
@@ -74,6 +92,11 @@ function searchReducer(state = initialState, action) {
         case GET_COL:{
             const newState = {}
             action.payload.collections.forEach((col) => newState[col.id] = col )
+            return newState
+        }
+        case GET_GENRE:{
+            const newState = {}
+            action.payload.forEach((genre) => newState[genre.id] = genre )
             return newState
         }
 

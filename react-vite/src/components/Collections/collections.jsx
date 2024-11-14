@@ -12,6 +12,7 @@ import EditCollection from "../CollectionDetails/editCol";
 import AddMovie from "../CollectionDetails/addMovie";
 import { useModal } from '../../context/Modal';
 import { Navigate } from 'react-router-dom';
+import { resetPending } from "../../redux/pendingMovies";
 
 function Collections() {
   const dispatch = useDispatch();
@@ -24,6 +25,7 @@ function Collections() {
 
   useEffect(() => {
     dispatch(getCollections());
+    dispatch(resetPending())
   }, [dispatch]);
 
 

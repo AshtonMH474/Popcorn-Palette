@@ -1,0 +1,37 @@
+.paddingBottom{
+    padding-bottom: 20px;
+}
+
+.moveRight{
+    padding-left: 100px;
+}
+
+.noCursor:hover{
+    cursor: default;
+}
+
+.moveUp{
+    position: relative;
+    bottom: 18px;
+}
+
+.date{
+    font-size: 16px
+}
+
+.gray{
+    color: #A4A4A4;
+}
+
+
+.customDes{
+    max-height: 190px;
+    height: 190px;
+}
+
+.searchGenre{
+    position: relative;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+}

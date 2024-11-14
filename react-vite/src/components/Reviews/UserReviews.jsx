@@ -18,7 +18,7 @@ function UserReviews(){
     const user = useSelector((store) => store.session.user);
     const reviews = useSelector(state => state.reviews)
     const reviewsArr = Object.values(reviews)
-    console.log(reviewsArr)
+
 
 
 
@@ -75,12 +75,12 @@ function UserReviews(){
                                         </div>
                                     </div>
                                 </div>
-                                <div className="reviewInfo">
+                                <div className="reviewInfo moveUp">
                                     <div className="displayFlex">
                                         <h3 className="white">{review.movie.title}</h3>
                                     </div>
-                                    <p className="white wordBreak reviewReview">{review.review}</p>
-                                    <div className="white">Your Review: <IoStarSharp className='star' />{review.rating.toFixed(1)}</div>
+                                    <p className="gray wordBreak reviewReview">{review.review}</p>
+                                    <div className="gray">Your Review: <IoStarSharp className='star' />{review.rating.toFixed(1)}</div>
                                 </div>
                             </div>
 
