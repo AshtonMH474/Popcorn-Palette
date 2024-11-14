@@ -114,10 +114,10 @@ function CreateCustom(){
 
 
       async function pendGenre(genre) {
-
-
         await dispatch(addingPendGenre(genre))
         await setDropDown(false)
+        await dispatch(clearSearch())
+        await setGenre('')
       }
 
     return (
@@ -190,8 +190,9 @@ function CreateCustom(){
             )}
         </div>
         <div className="form-group">
-        <label htmlFor="image">Select Poster Image</label>
+        <label className="imageLabel" htmlFor="image">Select Poster Image
         {errors.image && (<div className="error paddingBottomSmall">{errors.image}</div>)}
+
           <input className="white"
             type="file"
             id="image"
@@ -200,8 +201,13 @@ function CreateCustom(){
             onChange={handleImageChange}
             required
           />
+        </label>
+
           </div>
 
+          <div className="pendImage">
+          {formData.imgUrl && <img className="posters noCursor" src={formData.imgUrl} alt="Image Preview"  />}
+        </div>
 
           <button onClick={handleSubmit} type="submit" className="submit-btn">Submit</button>
       </form>
