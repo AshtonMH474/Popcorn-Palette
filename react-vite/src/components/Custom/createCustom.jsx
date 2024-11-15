@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import './createCustom.css'
 import { useDispatch } from "react-redux";
 import { clearSearch, searchGenres } from "../../redux/search";
-import { addingPendGenre } from "../../redux/pendingMovies";
+import { addingPendGenre, resetPending } from "../../redux/pendingMovies";
 import { addCustom } from "../../redux/customs";
 import { useNavigate } from "react-router-dom";
 
@@ -23,6 +23,10 @@ function CreateCustom(){
         description: '',
         releaseDate: ''
       });
+
+      useEffect(() => {
+        dispatch(resetPending())
+      },{dispatch})
 
       const handleChange = (e) => {
         const { name, value } = e.target;
@@ -114,10 +118,19 @@ function CreateCustom(){
 
 
       async function pendGenre(genre) {
-
-
+        if(pendingArr && pendingArr.length > 4){
+            let obj = {
+                genres:'5 Genres or less'
+            }
+            setErrors(obj)
+            await dispatch(clearSearch())
+            await setGenre('')
+            return;
+        }
         await dispatch(addingPendGenre(genre))
         await setDropDown(false)
+        await dispatch(clearSearch())
+        await setGenre('')
       }
 
     return (
@@ -190,8 +203,9 @@ function CreateCustom(){
             )}
         </div>
         <div className="form-group">
-        <label htmlFor="image">Select Poster Image</label>
+        <label className="imageLabel" htmlFor="image">Select Poster Image
         {errors.image && (<div className="error paddingBottomSmall">{errors.image}</div>)}
+
           <input className="white"
             type="file"
             id="image"
@@ -200,8 +214,13 @@ function CreateCustom(){
             onChange={handleImageChange}
             required
           />
+        </label>
+
           </div>
 
+          <div className="pendImage">
+          {formData.imgUrl && <img className="posters noCursor" src={formData.imgUrl} alt="Image Preview"  />}
+        </div>
 
           <button onClick={handleSubmit} type="submit" className="submit-btn">Submit</button>
       </form>

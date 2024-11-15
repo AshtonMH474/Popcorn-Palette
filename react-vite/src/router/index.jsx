@@ -8,6 +8,7 @@ import Collections from '../components/Collections';
 import CollectionDetails from '../components/CollectionDetails';
 import CustomMovies from '../components/Custom';
 import CreateCustom from '../components/Custom/createCustom';
+import EditCustom from '../components/Custom/editCustom';
 
 
 export const router = createBrowserRouter([
@@ -45,6 +46,10 @@ export const router = createBrowserRouter([
       {
         path:'/customs/create',
         element:<CreateCustom/>
+      },
+      {
+        path:'/customs/:customId/edit',
+        element:<EditCustom/>
       }
 
     ],
