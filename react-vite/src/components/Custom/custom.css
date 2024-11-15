@@ -35,3 +35,33 @@
     top: 0px;
     width: 100%;
 }
+
+.itemsGenres{
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7);
+    opacity: 0; /* Initially hidden */
+    text-align: center;
+    position: relative;
+    bottom: 20px;
+    transition: opacity 0.3s ease;
+}
+
+.genresDiv{
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+}
+.genresDiv:hover{
+    transform: scale(1.05); /* Slightly enlarge on hover */
+    box-shadow: 0 6px 30px rgba(0, 0, 0, 0.2);
+}
+
+.genresDiv:hover .itemsGenres{
+    opacity: 1;
+    transition: opacity 0.3s ease;
+}
+.genresDiv:hover .genreText{
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}

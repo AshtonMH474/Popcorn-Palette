@@ -4,6 +4,7 @@ const PEND_MOVIES = 'pending/PEND_MOVIES'
 const RESET_PEND = 'pending/RESET_PEND'
 const DELETE_PENDING = 'pending/DELETE_PENDING'
 const PEND_GENRES = 'pending/PEND_GENRES'
+const PEND_CURRENT_GERNES = 'pending/PEND_CURRENT_GENRES'
 
 const setPending = movie => {
         return{
@@ -31,12 +32,23 @@ const setPendingGenre = genre => {
     }
 }
 
+const setAllCurrentGenres = genres => {
+    return {
+        type:PEND_CURRENT_GERNES,
+        payload:genres
+    }
+}
+
 export const addingPendGenre = (genre) => async(dispatch) => {
     await dispatch(setPendingGenre(genre))
 }
 
 export const resetPending = () => async(dispatch) => {
     await dispatch(resetMovies())
+}
+
+export const resumeGenres = (genres) => async(dispatch) => {
+    await dispatch(setAllCurrentGenres(genres))
 }
 
 
@@ -79,6 +91,11 @@ function pendingReducer(state = initialState,action){
         case PEND_GENRES:{
             const newState  = {...state}
             newState[action.payload.id] = action.payload
+            return newState
+        }
+        case PEND_CURRENT_GERNES:{
+            const newState = {}
+            action.payload.forEach((genre) => newState[genre.id] = genre)
             return newState
         }
         default:

@@ -70,3 +70,28 @@
     padding-bottom: 10px;
 
   }
+
+  .form-group input[type="file"] {
+    display: none;
+  }
+
+  .imageLabel{
+    border: 1px solid #708090;
+    text-align: center;
+    background-color: #708090;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+  }
+
+  .imageLabel:hover{
+    cursor: pointer;
+    background-color: #2F4F4F;
+  }
+
+  .pendImage{
+    display: flex;
+    justify-content: center;
+  }

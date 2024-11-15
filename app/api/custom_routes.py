@@ -32,7 +32,7 @@ def all_user_customs():
 @custom_routes.route('/<int:custom_id>')
 @login_required
 def custom_details(custom_id):
-    custom= Custom_Movie.query.filter_by(id=custom_id)
+    custom= Custom_Movie.query.filter_by(id=custom_id).first()
 
     if custom is None:
         return {'errors':{'message':'Custom not Found'}},404
