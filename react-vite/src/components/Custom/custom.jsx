@@ -38,8 +38,8 @@ function CustomMovies(){
     return (
         <>
         <div className='homeScreen topPaddingHome'>
-        <div className="displayFlex center topPaddingHome paddingBottom">
-            <h1 className="white  moveRight">Your Movies:</h1>
+        <div className="displayFlex center smallPaddingBottom">
+            <h1 className="white  moveRight ">Your Movies:</h1>
             <button onClick={() => nav('/customs/create')} className="createCol noListStyleType" >Create Personal Movie</button>
           </div>
         <div className="reviewsCenter paddingBottom">
