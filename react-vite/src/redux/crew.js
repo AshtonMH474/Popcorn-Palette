@@ -28,15 +28,22 @@ export const getCrew = (movie) => async(dispatch) => {
     const response = await fetch(searchUrl);
     const movieData = await response.json();
 
+
     // makes it so movie is correct based on title and year
     const filteredMovies = movieData.results.filter(m => m.release_date.split('-')[0] == releaseDate.split('-')[0]);
-
+    if(filteredMovies.length){
     const creditsUrl = `https://api.themoviedb.org/3/movie/${filteredMovies[0].id}/credits?api_key=${apiKey}`;
     const res = await fetch(creditsUrl);
-    const data = await res.json();
+        if(res.ok){
+        const data = await res.json();
+        await dispatch(setCrew(data.cast))
+        }
+    }else{
+        await dispatch(noCrew())
+    }
 
 
-    dispatch(setCrew(data.cast))
+
 
 }
 
