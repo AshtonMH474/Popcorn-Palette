@@ -6,8 +6,9 @@ import { deleteFromWatchlist, getWatchlist, updateMovieInWatchlist } from '../..
 import { IoStarSharp } from "react-icons/io5";
 import { FaRegTrashAlt } from "react-icons/fa";
 import { IoEyeOutline } from "react-icons/io5";
-import { Navigate, NavLink } from 'react-router-dom';
-import { getMovies } from '../../redux/movies'
+import { Navigate, useNavigate } from 'react-router-dom';
+import { getMovieDetails, getMovies } from '../../redux/movies'
+import { resetCrew } from '../../redux/crew'
 
 
 function Watchlist(){
@@ -17,7 +18,7 @@ function Watchlist(){
     const [active,setActive] = useState('unwatched')
     const [watchlistCurrArr,setWatchlist] = useState([])
     const user = useSelector((store) => store.session.user);
-
+    const navigate = useNavigate()
 
     useEffect(() => {
         dispatch(getWatchlist())
@@ -50,7 +51,12 @@ function Watchlist(){
 
     if(!user) return <Navigate to='/'/>
 
+    async function naviagteToMovie(movie) {
+        await dispatch(resetCrew())
+        await dispatch(getMovieDetails(movie.id))
+        await navigate(`/movies/${movie.id}`)
 
+    }
 
 
     return (
@@ -76,9 +82,9 @@ function Watchlist(){
                     ):(
                     watchlistCurrArr.length > 0 && watchlistCurrArr.map(movie => (
                         <div key={movie.id} className='movieItem lightBlack'>
-                        <NavLink className='noTextUnderline' to={`/movies/${movie.id}`}>
-                        <img className='posters' src={movie.movieImages[0].imgUrl} alt='moviePoster' />
-                        </NavLink>
+
+                        <img onClick={() => naviagteToMovie(movie)} className='posters' src={movie.movieImages[0].imgUrl} alt='moviePoster' />
+
                         <div className='paddingLeft10px watchlistCard'>
                             <div className='white title'>{movie.title}</div>
                             <div className="displayFlex spaceBetween littleRightPadding">

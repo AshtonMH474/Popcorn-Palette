@@ -37,7 +37,6 @@ function MovieDetails(){
 
 
     const crewArr = Object.values(crew)
-    console.log(crewArr)
     const [newCrew,setCrew] = useState([])
     const [active,setActive] = useState('crew')
     const [currentIndex, setCurrentIndex] = useState(0);

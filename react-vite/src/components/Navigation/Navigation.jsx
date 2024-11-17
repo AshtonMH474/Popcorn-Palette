@@ -8,7 +8,7 @@ import { useEffect, useRef, useState } from "react";
 import { searchMovies } from "../../redux/search";
 import { getReviewsFromMovie } from "../../redux/reviews";
 import { getMovieDetails, getMovies } from "../../redux/movies";
-import { getCrew } from "../../redux/crew";
+import { getCrew, resetCrew } from "../../redux/crew";
 // import { getCrew } from "../../redux/crew";
 
 function Navigation({showZ,setZ}) {
@@ -52,12 +52,15 @@ function Navigation({showZ,setZ}) {
   async function goToMovie(movie){
     setMovie('')
     setDropDown(false)
+
     async function getMovie(){
+
       await dispatch(getMovieDetails(movie.id,movie))
       await dispatch(getReviewsFromMovie(movie.id))
       await dispatch(getCrew(movie))
 
     }
+    await dispatch(resetCrew())
     await nav(`/movies/${movie.id}`)
     await getMovie()
 
