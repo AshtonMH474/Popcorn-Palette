@@ -45,7 +45,7 @@ export const searchMovies = (title) => async(dispatch) => {
     const res2 = await fetch(`https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${title}`);
 
         let data = await res2.json()
-        console.log(data)
+
         let newArr = []
         for(let i = 0; i < data.results.length; i++){
             let movie = data.results[i]
