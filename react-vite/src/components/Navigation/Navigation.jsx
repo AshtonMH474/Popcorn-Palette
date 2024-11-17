@@ -59,8 +59,9 @@ function Navigation({showZ,setZ}) {
       await dispatch(getCrew(movie))
 
     }
-    await getMovie()
     await nav(`/movies/${movie.id}`)
+    await getMovie()
+
   }
 
   return (

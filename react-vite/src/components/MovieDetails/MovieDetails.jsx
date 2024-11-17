@@ -37,6 +37,7 @@ function MovieDetails(){
 
 
     const crewArr = Object.values(crew)
+    console.log(crewArr)
     const [newCrew,setCrew] = useState([])
     const [active,setActive] = useState('crew')
     const [currentIndex, setCurrentIndex] = useState(0);
@@ -117,7 +118,7 @@ function MovieDetails(){
             checkIfUserHasReview()
             setUserReview()
         }
-    },[reviewsArr.length,movieId])
+    },[reviewsArr.length,movieId,user])
 
     useEffect(() => {
         if(user)dispatch(getWatchlist())
@@ -253,19 +254,20 @@ function MovieDetails(){
                     </div>
                     {active == 'crew' && (
                         <div className={`displayFlex crew gap10px ${currentIndex > 0 ? 'moveCast' : ''}`}>
-                        {currentIndex > 0 && (<button className={`arrowCrew arrowLeftCrew ${showZ ? 'arrowZ': ''}`}  onClick={prevCast} ><HiArrowSmallLeft/></button>)}
-                        {movieItem && newCrew.length && newCrew.slice(currentIndex,currentIndex+4).map(artist => (
+                            {currentIndex > 0 && (<button className={`arrowCrew arrowLeftCrew ${showZ ? 'arrowZ': ''}`}  onClick={prevCast} ><HiArrowSmallLeft/></button>)}
+                            {movieItem && newCrew.length && newCrew.slice(currentIndex,currentIndex+4).map(artist => (
                             <div key={artist.id} className="artist">
                                 {artist.imgUrl && (<img className="imgArtist" src={artist.imgUrl} alt='/src/Static/Profile.jpeg'/>)}
                                 {artist.imgUrl && (<div className="white artistName bold ">{artist.name}</div>)}
                                 {artist.imgUrl && artist.character && (<div className="fadedWhite artistChar center paddTop">{artist.character}</div>)}
                             </div>
-                        ))}
-                        {currentIndex + 4 < newCrew.length && (
+                            ))}
+                            {currentIndex + 4 < newCrew.length && (
                                 <button className={`arrowCrew arrowRightCrew ${showZ ? 'arrowZ': ''}`}  onClick={nextCast}>
                                     <HiArrowSmallRight />
                                     </button>
                                     )}
+                            {newCrew.length < 1 && (<div className="white noProviders">CAST NOT FOUND</div>)}
                         </div>
                     )}
                     {active == 'genre' && (<div className="displayFlex gap10px genresGroup">
