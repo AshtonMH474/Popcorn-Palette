@@ -9,7 +9,7 @@ import { searchMovies } from "../../redux/search";
 import { getReviewsFromMovie } from "../../redux/reviews";
 import { getMovieDetails, getMovies } from "../../redux/movies";
 import { getCrew, resetCrew } from "../../redux/crew";
-// import { getCrew } from "../../redux/crew";
+
 
 function Navigation({showZ,setZ}) {
   const nav = useNavigate()
@@ -27,6 +27,7 @@ function Navigation({showZ,setZ}) {
     if(movie.length > 0){
     dispatch(searchMovies(movie))
     setDropDown(true)
+    dispatch(resetCrew())
     }
     else setDropDown(false)
   },[movie.length,dispatch])
@@ -50,8 +51,8 @@ function Navigation({showZ,setZ}) {
 
 
   async function goToMovie(movie){
-    setMovie('')
-    setDropDown(false)
+    await setMovie('')
+    await setDropDown(false)
 
     async function getMovie(){
 
@@ -60,7 +61,7 @@ function Navigation({showZ,setZ}) {
       await dispatch(getCrew(movie))
 
     }
-    await dispatch(resetCrew())
+
     await nav(`/movies/${movie.id}`)
     await getMovie()
 
