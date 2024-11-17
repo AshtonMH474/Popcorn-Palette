@@ -34,31 +34,31 @@ function Home(){
     useEffect(() => {
         let filteredMovies;
         if(active === 'action'){
-            filteredMovies = moviesArr.filter(movie => movie.genres.some(genre => genre.type == 'Action'))
+            filteredMovies = moviesArr.filter(movie => movie.genres.some(genre => genre.type == 'Action')&& movie.forHome === true)
             setActiveMovies(filteredMovies.map(movie => ({
                 ...movie,isInWatchlist:watchlistArr.some(watchlistMovie => watchlistMovie.id === movie.id)
             })))
         }
         if(active === 'crime'){
-            filteredMovies = moviesArr.filter(movie => movie.genres.some(genre => genre.type == 'Crime'))
+            filteredMovies = moviesArr.filter(movie => movie.genres.some(genre => genre.type == 'Crime')&& movie.forHome === true)
             setActiveMovies(filteredMovies.map(movie => ({
                 ...movie,isInWatchlist:watchlistArr.some(watchlistMovie => watchlistMovie.id === movie.id)
             })))
         }
         if(active === 'scifi'){
-            filteredMovies = moviesArr.filter(movie => movie.genres.some(genre => genre.type == 'Science Fiction'))
+            filteredMovies = moviesArr.filter(movie => movie.genres.some(genre => genre.type == 'Science Fiction')&& movie.forHome === true)
             setActiveMovies(filteredMovies.map(movie => ({
                 ...movie,isInWatchlist:watchlistArr.some(watchlistMovie => watchlistMovie.id === movie.id)
             })))
         }
         if(active === 'horror'){
-            filteredMovies = moviesArr.filter(movie => movie.genres.some(genre => genre.type == 'Horror'))
+            filteredMovies = moviesArr.filter(movie => movie.genres.some(genre => genre.type == 'Horror')&& movie.forHome === true)
             setActiveMovies(filteredMovies.map(movie => ({
                 ...movie,isInWatchlist:watchlistArr.some(watchlistMovie => watchlistMovie.id === movie.id)
             })))
         }
         if(active === 'comedy'){
-            filteredMovies = moviesArr.filter(movie => movie.genres.some(genre => genre.type == 'Comedy'))
+            filteredMovies = moviesArr.filter(movie => movie.genres.some(genre => genre.type == 'Comedy')&& movie.forHome === true)
             setActiveMovies(filteredMovies.map(movie => ({
                 ...movie,isInWatchlist:watchlistArr.some(watchlistMovie => watchlistMovie.id === movie.id)
             })))

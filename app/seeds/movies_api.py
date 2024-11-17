@@ -63,8 +63,8 @@ def seed_now_playing():
                 img = f"https://image.tmdb.org/t/p/w500{movie['poster_path']}"
                 genres = create_genres(movie['genre_ids'])
 
-            # print('movie:---------------',movie)
-                movie = Movie(id=movie['id'],description=movie['overview'],title=movie['title'],release_date=date(int(release_date[0]),int(release_date[1]),int(release_date[2])))
+                print('movie:---------------',movie)
+                movie = Movie(id=movie['id'],description=movie['overview'],title=movie['title'],lang=movie['original_language'],for_home=True,release_date=date(int(release_date[0]),int(release_date[1]),int(release_date[2])))
                 db.session.add(movie)
                 db.session.commit()
                 for genre in genres:
@@ -116,7 +116,7 @@ def seed_movies_by_genre(genre_name):
                 genres = create_genres(movie['genre_ids'])
 
             # print('movie:---------------',movie)
-                movie = Movie(id=movie['id'],description=movie['overview'],title=movie['title'],release_date=date(int(release_date[0]),int(release_date[1]),int(release_date[2])))
+                movie = Movie(id=movie['id'],description=movie['overview'],title=movie['title'],lang=movie['original_language'],for_home=True,release_date=date(int(release_date[0]),int(release_date[1]),int(release_date[2])))
                 db.session.add(movie)
                 db.session.commit()
 
@@ -145,7 +145,7 @@ def seed_watchlist_movies():
     star_wars_release_date = star_wars['release_date'].split('-')
     star_wars_img = f"https://image.tmdb.org/t/p/w500{star_wars['poster_path']}"
     star_wars_genres = create_genres(star_wars['genre_ids'])
-    star_wars_movie = Movie(id=star_wars['id'],description=star_wars['overview'],title=star_wars['title'],release_date=date(int(star_wars_release_date[0]),int(star_wars_release_date[1]),int(star_wars_release_date[2])))
+    star_wars_movie = Movie(id=star_wars['id'],description=star_wars['overview'],title=star_wars['title'],lang=star_wars['original_language'],for_home=True,release_date=date(int(star_wars_release_date[0]),int(star_wars_release_date[1]),int(star_wars_release_date[2])))
 
 
     db.session.add(star_wars_movie)
@@ -177,7 +177,7 @@ def seed_watchlist_movies():
         batman_release_date = batman['release_date'].split('-')
         batman_img = f"https://image.tmdb.org/t/p/w500{batman['poster_path']}"
         batman_genres = create_genres(batman['genre_ids'])
-        batman_movie = Movie(id=batman['id'],description=batman['overview'],title=batman['title'],release_date=date(int(batman_release_date[0]),int(batman_release_date[1]),int(batman_release_date[2])))
+        batman_movie = Movie(id=batman['id'],description=batman['overview'],lang=batman['original_language'],for_home=True,title=batman['title'],release_date=date(int(batman_release_date[0]),int(batman_release_date[1]),int(batman_release_date[2])))
 
 
         db.session.add(batman_movie)
@@ -212,6 +212,7 @@ def seed_watchlist_movies():
         # Create movie instance
             ten_things_movie_instance = Movie(
                 id=ten_things_movie['id'],
+                lang=ten_things_movie['original_language'],for_home=True,
                 description=ten_things_movie['overview'],
                 title=ten_things_movie['title'],
                 release_date=date(int(ten_things_release_date[0]), int(ten_things_release_date[1]), int(ten_things_release_date[2]))
@@ -242,7 +243,6 @@ def seed_watchlist_movies():
 # Ensure the request was successful
     if response.status_code == 200:
         quiet_place_data = response.json()
-        print('quet_place ----------------------',quiet_place_data)
         if quiet_place_data['results']:  # Check if there are results
             quiet_place_movie = quiet_place_data['results'][0]
 
@@ -254,6 +254,7 @@ def seed_watchlist_movies():
         # Create movie instance
             quiet_place_movie_instance = Movie(
             id=quiet_place_movie['id'],
+            lang=quiet_place_movie['original_language'],for_home=True,
             description=quiet_place_movie['overview'],
             title=quiet_place_movie['title'],
             release_date=date(int(quiet_place_release_date[0]), int(quiet_place_release_date[1]), int(quiet_place_release_date[2]))
@@ -294,6 +295,7 @@ def seed_watchlist_movies():
         # Create movie instance
             jump_street_movie_instance = Movie(
             id=jump_street_movie['id'],
+            lang=jump_street_movie['original_language'],for_home=True,
             description=jump_street_movie['overview'],
             title=jump_street_movie['title'],
             release_date=date(int(jump_street_release_date[0]), int(jump_street_release_date[1]), int(jump_street_release_date[2]))
@@ -335,6 +337,7 @@ def seed_watchlist_movies():
         # Create movie instance
             bob_marley_movie_instance = Movie(
             id=bob_marley_movie['id'],
+            lang=bob_marley_movie['original_language'],for_home=True,
             description=bob_marley_movie['overview'],
             title=bob_marley_movie['title'],
             release_date=date(int(bob_marley_release_date[0]), int(bob_marley_release_date[1]), int(bob_marley_release_date[2]))
@@ -374,6 +377,7 @@ def seed_watchlist_movies():
         # Create movie instance
             oppenheimer_movie_instance = Movie(
                 id=oppenheimer_movie['id'],
+                lang=oppenheimer_movie['original_language'],for_home=True,
                 description=oppenheimer_movie['overview'],
                 title=oppenheimer_movie['title'],
                 release_date=date(int(oppenheimer_release_date[0]), int(oppenheimer_release_date[1]), int(oppenheimer_release_date[2]))

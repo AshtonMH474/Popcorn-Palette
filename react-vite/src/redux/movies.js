@@ -15,18 +15,6 @@ const getMovie = (movie) => ({
 
 export const getMovies = () => async(dispatch) => {
     const res = await fetch("/api/movies/")
-    // let page = 1
-    // const apiKey = '79009e38d3509a590d6510f6e91c4cd8'
-    // while(true){
-    //     const url = `https://api.themoviedb.org/3/movie/now_playing?api_key=${apiKey}&page=${1}`;
-    //     const testRes = await fetch(url)
-    //     let data = await testRes.json()
-    //     if(!data.results.length)break
-
-    //     console.log(data.results)
-    //     page++
-
-    // }
 
     if(res.ok){
         const data = await res.json();
@@ -50,6 +38,7 @@ export const getMovieDetails = (movieId,movie) => async(dispatch) => {
     const res = await fetch(`/api/movies/${movieId}`);
     const movieDetailsRes = await fetch(`https://api.themoviedb.org/3/movie/${movieId}/videos?api_key=${apiKey}`);
     const movieDetailsData = await movieDetailsRes.json();
+
     if(res.ok){
         const watchProvidersRes = await fetch(`https://api.themoviedb.org/3/movie/${movieId}/watch/providers?api_key=${apiKey}`);
         const watchProvidersData = await watchProvidersRes.json();
@@ -111,13 +100,13 @@ export default movieReducer;
 export const  changeFormat = async (movie) => {
     let img = `https://image.tmdb.org/t/p/w500${movie.poster_path}`
     let genres = await createGenres(movie.genre_ids)
-
     let obj = {
         'description':movie.overview,
         'id':movie.id,
         'title':movie.title,
         'releaseDate':movie.release_date,
         'genres': genres,
+        'lang':movie.original_language,
         'movieImages':[
             {
                 'imgUrl':img,

@@ -10,9 +10,15 @@ def all_movies():
     """
     Query for all movies
     """
+    high_rated_movies = Movie.query.filter_by(lang='en').filter(Movie.avg_rating > 4.5).limit(20).all()
+    movies = Movie.query.filter_by(lang='en',for_home=True).all()
 
-    movies = Movie.query.all()
+    for movie in high_rated_movies:
+        if movie not in movies:
+            movies.append(movie)
+
     return {'movies':[movie.to_dict() for movie in movies]}
+
 
 
 @movie_routes.route('/<int:movie_id>')
@@ -55,12 +61,13 @@ def check_movie():
         description = data.get('description')
         movie_images = data.get('movieImages')
         genres = data.get('genres')
+        lang = data.get('lang')
 
 
 
 
 
-        movie = Movie(id=id,title=title,description=description,release_date=date(int(release_date[0]),int(release_date[1]),int(release_date[2])))
+        movie = Movie(id=id,title=title,description=description,lang=lang,release_date=date(int(release_date[0]),int(release_date[1]),int(release_date[2])))
         db.session.add(movie)
         db.session.commit()
         movie_image = Movie_Image(movie_id = movie.id, img_url=movie_images[0]['imgUrl'],poster=movie_images[0]['poster'])
