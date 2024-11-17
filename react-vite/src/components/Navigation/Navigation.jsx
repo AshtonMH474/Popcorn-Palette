@@ -50,7 +50,6 @@ function Navigation({showZ,setZ}) {
 
 
   async function goToMovie(movie){
-    console.log(movie)
     setMovie('')
     setDropDown(false)
     async function getMovie(){
