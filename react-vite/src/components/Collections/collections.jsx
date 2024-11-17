@@ -13,6 +13,7 @@ import AddMovie from "../CollectionDetails/addMovie";
 import { useModal } from '../../context/Modal';
 import { Navigate } from 'react-router-dom';
 import { resetPending } from "../../redux/pendingMovies";
+import { resetCrew } from "../../redux/crew";
 
 function Collections() {
   const dispatch = useDispatch();
@@ -39,6 +40,7 @@ function Collections() {
 
 
   async function navigateMovie(movie){
+      await dispatch(resetCrew())
       await dispatch(getMovieDetails(movie.id))
       await nav(`/movies/${movie.id}`)
   }

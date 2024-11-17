@@ -11,6 +11,7 @@ import EditCollection from "./editCol"
 import { FaRegTrashAlt } from "react-icons/fa";
 import DeleteCollection from "./deleteCol"
 import { useModal } from '../../context/Modal';
+import { resetCrew } from "../../redux/crew"
 
 
 function CollectionDetails(){
@@ -64,6 +65,7 @@ function CollectionDetails(){
     }
 
     async function navMovie(movie) {
+        await dispatch(resetCrew())
         await dispatch(getMovieDetails(movie.id))
         await nav(`/movies/${movie.id}`)
 

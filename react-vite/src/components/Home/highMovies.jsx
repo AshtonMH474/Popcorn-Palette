@@ -10,6 +10,7 @@ import { useDispatch,useSelector } from "react-redux";
 import { deleteFromWatchlist } from "../../redux/watchlist";
 import { getMovieDetails } from "../../redux/movies";
 import { NavLink } from "react-router-dom";
+import { resetCrew } from "../../redux/crew";
 
 function HighMovies({high}){
     const [currentIndex, setCurrentIndex] = useState(0);
@@ -51,6 +52,7 @@ function HighMovies({high}){
         dispatch(deleteFromWatchlist(id))
     }
     async function navigateToMovie(movie) {
+        await dispatch(resetCrew())
         await dispatch(getMovieDetails(movie.id))
 
     }

@@ -8,6 +8,7 @@ import { HiArrowSmallRight } from "react-icons/hi2";
 import { HiArrowSmallLeft } from "react-icons/hi2";
 import { IoIosCheckmark } from "react-icons/io";
 import { getMovieDetails } from "../../redux/movies";
+import { resetCrew } from "../../redux/crew";
 // import { NavLink } from "react-router-dom";
 
 function FilterMovies({movies,currentIndex,setCurrentIndex}){
@@ -49,6 +50,7 @@ function FilterMovies({movies,currentIndex,setCurrentIndex}){
 
 
     async function navigateToMovie(movie) {
+        await dispatch(resetCrew())
         await dispatch(getMovieDetails(movie.id))
         navigate(`/movies/${movie.id}`)
 

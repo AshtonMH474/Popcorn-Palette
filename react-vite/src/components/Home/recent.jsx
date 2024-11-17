@@ -9,6 +9,7 @@ import { addingToWatchList, getWatchlist } from "../../redux/watchlist";
 import { useDispatch,useSelector } from "react-redux";
 import { deleteFromWatchlist } from "../../redux/watchlist";
 import { getMovieDetails } from "../../redux/movies";
+import { resetCrew } from "../../redux/crew";
 
 
 
@@ -57,6 +58,7 @@ function Recent({recent}){
     }
 
     async function navigateToMovie(movie) {
+        await dispatch(resetCrew())
         await dispatch(getMovieDetails(movie.id))
         await navigate(`/movies/${movie.id}`)
 
