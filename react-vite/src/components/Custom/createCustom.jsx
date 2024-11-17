@@ -4,9 +4,10 @@ import { useSelector } from "react-redux";
 import './createCustom.css'
 import { useDispatch } from "react-redux";
 import { clearSearch, searchGenres } from "../../redux/search";
-import { addingPendGenre, resetPending } from "../../redux/pendingMovies";
+import { addingPendGenre, removePending, resetPending } from "../../redux/pendingMovies";
 import { addCustom } from "../../redux/customs";
 import { useNavigate } from "react-router-dom";
+import { FaRegTrashAlt } from "react-icons/fa";
 
 function CreateCustom(){
     const nav = useNavigate()
@@ -133,6 +134,10 @@ function CreateCustom(){
         await setGenre('')
       }
 
+      async function deletePending(genre) {
+        await dispatch(removePending(genre))
+      }
+
     return (
         <div className='homeScreen topPaddingHome'>
             <h2 className="customCreateh2">Create a Personal Movie</h2>
@@ -195,8 +200,11 @@ function CreateCustom(){
             {pendingArr.length > 0 && (
                 <div className="displayFlex gap10px genresGroup paddingTop">
                     {pendingArr.map((genre) => (
-                        <div className="white genres" key={genre.id}>
+                        <div className="white genres genresDiv" key={genre.id}>
+                            <div className="genreText">
                             {genre.type === "Science Fiction" ? "SciFi" : genre.type}
+                            </div>
+                            <div onClick={(e) => { e.stopPropagation(); deletePending(genre); }} className="trashCol itemsGenres"><FaRegTrashAlt/></div>
                         </div>
                     ))}
                 </div>

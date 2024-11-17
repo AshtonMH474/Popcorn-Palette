@@ -44,6 +44,9 @@ function MovieDetails(){
     const reviews = useSelector(state=> state.reviews)
     const reviewsArr = Object.values(reviews)
     const navigate = useNavigate()
+    // to change release Date
+
+    const options = { year: 'numeric', month: 'long', day: '2-digit' };
 
 
     useEffect(() => {
@@ -235,7 +238,8 @@ function MovieDetails(){
             <div className={`movieDetailsPage ${user ? '': 'nonUserDetail'}`}>
                 <div className="moveLeft50px movieInfo">
                     <div className="white movieDetailsTitle">{movieItem.title}</div>
-                    <p className="white movieDescription largePaddingBottom">{movieItem.description}</p>
+                    <h4 className="underTitle">Released: {new Date(movieItem.releaseDate).toLocaleDateString('en-US', options)}</h4>
+                    <p className="underTitle movieDescription largePaddingBottom">{movieItem.description}</p>
                     <div className="displayFlex gap10px">
                         <h2 onClick={() => setActive('crew')} className={`white cursor ${active == 'crew' ? 'red':''}`}>CAST</h2>
                         <h2 onClick={() => setActive('genre')} className={`white cursor ${active == 'genre' ? 'red':''}`}>GENRES</h2>
