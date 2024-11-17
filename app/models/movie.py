@@ -30,6 +30,8 @@ class Movie(db.Model):
     description = db.Column(db.Text,nullable=True)
     release_date = db.Column(db.Date,nullable=False)
     avg_rating = db.Column(db.Float,nullable=False,default=0.0)
+    lang = db.Column(db.String(20), nullable=False, default='en')
+    for_home = db.Column(db.Boolean,nullable=False, default=False)
     created_at = db.Column(db.DateTime, default=lambda: datetime.now(timezone.utc))
     updated_at = db.Column(db.DateTime, default=lambda: datetime.now(timezone.utc), onupdate=lambda: datetime.now(timezone.utc))
 
@@ -57,6 +59,8 @@ class Movie(db.Model):
             'description':self.description,
             'releaseDate':self.release_date,
             'avgRating':self.avg_rating,
+            'forHome':self.for_home,
+            'lang':self.lang,
             'createdAt':self.created_at,
             'updatedAt':self.updated_at
         }
@@ -80,6 +84,7 @@ class Movie(db.Model):
             'createdAt':self.created_at,
             'updatedAt':self.updated_at
         }
+
         if self.movie_images:
             new_dict['movieImages'] = [image.to_dict() for image in self.movie_images]
 
