@@ -37,7 +37,7 @@ function MovieDetails(){
 
 
     const crewArr = Object.values(crew)
-    console.log(crewArr)
+
     const [newCrew,setCrew] = useState([])
     const [active,setActive] = useState('crew')
     const [currentIndex, setCurrentIndex] = useState(0);
@@ -214,7 +214,7 @@ function MovieDetails(){
 
 
                 <div className={`displayFlex movieDetailButtons paddingTop ${user ? '' : 'noUserButtons'}`}>
-                <button onClick={handleTrailerClick} className="detailButton"><FaYoutube size={30} className="youtube"/><span>Trailer</span></button>
+                {movieItem.trailer && (<button onClick={handleTrailerClick} className="detailButton"><FaYoutube size={30} className="youtube"/><span>Trailer</span></button>)}
                 {user ? (
                 <>
                     {!isInWatchlist && (<button onClick={() => addToWatchList(movieId)} className="detailButton">Add to Watchlist</button>)}
@@ -242,7 +242,7 @@ function MovieDetails(){
             </div>
 
             </div>
-            <div className={`movieDetailsPage ${user ? '': 'nonUserDetail'}`}>
+            <div className={`movieDetailsPage ${user ? '': 'nonUserDetail'} ${movieItem.trailer? '' : 'noTrailer'} ${hasReview? 'hasReviewMove' : ''}`}>
                 <div className="moveLeft50px movieInfo">
                     <div className="white movieDetailsTitle">{movieItem.title}</div>
                     <h4 className="underTitle">Released: {new Date(movieItem.releaseDate).toLocaleDateString('en-US', options)}</h4>
