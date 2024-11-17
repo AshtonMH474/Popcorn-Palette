@@ -25,6 +25,8 @@ def upgrade():
     op.create_table('movies',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('title', sa.String(length=100), nullable=False),
+    sa.Column('lang', sa.String(length=20), nullable=False),
+    sa.Column('for_home', sa.Boolean(), nullable=False),
     sa.Column('description', sa.Text(), nullable=True),
     sa.Column('release_date', sa.Date(), nullable=False),
     sa.Column('avg_rating', sa.Float(), nullable=False),
