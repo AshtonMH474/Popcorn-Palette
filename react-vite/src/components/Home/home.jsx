@@ -23,6 +23,7 @@ function Home(){
     const [activeMovies,setActiveMovies] = useState([])
     const [currentIndex, setCurrentIndex] = useState(0);
 
+
     useEffect(() => {
         dispatch(getMovies())
 

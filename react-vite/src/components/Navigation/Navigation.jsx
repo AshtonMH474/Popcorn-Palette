@@ -50,7 +50,6 @@ function Navigation({showZ,setZ}) {
 
 
   async function goToMovie(movie){
-    console.log(movie)
     setMovie('')
     setDropDown(false)
     async function getMovie(){
@@ -59,8 +58,9 @@ function Navigation({showZ,setZ}) {
       await dispatch(getCrew(movie))
 
     }
-    await getMovie()
     await nav(`/movies/${movie.id}`)
+    await getMovie()
+
   }
 
   return (
