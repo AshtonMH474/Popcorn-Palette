@@ -1,6 +1,21 @@
 .widthPoster{
     width: 200px;
 }
+.youtube {
+  display: block;
+  padding-left: 15px;
+  padding-bottom: 5px;          /* Make sure the icon is block-level */
+}
+
+.detailButton .youtube {
+  margin-bottom: -30px;         /* Move the icon closer to the text if needed */
+}
+
+.detailButton span {
+  display: inline-block;
+  margin-bottom: -5px;
+  padding-left: 10px;           /* Move the text upwards */
+}
 .movieDetailsPage{
     display: flex;
     justify-content: center;
@@ -63,8 +78,8 @@
 
 .movieInfo{
     position: relative;
-    bottom: 480px;
-    width: 500px
+    bottom: 550px;
+    width: 500px;
 }
 .reviewsContainer{
     position: relative;
@@ -81,7 +96,11 @@
 }
 .nonUserDetail{
     position: relative;
-    top:115px
+    top:170px
+}
+.yesUser{
+  position: relative;
+  bottom: 80px;
 }
 .minHeightBackground{
     min-height: 98.7vh;
@@ -116,6 +135,9 @@
     flex-wrap: wrap;
     padding-bottom: 20px;
   }
+  .crew{
+    padding-bottom: 10px;
+  }
 
   .imgArtist {
     width: 120px;
@@ -127,6 +149,28 @@
   }
   .artist{
     width: 120px;
+  }
+
+  .providerLogo{
+    width: 100px;
+    height: 100px; /* Same as width to make it a perfect circle */
+    border-radius: 50%; /* This makes the image circular */
+    object-fit: cover; /* Ensures the image maintains aspect ratio and fits the circle */
+
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Add a subtle shadow */
+  }
+  .linkNames{
+    padding-top: 10px;
+  }
+  .noProviders{
+    border: 1px white solid;
+    width: 350px;
+    position: relative;
+    right: 25px;
+    text-align: center;
+    height: 70px;
+    padding-top: 50px;
+    font-weight: bold
   }
 
   .fadedWhite{
@@ -186,4 +230,8 @@
 .moveCast{
     position: relative;
     right: 60px;
+}
+
+.underTitle{
+  color:#B0B0B0
 }
