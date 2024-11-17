@@ -1,5 +1,5 @@
 
-
+const RESET_CREW = 'crew/RESET_CREW'
 const GET_CREW = 'crew/GET_CREW'
 
 
@@ -7,6 +7,14 @@ const setCrew = (crew) => ({
     type:GET_CREW,
     payload:crew
 })
+
+const noCrew = () =>({
+    type:RESET_CREW
+})
+
+export const resetCrew = () => async(dispatch) => {
+    dispatch(noCrew())
+}
 
 
 export const getCrew = (movie) => async(dispatch) => {
@@ -41,6 +49,10 @@ function crewReducer(state = initialState,action){
         case GET_CREW:{
             const newState = {}
             action.payload.forEach((artist) => newState[artist.id] = artist)
+            return newState
+        }
+        case RESET_CREW:{
+            const newState = {}
             return newState
         }
         default:
