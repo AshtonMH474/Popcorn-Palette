@@ -55,7 +55,7 @@ export const getMovieDetails = (movieId,movie) => async(dispatch) => {
         const watchProvidersData = await watchProvidersRes.json();
 
         let newWatchArr = []
-        console.log(watchProvidersData.results.US)
+        if(watchProvidersData.results.US){
         let watchProviders =watchProvidersData.results.US.flatrate || watchProvidersData.results.US.buy;
         watchProviders.forEach((link) => {
             if(link.display_priority < 10){
@@ -63,6 +63,7 @@ export const getMovieDetails = (movieId,movie) => async(dispatch) => {
                  newWatchArr.push(link)
             }
         })
+    }
 
         let trailer;
         if (movieDetailsData.results && movieDetailsData.results.length > 0) {
