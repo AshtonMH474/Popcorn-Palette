@@ -36,7 +36,7 @@ export const getMovies = () => async(dispatch) => {
 }
 
 export const getMovieDetails = (movieId,movie) => async(dispatch) => {
-
+    const apiKey = '79009e38d3509a590d6510f6e91c4cd8'
     if(movie && movie.movieImages.length){
 
     const checkMovie = await csrfFetch(`/api/movies`,{
@@ -48,8 +48,31 @@ export const getMovieDetails = (movieId,movie) => async(dispatch) => {
 
 
     const res = await fetch(`/api/movies/${movieId}`);
+    const movieDetailsRes = await fetch(`https://api.themoviedb.org/3/movie/${movieId}/videos?api_key=${apiKey}`);
+    const movieDetailsData = await movieDetailsRes.json();
     if(res.ok){
+        const watchProvidersRes = await fetch(`https://api.themoviedb.org/3/movie/${movieId}/watch/providers?api_key=${apiKey}`);
+        const watchProvidersData = await watchProvidersRes.json();
+
+        let newWatchArr = []
+        console.log(watchProvidersData.results.US)
+        let watchProviders =watchProvidersData.results.US.flatrate || watchProvidersData.results.US.buy;
+        watchProviders.forEach((link) => {
+            if(link.display_priority < 10){
+                link.imgUrl = `https://www.themoviedb.org/t/p/w500/${link.logo_path}`
+                 newWatchArr.push(link)
+            }
+        })
+
+        let trailer;
+        if (movieDetailsData.results && movieDetailsData.results.length > 0) {
+            // Find the first trailer (or you can filter by other criteria if needed)
+            trailer = movieDetailsData.results.find(vid => vid.type === 'Trailer' && vid.site === 'YouTube');
+        }
+
         const data = await res.json()
+        data.movie.trailer = trailer ? `https://www.youtube.com/watch?v=${trailer.key}` : null;
+        data.movie.watchProviders = newWatchArr
         await dispatch(getMovie(data))
         return data
     }

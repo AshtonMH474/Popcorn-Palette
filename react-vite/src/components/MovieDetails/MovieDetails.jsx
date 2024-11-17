@@ -16,6 +16,7 @@ import { HiArrowSmallRight } from "react-icons/hi2";
 import { HiArrowSmallLeft } from "react-icons/hi2";
 import { useModal } from '../../context/Modal';
 import AddToCollection from "./AddtoCol";
+import { FaYoutube } from 'react-icons/fa';
 
 
 function MovieDetails(){
@@ -47,7 +48,7 @@ function MovieDetails(){
     // to change release Date
 
     const options = { year: 'numeric', month: 'long', day: '2-digit' };
-
+    console.log(movieItem)
 
     useEffect(() => {
         const fetchData = async () => {
@@ -187,12 +188,17 @@ function MovieDetails(){
         setZ(false)
         setModalContent(<AddToCollection movieItem={movieItem} year={year}/>)
     }
+    const handleTrailerClick = () => {
+        if (movieItem.trailer) {
+          window.open(movieItem.trailer, '_blank'); // Opens the trailer in a new tab
+        }
+      };
     if(!movie) return <h1>Loading...</h1>
 
     return (
         <>
         <div className="homeScreen minHeightBackground">
-        {movieItem ? (
+            {movieItem ? (
             <>
             <div className="movieOptions">
                 <div className="movieItemDetails lightBlack widthPoster">
@@ -208,6 +214,7 @@ function MovieDetails(){
 
 
                 <div className={`displayFlex movieDetailButtons paddingTop ${user ? '' : 'noUserButtons'}`}>
+                <button onClick={handleTrailerClick} className="detailButton"><FaYoutube size={30} className="youtube"/><span>Trailer</span></button>
                 {user ? (
                 <>
                     {!isInWatchlist && (<button onClick={() => addToWatchList(movieId)} className="detailButton">Add to Watchlist</button>)}
@@ -243,9 +250,10 @@ function MovieDetails(){
                     <div className="displayFlex gap10px">
                         <h2 onClick={() => setActive('crew')} className={`white cursor ${active == 'crew' ? 'red':''}`}>CAST</h2>
                         <h2 onClick={() => setActive('genre')} className={`white cursor ${active == 'genre' ? 'red':''}`}>GENRES</h2>
+                        <h2 onClick={() => setActive('watch')} className={`white cursor ${active == 'watch' ? 'red':''}`}>PROVIDERS</h2>
                     </div>
                     {active == 'crew' && (
-                        <div className={`displayFlex gap10px ${currentIndex > 0 ? 'moveCast' : ''}`}>
+                        <div className={`displayFlex crew gap10px ${currentIndex > 0 ? 'moveCast' : ''}`}>
                         {currentIndex > 0 && (<button className={`arrowCrew arrowLeftCrew ${showZ ? 'arrowZ': ''}`}  onClick={prevCast} ><HiArrowSmallLeft/></button>)}
                         {movieItem && newCrew.length && newCrew.slice(currentIndex,currentIndex+4).map(artist => (
                             <div key={artist.id} className="artist">
@@ -267,6 +275,20 @@ function MovieDetails(){
                                 {genre.type === "Science Fiction" ? "SciFi" : genre.type}
                             </div>
                         ))}
+                    </div>)}
+                    {active == 'watch' && (<div className="displayFlex gap10px">
+                        {movieItem && movieItem.watchProviders.length && movieItem.watchProviders
+                        .map(watch => (
+                            <div key={watch.id} className="white">
+                                <img className="providerLogo" src={watch.imgUrl} alt='link'/>
+                                {watch.imgUrl && (<div className="white artistName bold linkNames">{watch.provider_name == 'Amazon Prime Video' ? 'Amazon Prime' : watch.provider_name}</div>)}
+                            </div>
+                        ))}
+                        {movieItem && !movieItem.watchProviders.length && (
+                            <div className="white noProviders">
+                                No Providers
+                            </div>
+                        )}
                     </div>)}
                     <div>
                         <Reviews movieId={movieId}/>
