@@ -48,7 +48,6 @@ function MovieDetails(){
     // to change release Date
 
     const options = { year: 'numeric', month: 'long', day: '2-digit' };
-    console.log(movieItem)
 
     useEffect(() => {
         const fetchData = async () => {
