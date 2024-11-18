@@ -245,7 +245,7 @@ function MovieDetails(){
             <div className={`movieDetailsPage ${user ? '': 'nonUserDetail'} ${movieItem.trailer? '' : 'noTrailer'} ${hasReview? 'hasReviewMove' : ''}`}>
                 <div className="moveLeft50px movieInfo">
                     <div className="white movieDetailsTitle">{movieItem.title}</div>
-                    <h4 className="underTitle">Released: {new Date(movieItem.releaseDate).toLocaleDateString('en-US', options)}</h4>
+                    <h4 className="underTitle">Release Date: {new Date(movieItem.releaseDate).toLocaleDateString('en-US', options)}</h4>
                     <p className="underTitle movieDescription largePaddingBottom">{movieItem.description}</p>
                     <div className="displayFlex gap10px">
                         <h2 onClick={() => setActive('crew')} className={`white cursor ${active == 'crew' ? 'red':''}`}>CAST</h2>
