@@ -200,7 +200,8 @@ function MovieDetails(){
         <div className="homeScreen minHeightBackground">
             {movieItem ? (
             <>
-            <div className="movieOptions">
+                <div className="movieScreenWrapper">
+                <div className="movieOptions">
                 <div className="movieItemDetails lightBlack widthPoster">
                     <img className='detailsPoster' src={movieItem.movieImages[0].imgUrl} alt='moviePoster' />
                     <div className='paddingLeft10px'>
@@ -210,13 +211,13 @@ function MovieDetails(){
                             </div>
                     </div>
 
-                </div>
+                    </div>
 
 
-                <div className={`displayFlex movieDetailButtons paddingTop ${user ? '' : 'noUserButtons'}`}>
+                    <div className={`displayFlex movieDetailButtons paddingTop`}>
                 {movieItem.trailer && (<button onClick={handleTrailerClick} className="detailButton"><FaYoutube size={30} className="youtube"/><span>Trailer</span></button>)}
-                {user ? (
-                <>
+                    {user ? (
+                    <>
                     {!isInWatchlist && (<button onClick={() => addToWatchList(movieId)} className="detailButton">Add to Watchlist</button>)}
                     {isInWatchlist && (<button onClick={() => removeFromWatchlist(movieId)} className="detailButton">Remove From Watchlist</button>)}
                     <button onClick={openAddCollection} className="detailButton">Add to a Collection</button>
@@ -225,7 +226,7 @@ function MovieDetails(){
                         Add Review
                     </button>
                     )}
-                {hasReview && (
+                    {hasReview && (
                     <>
                         <button onClick={openUpdateReview} className="detailButton noListStyleType">
                         Update Your Review
@@ -234,16 +235,17 @@ function MovieDetails(){
                         Delete Your Review
                         </button>
                     </>
-                )}
-                </>
-                ) : (
-                <div className="noUserPadding"></div>  // Placeholder when no user is present
-                )}
-            </div>
+                    )}
+                    </>
+                    ) : (
+                    <div></div>  // Placeholder when no user is present
+                    )}
+                    </div>
 
-            </div>
-            <div className={`movieDetailsPage ${user ? '': 'nonUserDetail'} ${movieItem.trailer? '' : 'noTrailer'} ${hasReview? 'hasReviewMove' : ''}`}>
-                <div className="moveLeft50px movieInfo">
+
+                </div>
+                <div className={`movieDetailsPage ${movieItem.trailer? '' : 'noTrailer'} ${hasReview? 'hasReviewMove' : ''}`}>
+                    <div className="moveLeft50px movieInfo">
                     <div className="white movieDetailsTitle">{movieItem.title}</div>
                     <h4 className="underTitle">Release Date: {new Date(movieItem.releaseDate).toLocaleDateString('en-US', options)}</h4>
                     <p className="underTitle movieDescription largePaddingBottom">{movieItem.description}</p>
@@ -291,12 +293,12 @@ function MovieDetails(){
                             </div>
                         )}
                     </div>)}
-                    <div>
+                    <div className="paddingBottomLarge">
                         <Reviews movieId={movieId}/>
                     </div>
                 </div>
             </div>
-
+            </div>
             </>
             ) : (
                 <div>Loading...</div>

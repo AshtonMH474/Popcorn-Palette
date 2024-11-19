@@ -96,7 +96,7 @@ function Collections() {
       <div className='homeScreen topPaddingHome'>
         <div>
           <div className="displayFlex center topPaddingHome">
-          <h1 className="white  ">Your Collections</h1>
+          <h1 className="white headerCol">Your Collections</h1>
           <button className="createCol noListStyleType" onClick={openModalCreate}>Create Collection</button>
           </div>
           <div className="paddingFromFooter"></div>
@@ -133,7 +133,7 @@ function Collections() {
 
                 </div>
                 <div className='collectionInfo'>
-                  <h2 onClick={() => navCollection(col)} className="white cursor">{col.title}</h2>
+                  <h2 onClick={() => navCollection(col)} className="white cursor hoverRed">{col.title}</h2>
                   <div className="displayFlex">
                     {col.movies && col.movies.length && (<h3 className="numberMovies">{col.movies.length} Films</h3>)}
                     {!col.movies && (<h3 className="numberMovies">0 Films</h3>)}
