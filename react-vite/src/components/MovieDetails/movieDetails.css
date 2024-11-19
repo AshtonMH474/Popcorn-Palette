@@ -104,6 +104,7 @@
     min-height: 98.7vh;
 }
 
+
   .marginButton{
     margin-bottom: 84px;
   }
@@ -163,14 +164,8 @@
     padding-top: 50px;
     font-weight: bold
   }
-  .noTrailer{
-    position: relative;
-    top: 60px;
-  }
-  .hasReviewMove{
-    position: relative;
-    bottom: 15px;
-  }
+
+
 
   .fadedWhite{
     color : gray
