@@ -13,6 +13,7 @@ import { resetCrew } from "../../redux/crew";
 
 
 
+
 function Recent({recent}){
     const [currentIndex, setCurrentIndex] = useState(0);
     const dispatch = useDispatch()
@@ -23,19 +24,22 @@ function Recent({recent}){
     const navigate = useNavigate()
 
 
+
     useEffect(() => {
         // Whenever recent or watchlist changes, update local movie state
-        const recentMovies = recent
+       setMovies(
+        recent
         .sort((a, b) => {
-    const dateA = new Date(a.releaseDate);
-    const dateB = new Date(b.releaseDate);
-    return dateB - dateA; // Sort by most recent (descending order)
-        })
-    .map(movie => ({
-    ...movie,
-    isInWatchlist: Object.values(watchlist).some(watchlistMovie => watchlistMovie.id === movie.id)
-    }));
-    setMovies(recentMovies);
+        const dateA = new Date(a.releaseDate);
+        const dateB = new Date(b.releaseDate);
+        return dateB - dateA; // Sort by most recent (descending order)
+        }).map(movie => ({
+        ...movie,
+        isInWatchlist: Object.values(watchlist).some(
+        watchlistMovie => watchlistMovie.id === movie.id
+      )
+    }))
+);
     }, [recent, watchlist]);
 
 
