@@ -47,6 +47,7 @@ function MovieDetails(){
     const reviewsArr = Object.values(reviews)
     const navigate = useNavigate()
     // to change release Date
+    console.log(movieItem)
 
     const options = { year: 'numeric', month: 'long', day: '2-digit' };
 
@@ -244,7 +245,7 @@ function MovieDetails(){
 
 
                 </div>
-                <div className={`movieDetailsPage ${movieItem.trailer? '' : 'noTrailer'} ${hasReview? 'hasReviewMove' : ''}`}>
+                <div className={`movieDetailsPage`}>
                     <div className="moveLeft50px movieInfo">
                     <div className="white movieDetailsTitle">{movieItem.title}</div>
                     <h4 className="underTitle">Release Date: {new Date(movieItem.releaseDate).toLocaleDateString('en-US', options)}</h4>
