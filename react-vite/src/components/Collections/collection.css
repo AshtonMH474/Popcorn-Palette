@@ -3,6 +3,9 @@
   align-items: center;
   gap:650px
 }
+.headerCol{
+  padding-left: 80px;
+}
 .createCol{
   width: 200px;
   padding: 10px 20px;
@@ -17,6 +20,10 @@
 .createCol:hover {
   background-color: #B22222;
   cursor: pointer;
+}
+
+.hoverRed:hover{
+  color:#B22222
 }
 
 .allCollections{
