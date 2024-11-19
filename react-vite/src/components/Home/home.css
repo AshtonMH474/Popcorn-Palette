@@ -27,11 +27,12 @@
 .movieFlex{
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
+    gap: 15px;
     position: relative;
     left: 19%;
 
 }
+
 
 .moveMovie{
     left: 16%;
@@ -52,14 +53,13 @@ padding-left: 10px;
 .movieItem {
     background-color: #36454F;
     border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(255, 255, 255, 0.1), /* Light shadow to contrast against dark bg */
-    0 1px 3px rgba(255, 255, 255, 0.08); /* Subtle, layered shadow */
-    transition: transform 0.2s, box-shadow 0.2s ease;
+    border: 2px solid transparent; /* Start with transparent border */
+    transition: transform 0.3s ease, border 0.3s ease; /* Smooth transition for both scale and border */
 }
+
 .movieItem:hover {
-    transform: scale(1.05);
-    box-shadow: 0 10px 15px rgba(255, 255, 255, 0.2), /* Brighter shadow on hover */
-    0 4px 6px rgba(255, 255, 255, 0.1);
+    transform: scale(1.05); /* Scale the item slightly on hover */
+    border: 2px solid white; /* Change border color to white on hover */
 }
 
 .arrow{
