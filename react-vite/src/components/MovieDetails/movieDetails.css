@@ -16,9 +16,15 @@
   margin-bottom: -5px;
   padding-left: 10px;           /* Move the text upwards */
 }
+.movieScreenWrapper{
+  display: flex;
+  justify-content: center;
+}
 .movieDetailsPage{
-    display: flex;
-    justify-content: center;
+
+    position: relative;
+    top: 645px;
+
 }
 .movieItemDetails{
     background-color: #36454F;
@@ -26,9 +32,7 @@
 
 }
 .movieOptions{
-    position: relative;
-    top: 90px;
-    left: 22%;
+  padding-top: 100px;
 }
 
 .paddingTop{
@@ -94,25 +98,12 @@
     top:20px;
     left: 5%;
 }
-.nonUserDetail{
-    position: relative;
-    top:170px
-}
-.yesUser{
-  position: relative;
-  bottom: 80px;
-}
+
+
 .minHeightBackground{
     min-height: 98.7vh;
 }
-.noUserButtons {
-    height: 124.6px;
-  }
 
-  .noUserPadding {
-    height: 0;
-    padding-top: 20px;
-  }
   .marginButton{
     margin-bottom: 84px;
   }
@@ -242,4 +233,7 @@
 
 .underTitle{
   color:#B0B0B0
+}
+.paddingBottomLarge{
+  padding-bottom: 200px;
 }
