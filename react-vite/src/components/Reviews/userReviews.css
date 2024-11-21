@@ -16,7 +16,13 @@
     transition: transform 0.2s;
     min-height: 325px;
     max-height: 325px;
+    border: 2px solid transparent; /* Start with transparent border */
+    transition: transform 0.3s ease, border 0.3s ease;
 
+}
+
+.reviewMovieItem:hover{
+    border: 2px solid white;
 }
 
 .reviewMovieItem:hover {
