@@ -40,7 +40,8 @@
 .star{
     position: relative;
     right: 1px;
-    top:1px;
+    top:2px;
+    color: #FFD700;
 }
 .paddingLeft10px{
 padding-left: 10px;
@@ -51,8 +52,9 @@ padding-left: 10px;
     right: 390px;
 }
 .movieItem {
-    background-color: #36454F;
+    background-color: #1a1a1a;
     border-radius: 10px;
+    padding-bottom: 5px;
     border: 2px solid transparent; /* Start with transparent border */
     transition: transform 0.3s ease, border 0.3s ease; /* Smooth transition for both scale and border */
 }

@@ -3,8 +3,8 @@
 }
 .youtube {
   display: block;
-  padding-left: 15px;
-  padding-bottom: 6px;          /* Make sure the icon is block-level */
+  padding-left: 10px;
+  padding-bottom: 5.5px;          /* Make sure the icon is block-level */
 }
 
 .detailButton .youtube {
@@ -28,8 +28,9 @@
 
 }
 .movieItemDetails{
-    background-color: #36454F;
+  background-color: #1a1a1a;
     border-radius: 10px;
+    padding-bottom: 5px;
 
 
 }
@@ -41,27 +42,67 @@
     padding-top: 50px;
 }
 .detailButton {
-    width: 200px;
-    padding: 10px 20px;
-    background-color: #708090; /* SlateGray color */
-    color: #fff;
-    border-radius: 5px;
-    font-size: 16px;
-    font-weight: 500;
-    text-transform: uppercase;
-    transition: background-color 0.3s ease;
-
+  width: 200px;
+  padding: 12px 24px; /* Increased padding for more space */
+  background: linear-gradient(45deg, #708090, #2f4f4f); /* SlateGray to a darker greenish-gray gradient */
+  color: #fff;
+  border-radius: 8px; /* Rounded corners */
+  font-size: 18px; /* Slightly larger text */
+  font-weight: 600; /* Bold font */
+  text-transform: uppercase;
+  text-align: center;
+  border: none; /* Remove default border */
+  cursor: pointer;
+  transition: all 0.3s ease; /* Smooth transition for all properties */
+  outline: none; /* Remove the outline */
+  position: relative; /* Allow for pseudo-element positioning */
 }
 
+/* Hover effect */
 .detailButton:hover {
-    background-color: #B22222;
-    cursor: pointer;
+  background: linear-gradient(45deg, #B22222, #8B0000); /* Gradient from Firebrick Red to Dark Red */
+  transform: translateY(-4px); /* Slightly raise the button */
+
 }
 
-.displayFlex.movieDetailButtons {
+/* Active effect when clicked */
+.detailButton:active {
+  transform: translateY(-2px); /* Slightly pressed down effect */
+
+}
+
+/* Focus effect when the button is focused */
+.detailButton:focus {
+  outline: none;
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.6); /* Focus glow effect */
+}
+
+/* Add a subtle shine effect on hover */
+.detailButton:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(45deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2));
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.detailButton:hover:before {
+  opacity: 1;
+}
+
+
+
+
+
+
+.movieDetailButtons {
     display: flex;
     flex-direction: column;
-    gap: 5px; /* Spacing between buttons */
+    gap: 10px; /* Spacing between buttons */
     flex-wrap: wrap; /* Allows wrapping on smaller screens */
     justify-content: flex-start;
     padding-top: 15px; /* Padding at the top */
@@ -115,23 +156,40 @@
     margin-bottom: 84px;
   }
   .genres{
-    height: 30px;
-    min-width: 100px;
-    padding: 0px 15px;
+    height: 40px;
+    min-width: 120px;
+    padding: 0 20px;
     text-align: center;
-    padding-top: 15px;
-    font-size: 15px;
-    text-transform: uppercase;
+    font-size: 16px;
+    font-weight: 500;
+    text-transform: capitalize;
     background-color: #36454F;
-    border-radius: 20px;
+    border-radius: 25px;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease-in-out;
+
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   }
+  .genres:hover {
+    background-color: #B22222;
+    transform: scale(1.05);
+    transition: all 0.3s ease-in-out;
+  }
+
 
   .gap10px{
     gap: 20px;
   }
   .genresGroup{
+    display: flex;
     flex-wrap: wrap;
+    gap: 15px; /* Slightly smaller gap between genres */
     padding-bottom: 20px;
+    justify-content: flex-start;
+    padding-top: 10px;
   }
   .crew{
     padding-bottom: 10px;
@@ -214,7 +272,6 @@
 }
   .currProvider {
     display: flex;
-    padding-bottom: 20px;
     align-items: center;
     gap: 5px;
 
@@ -320,7 +377,14 @@
 }
 
 .reviewBorder{
-  border-top: 1px solid #708090;
+  border-bottom: 1px solid #708090;
   position: relative;
   top: 20px;
+  font-size: 20px;
+  padding-bottom: 10px;
+}
+
+.reviewDiv{
+  border-bottom: 1px solid #708090;
+  padding-bottom: 10px;
 }

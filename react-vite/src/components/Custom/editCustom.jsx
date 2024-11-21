@@ -141,9 +141,9 @@ function EditCustom(){
       const searchRef = useRef(null)
 
       async function pendGenre(genre) {
-        if(pendingArr && pendingArr.length > 4){
+        if(pendingArr && pendingArr.length > 3){
             let obj = {
-                genres:'5 Genres or less'
+                genres:'4 Genres or less'
             }
             setErrors(obj)
             await dispatch(clearSearch())
@@ -225,17 +225,17 @@ function EditCustom(){
                 </div>
                 )}
         {pendingArr.length > 0 && (
-            <div className="displayFlex gap10px genresGroup paddingTop">
-                {pendingArr.map((genre) => (
-                    <div className="white genres genresDiv" key={genre.id}>
-                        <div className="genreText">
-                        {genre.type === "Science Fiction" ? "SciFi" : genre.type}
+                <div className="displayFlex gap10px genresGroup moveDown">
+                    {pendingArr.map((genre) => (
+                        <div className="white genres genresDiv" key={genre.id}>
+                            <div className="genreText">
+                            {genre.type === "Science Fiction" ? "SciFi" : genre.type}
+                            </div>
+                            <div onClick={(e) => { e.stopPropagation(); deletePending(genre); }} className="trashCol itemsGenres"><FaRegTrashAlt/></div>
                         </div>
-                        <div onClick={(e) => { e.stopPropagation(); deletePending(genre); }} className="trashCol itemsGenres"><FaRegTrashAlt/></div>
-                    </div>
-                ))}
-            </div>
-        )}
+                    ))}
+                </div>
+            )}
     </div>
     <div className="form-group">
     <label className="imageLabel" htmlFor="image">Select Poster Image
