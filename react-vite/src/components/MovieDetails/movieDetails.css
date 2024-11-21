@@ -4,7 +4,7 @@
 .youtube {
   display: block;
   padding-left: 15px;
-  padding-bottom: 5px;          /* Make sure the icon is block-level */
+  padding-bottom: 6px;          /* Make sure the icon is block-level */
 }
 
 .detailButton .youtube {
@@ -30,6 +30,7 @@
 .movieItemDetails{
     background-color: #36454F;
     border-radius: 10px;
+
 
 }
 .movieOptions{
@@ -68,9 +69,13 @@
 .detailsPoster{
     height: 300px;
     width: 200px;
-    border-radius: 8px;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
     overflow: hidden;
     object-fit: cover;
+
 }
 .movieDescription{
     word-break: break-word;
@@ -138,32 +143,112 @@
     border-radius: 50%; /* This makes the image circular */
     object-fit: cover; /* Ensures the image maintains aspect ratio and fits the circle */
 
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Add a subtle shadow */
   }
   .artist{
     width: 120px;
   }
+  .providers {
+    border-radius: 15px; /* Smooth rounded corners */
+    padding: 20px; /* Padding inside the container */
+    border: 1px solid rgba(255, 255, 255, 0.2); /* Subtle white border with transparency */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5); /* Soft shadow to lift the container */
+    color: #fff; /* Text color white for contrast */
+    backdrop-filter: blur(10px); /* Optional: adds a blurred effect for modern look */
+    max-width: 100%; /* Ensures it doesn’t overflow horizontally */
+    width: auto;
+    margin: 20px 0;
 
-  .providerLogo{
-    width: 100px;
-    height: 100px; /* Same as width to make it a perfect circle */
-    border-radius: 50%; /* This makes the image circular */
+  }
+
+  .providerLogo {
+    width: 70px;
+    height: 70px; /* Same as width to make it a perfect circle */
+    border-radius: 20px; /* This makes the image circular */
     object-fit: cover; /* Ensures the image maintains aspect ratio and fits the circle */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add a subtle shadow for depth */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition on hover */
+    border:1px white solid
+  }
 
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Add a subtle shadow */
+  .providerLogo:hover {
+    transform: scale(1.05); /* Slight zoom effect on hover */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Stronger shadow on hover */
   }
-  .linkNames{
+  .optionsBuy{
     padding-top: 10px;
+    gap: 10px;
+    padding-left: 8px;
   }
-  .noProviders{
-    border: 1px white solid;
-    width: 350px;
-    position: relative;
-    right: 25px;
+  .buy{
+    height: 20px;
+    min-width: 50px;
+    padding: 0px 15px;
     text-align: center;
-    height: 70px;
-    padding-top: 50px;
-    font-weight: bold
+    padding-top: 5px;
+    font-size: 15px;
+    text-transform: uppercase;
+    /* background-color: #36454F; */
+    border-radius: 20px;
+  }
+  .buy:first-child {
+    background-color: #28a745; /* Green for BUY */
+    color: white; /* White text */
+    border: 2px solid #218838; /* Darker green border */
+}
+
+.buy:first-child:hover {
+    background-color: #218838; /* Darker green on hover */
+    border-color: #1e7e34; /* Darker border on hover */
+}
+
+/* Style for the RENT button */
+.buy:last-child {
+  background-color: #007bff; /* Yellow for RENT */
+    color: white; /* Black text */
+    border: 2px solid #0056b3;/* Darker yellow border */
+}
+
+.buy:last-child:hover {
+  background-color: #0056b3; /* Darker yellow on hover */
+  border-color: #004085; /* Darker border on hover */
+}
+  .currProvider {
+    display: flex;
+    padding-bottom: 20px;
+    align-items: center;
+    gap: 5px;
+
+  }
+
+  .linkNames {
+    font-weight: bold;
+    color: #fff;
+    font-size: 1rem;
+    text-transform: capitalize;
+    transition: color 0.3s ease;
+    padding-left: 10px;
+    padding-top: 6px;
+    text-decoration: none;
+  }
+
+  .linkNames:hover {
+    color: #B22222; /* Hover effect to change text color */
+  }
+  .noTextUnderline{
+    text-decoration: none;
+  }
+
+  .noProviders {
+
+    color: #fff;
+    text-align: center;
+    font-weight: bold;
+    padding: 50px 0;
+    border-radius: 10px;
+    width: 350px;
+    margin: 0 auto; /* Center the "No Providers" box */
+
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow */
   }
 
 
@@ -232,4 +317,10 @@
 }
 .paddingBottomLarge{
   padding-bottom: 200px;
+}
+
+.reviewBorder{
+  border-top: 1px solid #708090;
+  position: relative;
+  top: 20px;
 }

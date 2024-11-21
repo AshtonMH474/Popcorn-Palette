@@ -99,7 +99,11 @@ padding-left: 10px;
 .posters {
     height: 300px;
     width: 200px;
-    border-radius: 8px;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+
     overflow: hidden; /* Ensures no part of the image spills over */
     object-fit: cover; /* Ensures the image covers the div without stretching */
 }

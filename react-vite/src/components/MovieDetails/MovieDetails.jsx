@@ -280,20 +280,51 @@ function MovieDetails(){
                             </div>
                         ))}
                     </div>)}
-                    {active == 'watch' && (<div className="displayFlex gap10px">
-                        {movieItem && movieItem.watchProviders.length && movieItem.watchProviders
-                        .map(watch => (
-                            <div key={watch.id} className="white">
-                                <img className="providerLogo" src={watch.imgUrl} alt='link'/>
-                                {watch.imgUrl && (<div className="white artistName bold linkNames">{watch.provider_name == 'Amazon Prime Video' ? 'Amazon Prime' : watch.provider_name}</div>)}
-                            </div>
-                        ))}
-                        {movieItem && !movieItem.watchProviders.length && (
-                            <div className="white noProviders">
-                                No Providers
-                            </div>
-                        )}
-                    </div>)}
+                    {active === 'watch' && (
+  <div className="providers gap10px">
+    {movieItem?.watchProviders?.length > 0 ? (
+      movieItem.watchProviders.map((watch,index) => (
+        <div key={`${watch.provider_name}-${index}}`} className="displayFlex currProvider white">
+          <a href={watch.link}
+              className="white bold linkNames"
+              target="_blank"
+              rel="noopener noreferrer">
+            <img className="providerLogo" src={watch.imgUrl} alt="link" /></a>
+          <div>
+            {watch.imgUrl && (
+
+              <a
+              href={watch.link}
+              className="white bold linkNames"
+              target="_blank"
+              rel="noopener noreferrer"
+
+            >
+              {watch.provider_name === 'Amazon Prime Video'
+                ? 'Amazon Prime'
+                : watch.provider_name}
+            </a>
+            )}
+            <div className="displayFlex optionsBuy">
+              {watch.buy && <div className="buy cursor"><a href={watch.link}
+              className="white noTextUnderline"
+              target="_blank"
+              rel="noopener noreferrer">BUY</a></div>}
+              {watch.rent && <div className="buy cursor"><a href={watch.link}
+              className="white  noTextUnderline"
+              target="_blank"
+              rel="noopener noreferrer">RENT</a></div>}
+            </div>
+          </div>
+        </div>
+      ))
+    ) : (
+      <div className="white noProviders">
+        No Providers
+      </div>
+    )}
+  </div>
+)}
                     <div className="paddingBottomLarge">
                         <Reviews movieId={movieId}/>
                     </div>

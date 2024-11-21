@@ -16,7 +16,7 @@ function Reviews({movieId}){
     return (
         <>
         {reviewsArr.length > 0 && reviewsArr[0].movieId == movieId && (
-        <>
+        <div className="reviewBorder">
             <h2 className="white">REVIEWS</h2>
             <div>
                 {reviewsArr.reverse().map(review => (
@@ -29,7 +29,7 @@ function Reviews({movieId}){
                     </div>
                 ))}
             </div>
-        </>
+        </div>
         )}
 
         </>
