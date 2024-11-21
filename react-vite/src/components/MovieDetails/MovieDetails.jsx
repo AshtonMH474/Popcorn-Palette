@@ -284,7 +284,9 @@ function MovieDetails(){
   <div className="providers gap10px">
     {movieItem?.watchProviders?.length > 0 ? (
       movieItem.watchProviders.map((watch,index) => (
-        <div key={`${watch.provider_name}-${index}}`} className="displayFlex currProvider white">
+        <div key={`${watch.provider_name}-${index}}`} className="displayFlex currProvider white" style={{
+            paddingBottom: movieItem.watchProviders.length > 1 ? '20px' : '',
+          }}>
           <a href={watch.link}
               className="white bold linkNames"
               target="_blank"
@@ -325,7 +327,7 @@ function MovieDetails(){
     )}
   </div>
 )}
-                    <div className="paddingBottomLarge">
+                    <div className="paddingBottomLarge ">
                         <Reviews movieId={movieId}/>
                     </div>
                 </div>

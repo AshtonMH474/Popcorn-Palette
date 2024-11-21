@@ -119,9 +119,9 @@ function CreateCustom(){
 
 
       async function pendGenre(genre) {
-        if(pendingArr && pendingArr.length > 4){
+        if(pendingArr && pendingArr.length > 3){
             let obj = {
-                genres:'5 Genres or less'
+                genres:'4 Genres or less'
             }
             setErrors(obj)
             await dispatch(clearSearch())
@@ -198,7 +198,7 @@ function CreateCustom(){
                     </div>
                     )}
             {pendingArr.length > 0 && (
-                <div className="displayFlex gap10px genresGroup paddingTop">
+                <div className="displayFlex gap10px genresGroup moveDown">
                     {pendingArr.map((genre) => (
                         <div className="white genres genresDiv" key={genre.id}>
                             <div className="genreText">

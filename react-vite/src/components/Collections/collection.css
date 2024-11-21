@@ -8,18 +8,21 @@
 }
 .createCol{
   width: 200px;
-  padding: 10px 20px;
-  background-color: #708090;
+  padding: 12px 24px;
+  background: linear-gradient(45deg, #708090, #2f4f4f);
   color: #fff;
   border-radius: 8px;
   font-size: 14px;
   font-weight: 500;
   text-transform: uppercase;
-  transition: background-color 0.3s ease;
+  text-align: center;
+  border: none; /* Remove default border */
+  cursor: pointer;
+  transition: all 0.3s ease; /* Smooth transition for all properties */
+  outline: none;
 }
 .createCol:hover {
-  background-color: #B22222;
-  cursor: pointer;
+  background: linear-gradient(45deg, #B22222, #8B0000); /* Gradient from Firebrick Red to Dark Red */
 }
 
 .hoverRed:hover{
