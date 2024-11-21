@@ -99,7 +99,7 @@ function CollectionDetails(){
                         <>
                         {movies.map((movie) => (
                             <div key={movie.id} className="movie-itemCol" onClick={() => navMovie(movie)}>
-                                <img className="posters" src={movie.movieImages[0].imgUrl} alt='poster'/>
+                                <img className="posters colPosters" src={movie.movieImages[0].imgUrl} alt='poster'/>
                                 <div className="movie-title items">{movie.title}</div>
                                 <div onClick={(e) => { e.stopPropagation(); deleteMovie(movie); }} className="trashCol items"><FaRegTrashAlt/></div>
                             </div>

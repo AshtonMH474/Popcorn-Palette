@@ -35,24 +35,91 @@ export const getMovieDetails = (movieId,movie) => async(dispatch) => {
     }
 
 
+
     const res = await fetch(`/api/movies/${movieId}`);
     const movieDetailsRes = await fetch(`https://api.themoviedb.org/3/movie/${movieId}/videos?api_key=${apiKey}`);
     const movieDetailsData = await movieDetailsRes.json();
+
 
     if(res.ok){
         const watchProvidersRes = await fetch(`https://api.themoviedb.org/3/movie/${movieId}/watch/providers?api_key=${apiKey}`);
         const watchProvidersData = await watchProvidersRes.json();
 
+        const providerUrlMap = {
+            8: 'https://www.netflix.com/',  // Netflix finsiehd
+            2: 'https://tv.apple.com/channel/tvs.sbd.4000?mttn3pid=Google%20AdWords&mttnagencyid=a5e&mttncc=US&mttnsiteid=143238&mttnsubad=OUS2019801_1-714069005165-c&mttnsubkw=75222218304__l8rPaTYl_&mttnsubplmnt=_adext_',  // Apple TV finsished
+            10: 'https://www.amazon.com/gp/video/storefront',  // Amazon Video finsished
+            15: 'https://www.hulu.com/welcome',  // Hulu finsiehd
+            337: 'https://www.disneyplus.com/',  // Disney+ finsished
+            386: 'https://www.peacocktv.com/',  // Peacock
+            1899:'https://www.max.com/', //max finsished
+            1825:'https://www.amazon.com/gp/video/offers?benefitId=hbomaxus', //max amazon channel finsished
+            283:'https://www.crunchyroll.com/',//curnchyroll finsished
+            1968:'https://www.amazon.com/gp/video/offers?benefitId=crunchyrollus&ref=DVM_PDS_GOO_US_AC_C_A_CRNCHYRLL_mkw_sMZxf5jcS-dc&mrntrk=pcrid_677890252292_slid__pgrid_160514214891_pgeo_9199127_x__adext__ptid_kwd-912938373981', //finsished
+            257:'https://www.fubo.tv/welcome', //fubotv finsiehd
+            9:'https://www.primevideo.com/offers/nonprimehomepage/ref=dv_web_force_root' //prime video
+          };
+
+
+
         let newWatchArr = []
+        let obj = {}
         if(watchProvidersData.results.US){
-        let watchProviders =watchProvidersData.results.US.flatrate || watchProvidersData.results.US.buy;
-        watchProviders.forEach((link) => {
-            if(link.display_priority < 10){
+        let stream = watchProvidersData.results.US.flatrate
+        let buy = watchProvidersData.results.US.buy;
+        let rent = watchProvidersData.results.US.rent;
+        if(stream && stream.length){
+        stream.forEach((link) => {
+            if(link.display_priority < 16){
+                if(obj[link.provider_name] == undefined){
                 link.imgUrl = `https://www.themoviedb.org/t/p/w500/${link.logo_path}`
-                 newWatchArr.push(link)
+                link.buy = false
+                link.rent = false
+                obj[link.provider_name] = link
+                }
             }
         })
+        }
+        if(buy && buy.length){
+        buy.forEach((link) => {
+            if(link.display_priority < 16){
+                if(obj[link.provider_name] == undefined){
+                    link.imgUrl = `https://www.themoviedb.org/t/p/w500/${link.logo_path}`
+                    link.buy = true
+                    link.rent = false
+                    obj[link.provider_name] = link
+                }
+                else {
+                    obj[link.provider_name].buy = true
+                }
+            }
+        })
+
+        }
+        if(rent && rent.length){
+            rent.forEach((link) => {
+                if(link.display_priority < 16){
+                    if(obj[link.provider_name] == undefined){
+                        link.imgUrl = `https://www.themoviedb.org/t/p/w500/${link.logo_path}`
+                        link.buy = false
+                        link.rent = true
+                        obj[link.provider_name] = link
+                    }
+                    else {
+                        obj[link.provider_name].rent = true
+                    }
+                }
+            })
+        }
+
+        for(let key in obj){
+            obj[key].link = providerUrlMap[obj[key].provider_id]
+            newWatchArr.push(obj[key])
+        }
+
+
     }
+
 
         let trailer;
         if (movieDetailsData.results && movieDetailsData.results.length > 0) {
@@ -63,6 +130,7 @@ export const getMovieDetails = (movieId,movie) => async(dispatch) => {
         const data = await res.json()
         data.movie.trailer = trailer ? `https://www.youtube.com/watch?v=${trailer.key}` : null;
         data.movie.watchProviders = newWatchArr
+
         await dispatch(getMovie(data))
         return data
     }
