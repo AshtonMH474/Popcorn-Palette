@@ -27,19 +27,21 @@ function Recent({recent}){
 
     useEffect(() => {
         // Whenever recent or watchlist changes, update local movie state
-       setMovies(
-        recent
-        .sort((a, b) => {
-        const dateA = new Date(a.releaseDate);
-        const dateB = new Date(b.releaseDate);
-        return dateB - dateA; // Sort by most recent (descending order)
-        }).map(movie => ({
-        ...movie,
-        isInWatchlist: Object.values(watchlist).some(
-        watchlistMovie => watchlistMovie.id === movie.id
-      )
-    }))
-);
+        setMovies(
+            recent
+              .filter(movie => new Date(movie.releaseDate) <= new Date()) // Filter out past releases
+              .sort((a, b) => {
+                const dateA = new Date(a.releaseDate);
+                const dateB = new Date(b.releaseDate);
+                return dateB - dateA; // Sort by most recent (descending order)
+              })
+              .map(movie => ({
+                ...movie,
+                isInWatchlist: Object.values(watchlist).some(
+                  watchlistMovie => watchlistMovie.id === movie.id
+                )
+              }))
+          );
     }, [recent, watchlist]);
 
 
