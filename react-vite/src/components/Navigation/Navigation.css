@@ -57,9 +57,11 @@
   position: absolute;
   right: 33.5%;
   width: 550px;
-  border-radius: 8px;
+  border-radius: 25px;
   bottom: 13px;
   height: 15px;
+
+  border: 2px solid transparent;
 }
 
 .watchLink:hover{
@@ -68,7 +70,14 @@
 .watchLink{
   position: absolute;
   left: 68%;
-  bottom: 13px;
+  bottom: 14px;
+}
+.watchlistPlus:hover{
+  color: #B22222;
+}
+.plusWatch{
+  position: relative;
+  top: 1.8px;
 }
 
 
@@ -86,6 +95,7 @@
   border-radius: 3px;
   transform: scale(1.05);
 }
+
 
 .dropdown-search{
   position: absolute;

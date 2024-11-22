@@ -12,7 +12,7 @@
 .reviewMovieItem{
     width: 200px;
     border-radius: 10px;
-    background-color: #1a1a1a;
+    background-color: #36454f;
     transition: transform 0.2s;
     min-height: 325px;
     max-height: 325px;
