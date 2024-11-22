@@ -13,6 +13,11 @@
     cursor: default;
 }
 
+.moveDown{
+    position: relative;
+    top: 10px;
+
+}
 .moveUp{
     position: relative;
     bottom: 18px;
@@ -46,11 +51,13 @@
     text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7);
     opacity: 0; /* Initially hidden */
     text-align: center;
-    position: relative;
-    bottom: 20px;
     transition: opacity 0.3s ease;
+    visibility: hidden;
 }
-
+.genreText{
+    position: relative;
+    left: 10px;
+}
 .genresDiv{
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     cursor: pointer;
@@ -62,9 +69,20 @@
 
 .genresDiv:hover .itemsGenres{
     opacity: 1;
-    transition: opacity 0.3s ease;
+    text-align: center;
+    position: fixed;
+    right: 42%;
+    top: 26%;
+    visibility: visible;
+    transition: opacity 0.8s ease;
 }
 .genresDiv:hover .genreText{
     opacity: 0;
-    transition: opacity 0.3s ease;
+    transition: opacity 0.8s ease;
+    visibility: hidden;
+}
+.genresDiv .genreText {
+    opacity: 1;
+    transition: opacity 0.5s ease-in; /* Fade-in when not hovered */
+    visibility: visible;
 }

@@ -65,6 +65,7 @@ export const getMovieDetails = (movieId,movie) => async(dispatch) => {
         let newWatchArr = []
         let obj = {}
         if(watchProvidersData.results.US){
+
         let stream = watchProvidersData.results.US.flatrate
         let buy = watchProvidersData.results.US.buy;
         let rent = watchProvidersData.results.US.rent;
