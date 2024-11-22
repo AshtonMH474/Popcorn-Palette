@@ -70,7 +70,7 @@ function CustomMovies(){
                                     <p className="gray wordBreak customDes  reviewReview">{custom.description}</p>
                                     <div className="displayFlex gap10px genresGroup">
                                     {custom.genres.length && custom.genres.map(genre => (
-                                        <div key={genre.id} className="  genres">
+                                        <div key={genre.id} className="white  genres">
                                             {genre.type === "Science Fiction" ? "SciFi" : genre.type}
                                         </div>
                                     ))}
@@ -85,7 +85,7 @@ function CustomMovies(){
                     )}
                 </div>
             ))}
-
+                {customArr.length < 1 && (<div className="noCollections noCustoms"><button onClick={() => nav('/customs/create')} className="createCol noListStyleType" >Create Personal Movie</button></div>)}
         </div>
 
 

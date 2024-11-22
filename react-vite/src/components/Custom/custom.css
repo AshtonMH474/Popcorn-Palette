@@ -88,3 +88,8 @@
     transition: opacity 0.5s ease-in; /* Fade-in when not hovered */
     visibility: visible;
 }
+
+.noCustoms{
+    position: relative;
+    right: 13.5%;
+}
