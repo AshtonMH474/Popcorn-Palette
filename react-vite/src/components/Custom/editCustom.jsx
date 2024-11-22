@@ -167,8 +167,11 @@ function EditCustom(){
 
     return (
         <div className='homeScreen topPaddingHome'>
+
         <h2 className="customCreateh2">Edit {custom.title}</h2>
+
     <div className="formSize">
+
   <form  className="create-custom-form">
     <div className="form-group">
       <label htmlFor="title">Title</label>
@@ -185,6 +188,7 @@ function EditCustom(){
     </div>
 
     <div className="form-group">
+
       <label htmlFor="description">Description</label>
       {errors.description && (<div className="error paddingBottomSmall">{errors.description}</div>)}
       <textarea

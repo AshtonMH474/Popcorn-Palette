@@ -6,6 +6,8 @@
   }
 
   .formSize{
+    position: relative;
+    bottom: 20px;
     width: 50%;
     margin-left: 25%;
     padding-bottom: 100px;
@@ -94,4 +96,5 @@
   .pendImage{
     display: flex;
     justify-content: center;
+
   }

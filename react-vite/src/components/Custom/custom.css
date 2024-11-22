@@ -55,6 +55,7 @@
     transition: opacity 0.3s ease;
     visibility: hidden;
 }
+
 .genreText{
     position: relative;
     left: 10px;
