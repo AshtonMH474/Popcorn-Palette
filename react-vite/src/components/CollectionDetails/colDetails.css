@@ -124,7 +124,7 @@
     position: absolute;
     z-index: 3;
     bottom: 10px;
-    left: 85px;
+    left: 90px;
   }
   .movie-itemCol .trashCol:hover{
    color: red;
