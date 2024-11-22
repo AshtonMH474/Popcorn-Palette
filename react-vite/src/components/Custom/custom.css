@@ -55,6 +55,7 @@
     transition: opacity 0.3s ease;
     visibility: hidden;
 }
+
 .genreText{
     position: relative;
     left: 10px;
@@ -72,7 +73,7 @@
     opacity: 1;
     text-align: center;
     position: fixed;
-    right: 42%;
+    right: 43%;
     top: 26%;
     visibility: visible;
     transition: opacity 0.8s ease;
