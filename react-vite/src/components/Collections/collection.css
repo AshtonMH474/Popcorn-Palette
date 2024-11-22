@@ -153,8 +153,6 @@
     border: white 1px solid;
     height: 300px;
     width: 600px;
-    position: relative;
-    right: 30px;
     display: flex;
     justify-content: center;
     align-items: center;

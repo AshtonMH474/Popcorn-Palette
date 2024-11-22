@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { useNavigate, useParams } from "react-router-dom"
+import { Navigate, useNavigate, useParams } from "react-router-dom"
 import { changeCustom, getCustomDetails, getCustoms } from "../../redux/customs"
 import BottomInfo from "../BottomInfo"
 import { addingPendGenre, removePending, resumeGenres } from "../../redux/pendingMovies"
@@ -9,6 +9,7 @@ import { clearSearch } from "../../redux/search"
 import { FaRegTrashAlt } from "react-icons/fa";
 
 function EditCustom(){
+    const user = useSelector((store) => store.session.user);
     const nav = useNavigate()
     const {customId} = useParams()
     const dispatch = useDispatch()
@@ -29,7 +30,7 @@ function EditCustom(){
     const [genre,setGenre] = useState('')
     const [showDropDown,setDropDown] = useState(false)
     const [loading, setLoading] = useState(true)
-      console.log(custom)
+
 
       useEffect(() => {
         const fetchCustomDetails = async () => {
@@ -160,7 +161,7 @@ function EditCustom(){
         await dispatch(removePending(genre))
       }
 
-
+      if(!user || !custom) return <Navigate to='/'/>
       if (loading) {
         return <div>Loading...</div> // or you can add a loading spinner or animation
     }

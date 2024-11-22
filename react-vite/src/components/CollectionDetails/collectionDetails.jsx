@@ -1,4 +1,4 @@
-import { useNavigate, useParams } from "react-router-dom"
+import { Navigate, useNavigate, useParams } from "react-router-dom"
 import BottomInfo from "../BottomInfo"
 import { useDispatch, useSelector } from "react-redux"
 import { useEffect, useState } from "react"
@@ -16,6 +16,7 @@ import { resetCrew } from "../../redux/crew"
 
 function CollectionDetails(){
     const {collectionId} = useParams()
+    const user = useSelector((store) => store.session.user);
     const dispatch = useDispatch()
     const collection = useSelector(state => state.collections);
     const col = Object.values(collection)[0]
@@ -71,7 +72,7 @@ function CollectionDetails(){
 
     }
 
-
+    if(!user) return <Navigate to='/'/>
     if(!col) return <h1>Loading...</h1>
     return (
         <>
