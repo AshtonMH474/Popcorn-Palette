@@ -200,7 +200,7 @@ function CreateCustom(){
             {pendingArr.length > 0 && (
                 <div className="displayFlex gap10px genresGroup moveDown">
                     {pendingArr.map((genre) => (
-                        <div className="white genres genresDiv" key={genre.id}>
+                        <div className=" genres genresDiv" key={genre.id}>
                             <div className="genreText">
                             {genre.type === "Science Fiction" ? "SciFi" : genre.type}
                             </div>

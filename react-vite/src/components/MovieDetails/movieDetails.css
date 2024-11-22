@@ -28,7 +28,7 @@
 
 }
 .movieItemDetails{
-  background-color: #1a1a1a;
+  background-color: #36454f;
     border-radius: 10px;
     padding-bottom: 5px;
 
@@ -163,15 +163,14 @@
     font-size: 16px;
     font-weight: 500;
     text-transform: capitalize;
-    background-color: #36454F;
+    background-color: #36454f;
+    color: white;
     border-radius: 25px;
-    color: #fff;
     display: flex;
     align-items: center;
     justify-content: center;
     transition: all 0.3s ease-in-out;
 
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   }
   .genres:hover {
     background-color: #B22222;

@@ -53,9 +53,10 @@ export const searchMovies = (title) => async(dispatch) => {
 
 
             let formattedMovie = await changeFormat(movie)
+            console.log(formattedMovie)
             if(formattedMovie.genres.length && formattedMovie.id && formattedMovie.description.length
             && formattedMovie.title.length &&
-            formattedMovie.movieImages.length &&
+            formattedMovie.movieImages &&
             formattedMovie.releaseDate) newArr.push(formattedMovie)
 
         }

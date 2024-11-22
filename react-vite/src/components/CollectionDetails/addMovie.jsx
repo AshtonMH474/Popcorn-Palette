@@ -3,7 +3,7 @@ import { useModal } from "../../context/Modal";
 import { useEffect, useRef, useState } from "react";
 import './addMovie.css'
 import { useDispatch, useSelector } from "react-redux";
-import { searchMovies } from "../../redux/search";
+import { clearSearch, searchMovies } from "../../redux/search";
 import { addingPendMovies, removePending } from "../../redux/pendingMovies";
 import { FaRegTrashAlt } from "react-icons/fa";
 import { addMoviesToCollection, getCollectionDetails, getCollections } from "../../redux/collections";
@@ -72,6 +72,25 @@ function AddMovie({col}){
 
       async function submitMovies() {
         if(pendingArr.length > 0){
+            for(let i = 0; i< pendingArr.length; i++){
+                let movie = pendingArr[i]
+                if(col && col.movies && col.movies.length > 0){
+                    let isTrue = false;
+                    col.movies.forEach((movieCol) => {
+                        if(movieCol.id === movie.id) isTrue = true
+                    })
+                    if(isTrue){
+                        let obj = {
+                            pendingLength:'One of the Movies is already in the collection'
+                        };
+                        await setErrors(obj)
+                        await setDropDown(false)
+                        await dispatch(clearSearch())
+                        return;
+                    }
+                }
+            }
+
             await dispatch(addMoviesToCollection(col,pendingArr))
             if(location.pathname =='/collections'){
                 await dispatch(getCollections())

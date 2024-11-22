@@ -47,7 +47,7 @@ function MovieDetails(){
     const reviewsArr = Object.values(reviews)
     const navigate = useNavigate()
     // to change release Date
-    console.log(movieItem)
+
 
     const options = { year: 'numeric', month: 'long', day: '2-digit' };
 
@@ -203,20 +203,20 @@ function MovieDetails(){
             <>
                 <div className="movieScreenWrapper">
                 <div className="movieOptions">
-                <div className="movieItemDetails lightBlack widthPoster">
-                    <img className='detailsPoster' src={movieItem.movieImages[0].imgUrl} alt='moviePoster' />
-                    <div className='paddingLeft10px'>
+                    <div className="movieItemDetails lightBlack widthPoster">
+                        <img className='detailsPoster' src={movieItem.movieImages[0].imgUrl} alt='moviePoster' />
+                        <div className='paddingLeft10px'>
                             <div className="displayFlex spaceBetween littleRightPadding">
                                 <div className='white'><IoStarSharp className='star' />{movieItem.avgRating.toFixed(1)}</div>
                                 <div className="white bold">{year}</div>
                             </div>
-                    </div>
+                        </div>
 
                     </div>
 
 
                     <div className={`displayFlex movieDetailButtons paddingTop`}>
-                {movieItem.trailer && (<button onClick={handleTrailerClick} className="detailButton"><FaYoutube size={30} className="youtube"/><span>Trailer</span></button>)}
+                    {movieItem.trailer && (<button onClick={handleTrailerClick} className="detailButton"><FaYoutube size={30} className="youtube"/><span>Trailer</span></button>)}
                     {user ? (
                     <>
                     {!isInWatchlist && (<button onClick={() => addToWatchList(movieId)} className="detailButton">Add to Watchlist</button>)}
@@ -275,7 +275,7 @@ function MovieDetails(){
                     )}
                     {active == 'genre' && (<div className="displayFlex gap10px genresGroup">
                         {movieItem && movieItem.genres.length && movieItem.genres.map(genre => (
-                            <div key={genre.id} className="white  genres">
+                            <div key={genre.id} className="  genres">
                                 {genre.type === "Science Fiction" ? "SciFi" : genre.type}
                             </div>
                         ))}

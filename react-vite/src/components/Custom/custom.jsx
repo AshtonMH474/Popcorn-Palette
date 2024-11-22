@@ -70,7 +70,7 @@ function CustomMovies(){
                                     <p className="gray wordBreak customDes  reviewReview">{custom.description}</p>
                                     <div className="displayFlex gap10px genresGroup">
                                     {custom.genres.length && custom.genres.map(genre => (
-                                        <div key={genre.id} className="white  genres">
+                                        <div key={genre.id} className="  genres">
                                             {genre.type === "Science Fiction" ? "SciFi" : genre.type}
                                         </div>
                                     ))}
