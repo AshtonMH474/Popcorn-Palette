@@ -176,12 +176,10 @@ export const  changeFormat = async (movie) => {
         'releaseDate':movie.release_date,
         'genres': genres,
         'lang':movie.original_language,
-        'movieImages':[
-            {
-                'imgUrl':img,
-                'poster':true
-            }
-        ]
+
+    }
+    if(movie.poster_path != null){
+        obj['movieImages'] = [{'imgUrl':img,'poster':true}]
     }
 
     const reviewsRes = await csrfFetch(`/api/reviews/avgRating/${movie.id}`)

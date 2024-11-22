@@ -34,7 +34,8 @@
 
 .customDes{
     max-height: 190px;
-    height: 190px;
+    height: auto;
+
 }
 
 .searchGenre{

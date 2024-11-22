@@ -124,6 +124,7 @@ function Home(){
         <>
 
         <div className='homeScreen'>
+            <div>
             <div className='moveLeft50px movieBottomPadding'>
                 <Recent recent={recent}/>
             </div>
@@ -158,7 +159,7 @@ function Home(){
                 </div>
                 <FilterMovies movies={activeMovies} currentIndex={currentIndex} setCurrentIndex={setCurrentIndex}/>
             </div>
-
+            </div>
             <div className='topPaddingHome'></div>
             <div className='footer'>
                 <BottomInfo/>

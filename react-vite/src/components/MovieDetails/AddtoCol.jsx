@@ -51,22 +51,22 @@ function AddToCollection({movieItem,year}){
       async function addMovie(col){
         let newArr = []
         newArr.push(movieItem)
-        if(col && col.movies && col.movies.length > 0){
-            let isTrue = false;
-            col.movies.forEach((movie) => {
-                if(movie.id === movieItem.id) isTrue = true
-            })
+        if (col && col.movies && col.movies.length > 0) {
+            // Create a Set of movie IDs for fast lookups
+            const movieIdsSet = new Set(col.movies.map(movie => movie.id));
 
-            if(isTrue){
+            // Check if the movieId already exists in the Set
+            if (movieIdsSet.has(movieItem.id)) {
                 let obj = {
-                    movieInCollection:'Movie is already in that collection'
-                }
-                await setErrors(obj)
-                await setDropDown(false)
-                await dispatch(clearSearch())
+                    movieInCollection: 'Movie is already in that collection'
+                };
+                await setErrors(obj);
+                await setDropDown(false);
+                await dispatch(clearSearch());
                 return;
             }
         }
+
 
 
         await dispatch(addMoviesToCollection(col,newArr))

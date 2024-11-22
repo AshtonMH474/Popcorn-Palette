@@ -97,9 +97,8 @@ function Navigation({showZ,setZ}) {
               )}
         </div>
        {sessionUser && ( <div className="watchLink">
-          <NavLink className='displayFlex noTextUnderline' to='/watchlist'>
-          <div className="white">WATCHLIST</div>
-          <FaPlus className="white"/>
+          <NavLink className='displayFlex noTextUnderline ' to='/watchlist'>
+          <div className="white watchlistPlus">WATCHLIST<FaPlus className="plusWatch"/></div>
           </NavLink>
         </div>)}
       </li>
