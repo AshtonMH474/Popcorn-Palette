@@ -6,10 +6,11 @@ import { useDispatch } from "react-redux";
 import { clearSearch, searchGenres } from "../../redux/search";
 import { addingPendGenre, removePending, resetPending } from "../../redux/pendingMovies";
 import { addCustom } from "../../redux/customs";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import { FaRegTrashAlt } from "react-icons/fa";
 
 function CreateCustom(){
+    const user = useSelector((store) => store.session.user);
     const nav = useNavigate()
     const dispatch = useDispatch()
     const [showDropDown,setDropDown] = useState(false)
@@ -137,6 +138,8 @@ function CreateCustom(){
       async function deletePending(genre) {
         await dispatch(removePending(genre))
       }
+
+      if(!user) return <Navigate to='/'/>
 
     return (
         <div className='homeScreen topPaddingHome'>
