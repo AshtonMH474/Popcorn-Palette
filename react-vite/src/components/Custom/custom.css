@@ -93,3 +93,24 @@
     position: relative;
     right: 13.5%;
 }
+
+.conatinerMyMovies{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    position: relative;
+    left: 3.5%;
+
+
+}
+.customMovieTitles{
+    display: flex;
+    justify-content: space-around; /* Center horizontally */
+    align-items: center; /* Align vertically if needed */
+    width: 100%;
+    position: relative;
+    left: 1%;
+    padding-bottom: 20px;
+
+}

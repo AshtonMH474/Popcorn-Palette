@@ -24,13 +24,23 @@
 .createCol:hover {
   background: linear-gradient(45deg, #B22222, #8B0000); /* Gradient from Firebrick Red to Dark Red */
 }
+.searchMove{
+  margin-left: 70px;
+  margin-bottom: 50px;
+
+  width: 600px;
+}
 
 .hoverRed:hover{
   color:#B22222
 }
 
 .allCollections{
-    padding-left: 345px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-right: 70px;
+
 }
 
 .collection-container{
@@ -103,6 +113,9 @@
   .collectionInfo {
     position: relative;
     bottom: 20px;
+    min-width: 400px;
+    max-width: 400px;
+
 
 
   }
@@ -133,7 +146,7 @@
 
     text-overflow: ellipsis;
     display: -webkit-box;            /* Uses a flexbox layout for the box */
-    -webkit-line-clamp: 6;           /* Limits to 6 lines */
+    -webkit-line-clamp: 5;           /* Limits to 6 lines */
     -webkit-box-orient: vertical;
 
 
@@ -142,7 +155,7 @@
     position: relative;
     bottom: 23px;
     max-width: 400px;
-    max-height: 115px;
+    max-height: 100px;
 
   }
   .colEdit{

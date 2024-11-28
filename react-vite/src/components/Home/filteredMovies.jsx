@@ -56,9 +56,9 @@ function FilterMovies({movies,currentIndex,setCurrentIndex}){
 
     }
     return (
-        <>
+        <div className="groupMoviesContainer">
 
-<div className={`movieFlex alignCenter ${currentIndex > 0 ? 'moveMovie' : ''}`}>
+<div className={`movieFlex alignCenter ${currentIndex  <= 0 && currMovies && currMovies.length > 5 ? 'moveMovie' : ''}`}>
                 {currentIndex > 0 && (<button className={`arrow arrowLeft ${showZ ? 'arrowZ': ''}`}  onClick={prevMovies} ><HiArrowSmallLeft/></button>)}
                 {currMovies.slice(currentIndex, currentIndex + 5).map(movie =>(
                     <div key={movie.id} className='movieItem lightBlack'>
@@ -84,7 +84,7 @@ function FilterMovies({movies,currentIndex,setCurrentIndex}){
                     )}
                 </div>
 
-        </>
+        </div>
     )
 
 }

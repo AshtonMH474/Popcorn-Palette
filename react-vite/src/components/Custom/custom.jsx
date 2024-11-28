@@ -38,11 +38,11 @@ function CustomMovies(){
     return (
         <>
         <div className='homeScreen topPaddingHome'>
-        <div className="displayFlex center smallPaddingBottom">
-            <h1 className="white  moveRight ">Your Movies:</h1>
+        <div className="displayFlex customMovieTitles smallPaddingBottom">
+            <h1 className="white">Your Movies:</h1>
             <button onClick={() => nav('/customs/create')} className="createCol noListStyleType" >Create Personal Movie</button>
           </div>
-        <div className="reviewsCenter paddingBottom">
+        <div className="conatinerMyMovies paddingBottom">
             {customArr.length && customArr.map(custom => (
                 <div className="currentReview" key={custom.id}>
                     {custom.movieImages[0]? (
