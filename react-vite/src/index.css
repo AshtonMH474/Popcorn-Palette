@@ -46,11 +46,15 @@
  .border{
     position: absolute;
     top: 0;
-    left: 0;
-    width: 102.03%;
+    left: -2px;
+    width: 102.78%;
     z-index: 1;
-
  }
+ @media screen and (min-width: 1690px) {
+  .border{
+    width: 103.05%;
+  }
+}
 
  .zIndex{
     z-index: 3;
@@ -107,4 +111,9 @@
 
 .smallRightPadding{
   padding-right: 20px;
+}
+
+.gitMove{
+  position: relative;
+  right: 30px;
 }
