@@ -78,9 +78,9 @@ function Recent({recent}){
     }
 
     return (
-        <>
-                <h2 className='textCenter white topPaddingHome'>RECENTLY RELEASED</h2>
-                <div className={`movieFlex alignCenter ${currentIndex > 0 ? 'moveMovie' : ''}`}>
+        <div className="groupMoviesContainer">
+                <h2 className='textCenter white topPaddingHome smallPaddingRightRecent'>RECENTLY RELEASED</h2>
+                <div className={`movieFlex alignCenter ${currentIndex  <= 0 && movies && movies.length > 5 ? 'moveMovie' : ''} ${currentIndex >= movies.length - 5 ? 'removeJustifyContent': ''}`}>
                 {currentIndex > 0 && (<button className={`arrow arrowLeft ${showZ ? 'arrowZ': ''}`}  onClick={prevMovies} ><HiArrowSmallLeft/></button>)}
                 {movies.slice(currentIndex, currentIndex + 5).map(movie =>(
                     <div key={movie.id} className='movieItem lightBlack'>
@@ -106,7 +106,7 @@ function Recent({recent}){
                     )}
                 </div>
 
-        </>
+        </div>
     )
 }
 

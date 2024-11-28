@@ -52,13 +52,13 @@
   position: relative;
   top:5px
 }
-
+.searchBar {
+  padding-right: 90px;
+}
 .search{
-  position: absolute;
-  right: 33.5%;
   width: 550px;
   border-radius: 25px;
-  bottom: 13px;
+
   height: 15px;
 
   border: 2px solid transparent;
@@ -68,9 +68,9 @@
   cursor: pointer;
 }
 .watchLink{
-  position: absolute;
-  left: 68%;
-  bottom: 14px;
+  position: relative;
+  right: 80px;
+  top: 1px;
 }
 .watchlistPlus:hover{
   color: #B22222;
@@ -105,10 +105,9 @@
   z-index: 1000;
   max-height: 200px;
   overflow-y: auto;
-  width: 550px;
+  width: 555px;
   margin-top: 5px;
-  right: 33.5%;
-  top: 35px;
+
 }
 
 .dropdown-item-search{

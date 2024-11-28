@@ -83,7 +83,7 @@ function Navigation({showZ,setZ}) {
       </li>
 
       <li className="displayFlex">
-        <div ref={searchRef}>
+        <div ref={searchRef} className="searchBar">
           <input className="search" type="text" value={movie} placeholder="search movie..." onChange={(e) => setMovie(e.target.value)}/>
 
           {showDropDown && searchArr.length > 0 && (

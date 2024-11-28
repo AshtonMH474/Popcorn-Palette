@@ -33,17 +33,20 @@
     color:red
 }
 .numWatchlist{
-    position: relative;
-    left: 1%;
+    padding-left:   25px;
+    white-space: nowrap;
 }
 .watched{
     position: relative;
-    right: 20px;
+    bottom: 40px;
+    padding-left: 825px;
+
 }
 
 .redHover:hover{
     color:#B22222
 }
+
 
 .noMoviesMessage{
     border: 1px white solid;
@@ -52,4 +55,20 @@
     text-align: center;
     padding-top: 100px;
     font-weight: bold;
+}
+
+
+.containerWatched{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 1075px;
+    flex-wrap: wrap;
+}
+.conatinerWashlist{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+
 }

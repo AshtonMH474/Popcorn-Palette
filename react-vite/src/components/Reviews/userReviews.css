@@ -37,13 +37,23 @@
     max-height: 325px;
 
 }
+.yourReviews{
+ text-align: center;
+ padding-right: 300px;
+}
+.yourReviewsContainer{
 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
 .reviewsCenter{
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    padding-left: 100px;
+
 
 }
 .padding50pxBottom{

@@ -7,22 +7,26 @@
     flex-direction: column;
     align-items: center; /* Center all content horizontally */
     justify-content: flex-start; /* Align items from the top */
-    /* padding: 20px; */
+
     width: 100%;
+}
+.groupMoviesContainer{
+
 }
 .homeScreen{
      position: relative;
-    top:8px;
+    top:10px;
     right: 8px;
     width: 103%;
     background-attachment: fixed;
     background-color: #0b0b0b;
     overflow: hidden;
-    min-height: 93.5vh;
+    min-height: 95.5vh;
 }
 .home{
     min-height: 99vh;
 }
+
 
 
 .white{
@@ -35,14 +39,13 @@
     display: flex;
     flex-wrap: wrap;
     gap: 15px;
-    position: relative;
-    left: 19%;
+    justify-content: center;
 
 }
 
 
 .moveMovie{
-    left: 15.8%;
+    padding-left: 49px;
 }
 .star{
     position: relative;
@@ -55,8 +58,7 @@ padding-left: 10px;
 }
 .textCenter{
     text-align: center;
-    position: relative;
-    right: 390px;
+    padding-right: 800px;
 }
 .movieItem {
     background-color: #36454f;
@@ -152,10 +154,17 @@ padding-left: 10px;
     cursor: pointer;
 }
 .moveCenterPage{
-    padding-left: 330px;
-    padding-bottom: 10px;
+  justify-content: center;
+  padding-right: 530px;
 }
 
 .red{
     color:#B22222;
+}
+.smallPaddingRightRecent{
+    padding-right: 815px;
+}
+
+.removeJustifyContent{
+padding-right: 708px;
 }

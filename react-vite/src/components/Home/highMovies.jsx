@@ -59,9 +59,9 @@ function HighMovies({high}){
 
 
     return (
-        <>
+        <div className="groupMoviesContainer">
         <h2 className='textCenter white'>HIGHLY RATED MOVIES</h2>
-                <div className={`movieFlex alignCenter ${currentIndex > 0 ? 'moveMovie' : ''}`}>
+                <div className={`movieFlex alignCenter ${currentIndex  <= 0 && movies && movies.length > 5 ? 'moveMovie' : ''}`}>
                 {currentIndex > 0 && (<button className={`arrow arrowLeft ${showZ ? 'arrowZ': ''}`}  onClick={prevMovies} ><HiArrowSmallLeft/></button>)}
                 {movies.slice(currentIndex, currentIndex + 5).map(movie =>(
                     <div key={movie.id} className='movieItem lightBlack'>
@@ -87,7 +87,7 @@ function HighMovies({high}){
                     )}
                 </div>
 
-        </>
+        </div>
     )
 }
 
