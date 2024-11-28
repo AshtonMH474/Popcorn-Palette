@@ -93,7 +93,7 @@ function Collections() {
   if(!user) return <Navigate to='/'/>
   return (
     <>
-      <div className='homeScreen topPaddingHome'>
+      <div className='homeScreen minHeightBackground topPaddingHome'>
         <div>
           <div className="displayFlex center topPaddingHome">
           <h1 className="white headerCol">Your Collections</h1>

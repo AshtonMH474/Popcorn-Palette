@@ -90,8 +90,10 @@
 }
 
 .noCustoms{
+    display: flex;
+    justify-content: center;
     position: relative;
-    right: 13.5%;
+    right: 80px;
 }
 
 .conatinerMyMovies{

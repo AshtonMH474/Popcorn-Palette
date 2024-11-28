@@ -5,10 +5,14 @@
     height: 100px;
     padding-top: 100px;
     text-align: center;
-    position: relative;
-    left: 22%;
+    display: flex;
+    justify-content: center;
 }
-
+.noReviews{
+    display: flex;
+    justify-content: center;
+    padding-right: 470px;
+}
 .reviewMovieItem{
     width: 200px;
     border-radius: 10px;
