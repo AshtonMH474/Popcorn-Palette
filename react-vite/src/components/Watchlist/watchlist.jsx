@@ -62,7 +62,7 @@ function Watchlist(){
     return (
         <>
 
-        <div className='homeScreen topPaddingHome'>
+        <div className='homeScreen minHeightBackground topPaddingHome'>
             <div className='conatinerWashlist'>
 
                 <div className='containerWatched'>

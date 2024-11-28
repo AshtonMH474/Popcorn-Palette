@@ -38,9 +38,11 @@ function UserReviews(){
     if(reviewsArr.length < 1){
         return (
             <>
-                <div className="homeScreen topPaddingHome">
+                <div className="homeScreen minHeightBackground topPaddingHome">
                     <h2 className='textCenter white'>YOUR REVIEWS</h2>
+                    <div className="noReviews">
                     <div className="reviewsBorder white">NO REVIEWS YET</div>
+                    </div>
                     <div className='footer lightBlack'>
                         <BottomInfo/>
                     </div>

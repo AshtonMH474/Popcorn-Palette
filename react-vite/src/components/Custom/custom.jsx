@@ -19,7 +19,6 @@ function CustomMovies(){
     const user = useSelector((store) => store.session.user);
 
 
-
     useEffect(() => {
         dispatch(getCustoms())
     },[dispatch])
@@ -37,7 +36,7 @@ function CustomMovies(){
 
     return (
         <>
-        <div className='homeScreen topPaddingHome'>
+        <div className='homeScreen minHeightBackground topPaddingHome'>
         <div className="displayFlex customMovieTitles smallPaddingBottom">
             <h1 className="white">Your Movies:</h1>
             <button onClick={() => nav('/customs/create')} className="createCol noListStyleType" >Create Personal Movie</button>
@@ -85,7 +84,7 @@ function CustomMovies(){
                     )}
                 </div>
             ))}
-                {customArr.length < 1 && (<div className="noCollections noCustoms"><button onClick={() => nav('/customs/create')} className="createCol noListStyleType" >Create Personal Movie</button></div>)}
+                {customArr.length < 1 && (<div className="noCustoms"><div className="noCollections"><button onClick={() => nav('/customs/create')} className="createCol noListStyleType" >Create Personal Movie</button></div></div>)}
         </div>
 
 
