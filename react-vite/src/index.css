@@ -52,7 +52,7 @@
  }
  @media screen and (min-width: 1690px) {
   .border{
-    width: 103.05%;
+    width: 103.1%;
   }
 }
 
@@ -115,5 +115,5 @@
 
 .gitMove{
   position: relative;
-  right: 30px;
+  right: 50px;
 }
