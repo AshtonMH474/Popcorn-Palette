@@ -114,32 +114,32 @@ def seed_reviews():
     update_rating(912649)
 
 
-    review16 = Review(
-        user_id=1,
-        movie_id=917496,
-        review='Loved it',
-        rating=4
-    )
-    review17 = Review(
-        user_id=2,
-        movie_id=917496,
-        review='Gotta love Michael Keaton',
-        rating=5
-    )
-    review18 = Review(
-        user_id=3,
-        movie_id=917496,
-        review='So glad they made another one',
-        rating=4
-    )
+    # review16 = Review(
+    #     user_id=1,
+    #     movie_id=917496,
+    #     review='Loved it',
+    #     rating=4
+    # )
+    # review17 = Review(
+    #     user_id=2,
+    #     movie_id=917496,
+    #     review='Gotta love Michael Keaton',
+    #     rating=5
+    # )
+    # review18 = Review(
+    #     user_id=3,
+    #     movie_id=917496,
+    #     review='So glad they made another one',
+    #     rating=4
+    # )
 
-    movie6_reviews = [review16,review17,review18]
+    # movie6_reviews = [review16,review17,review18]
 
-    for review in movie6_reviews:
-        db.session.add(review)
-    db.session.commit()
+    # for review in movie6_reviews:
+    #     db.session.add(review)
+    # db.session.commit()
 
-    update_rating(917496)
+    # update_rating(917496)
 
     review19 = Review(
         user_id=1,
