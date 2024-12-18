@@ -359,44 +359,44 @@ def seed_watchlist_movies():
             bob_marley_movie_image = Movie_Image(movie_id=bob_marley_movie_instance.id, img_url=bob_marley_img_url, poster=True)
             db.session.add(bob_marley_movie_image)
             db.session.commit()
-    url=f'https://api.themoviedb.org/3/search/movie?api_key={api_key}&query=Inside+Out+2&page={page}'
-    response = requests.get(url)
+    # url=f'https://api.themoviedb.org/3/search/movie?api_key={api_key}&query=Inside+Out+2&page={page}'
+    # response = requests.get(url)
 
-    if response.status_code == 200:
-        inside_out_data = response.json()
-        if inside_out_data['results']:  # Check if there are results
-            inside_movie = inside_out_data['results'][0]
+    # if response.status_code == 200:
+    #     inside_out_data = response.json()
+    #     if inside_out_data['results']:  # Check if there are results
+    #         inside_movie = inside_out_data['results'][0]
 
-            # Process movie details
-            inside_release_date = inside_movie['release_date'].split('-')
-            inside_img_url = f"https://image.tmdb.org/t/p/w500{inside_movie['poster_path']}"
-            inside_genres = create_genres(inside_movie['genre_ids'])
+    #         # Process movie details
+    #         inside_release_date = inside_movie['release_date'].split('-')
+    #         inside_img_url = f"https://image.tmdb.org/t/p/w500{inside_movie['poster_path']}"
+    #         inside_genres = create_genres(inside_movie['genre_ids'])
 
-        # Create movie instance
-            inside_movie_instance = Movie(
-                id=inside_movie['id'],
-                lang=inside_movie['original_language'],for_home=True,
-                description=inside_movie['overview'],
-                title=inside_movie['title'],
-                release_date=date(int(inside_release_date[0]), int(inside_release_date[1]), int(inside_release_date[2]))
-            )
+    #     # Create movie instance
+    #         inside_movie_instance = Movie(
+    #             id=inside_movie['id'],
+    #             lang=inside_movie['original_language'],for_home=True,
+    #             description=inside_movie['overview'],
+    #             title=inside_movie['title'],
+    #             release_date=date(int(inside_release_date[0]), int(inside_release_date[1]), int(inside_release_date[2]))
+    #         )
 
-            db.session.add(inside_movie_instance)
-            db.session.commit()
+    #         db.session.add(inside_movie_instance)
+    #         db.session.commit()
 
-        # Add genres
-            for genre in inside_genres:
-                curr_genre = Genre.query.filter_by(type=genre['type']).first()
-                if curr_genre is None:
-                    curr_genre = Genre(type=genre['type'])
-                    db.session.add(curr_genre)
-                    db.session.commit()
-            inside_movie_instance.genres.append(curr_genre)
+    #     # Add genres
+    #         for genre in inside_genres:
+    #             curr_genre = Genre.query.filter_by(type=genre['type']).first()
+    #             if curr_genre is None:
+    #                 curr_genre = Genre(type=genre['type'])
+    #                 db.session.add(curr_genre)
+    #                 db.session.commit()
+    #         inside_movie_instance.genres.append(curr_genre)
 
-        # Add movie image
-            inside_movie_image = Movie_Image(movie_id=inside_movie_instance.id, img_url=inside_img_url, poster=True)
-            db.session.add(inside_movie_image)
-            db.session.commit()
+    #     # Add movie image
+    #         inside_movie_image = Movie_Image(movie_id=inside_movie_instance.id, img_url=inside_img_url, poster=True)
+    #         db.session.add(inside_movie_image)
+    #         db.session.commit()
 
 
     url = f'https://api.themoviedb.org/3/search/movie?api_key={api_key}&query=Oppenheimer&page={page}'
